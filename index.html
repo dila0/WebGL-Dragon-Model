@@ -1,0 +1,92 @@
+<!--
+-
+- @fileoverview Main html file containig the main logic.
+-
+- @author Dila Tosun
+- @id 22102100
+- 
+- @author Ahmet Kaan Sever
+- @id 22102278
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dragon Head</title>
+  <script src="Common/webgl-utils.js"></script>
+  <script src="Common/MV.js"></script>
+  <script src="Common/initShaders.js"></script>
+</head>
+<body>
+  <canvas id="dragonCanvas" width="800" height="600"></canvas>
+
+  <!-- SHADERS -->
+  <script id="vertex-shader" type="x-shader/x-vertex">
+    attribute vec4 vPosition;
+    attribute vec3 vNormal;
+
+    uniform mat4 modelViewMatrix;
+    uniform mat4 projectionMatrix;
+    uniform mat4 normalMatrix;
+
+    varying vec3 fNormal;
+    varying vec3 fPosition;
+
+    void main() {
+        fPosition = (modelViewMatrix * vPosition).xyz;
+        fNormal = mat3(normalMatrix) * vNormal;
+
+        gl_Position = projectionMatrix * modelViewMatrix * vPosition;
+    }
+  </script>
+
+  <script id="fragment-shader" type="x-shader/x-fragment">
+    precision mediump float;
+
+    varying vec3 fNormal;
+    varying vec3 fPosition;
+
+    uniform vec3 lightPosition;
+    uniform vec4 ambientProduct;
+    uniform vec4 diffuseProduct;
+    uniform vec4 specularProduct;
+    uniform float shininess;
+
+    void main() {
+        vec3 N = normalize(fNormal);
+        vec3 L = normalize(lightPosition - fPosition);
+        vec3 E = normalize(-fPosition);
+        vec3 H = normalize(L + E);
+
+        float Kd = max(dot(N, L), 0.0);
+        float Ks = pow(max(dot(N, H), 0.0), shininess);
+
+        vec4 ambient = ambientProduct;
+        vec4 diffuse = Kd * diffuseProduct;
+        vec4 specular = Ks * specularProduct;
+
+        gl_FragColor = ambient + diffuse + specular;
+        gl_FragColor.a = 1.0;
+    }
+  </script>
+
+  <!-- Body Parts -->
+  <script src="src/dragonModel/body.js"></script>
+  <script src="src/dragonModel/foot.js"></script>
+  <script src="src/dragonModel/hand.js"></script>
+  <script src="src/dragonModel/head.js"></script>
+  <script src="src/dragonModel/jaw.js"></script>
+  <script src="src/dragonModel/lowerLeg.js"></script>
+  <script src="src/dragonModel/lowerNeck.js"></script>
+  <script src="src/dragonModel/lowerTail.js"></script>
+  <script src="src/dragonModel/lowerWing.js"></script>
+  <script src="src/dragonModel/upperLeg.js"></script>
+  <script src="src/dragonModel/upperNeck.js"></script>
+  <script src="src/dragonModel/upperTail.js"></script>
+  <script src="src/dragonModel/upperWing.js"></script>
+
+  <!-- Main Script -->
+  <script src="main.js"></script>
+</body>
+</html>
