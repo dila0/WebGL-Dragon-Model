@@ -49,5 +49,73 @@ const UPPER_TAIL_ID = 25;
 const LOWER_TAIL_ID = 26;
 
 var vertices = [
-    
+    // TODO: fill
 ];
+
+var numNodes = 27;
+var numAngles = 28;
+var angle = 0;
+var theta = [
+    // TODO: fill
+];
+
+var numVertices = 0; // TODO: fill
+var stack = [];
+var figure = [];
+
+for(var i = 0; i < numNodes; i++) {
+    figure[i] = createNode(null, null, null, null);
+}
+
+var vBuffer;
+var modelViewLoc;
+
+var pointsArray = [];
+
+// Main function
+window.onload = function init() {
+    canvas = document.getElementById('gl-canvas');
+
+    gl = WebGLUtils.setupWebGL(canvas);
+    if(!gl) {
+        alert("WebGL isn't available");
+    }
+
+    gl.viewport(0, 0, canvas.width, canvas.height);
+    gl.clearColor(1.0, 0.0, 0.0, 1.0); 
+
+    program = initShaders(gl, "vertex-shader", "fragment-shader");
+    gl.useProgram(program);
+
+    instanceMatrix = mat4();
+
+    projectionMatrix = ortho(-1, 1, -1, 1, -100, 100); //TODO: change
+    modelViewMatrix = mat4();
+
+    gl.uniformMatrix4fv(gl.getUniformLocation(program, "modelViewMatrix"), false, flatten(modelViewMatrix));
+    gl.uniformMatrix4fv(gl.getUniformLocation(program, "projectionMatrix"), false, flatten(projectionMatrix));
+
+    modelViewMatrixLoc = gl.getUniformLocation(program, "modelViewMatrix");
+
+    vBuffer = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, vBuffer);
+    gl.bufferData(gl.ARRAY_BUFFER, flatten(pointsArray), gl.STATIC_DRAW);
+
+    var vPos = gl.getAttribLocation(program, "vPos");
+    gl.vertexAttribPointer(vPos, 4, gl.FLOAT, false, 0, 0); 
+    gl.enableVertexAttribArray(vPos);
+
+    // TODO: fill sliders 
+
+    for(var i = 0; i < numNodes; i++) initNodes(i);
+    render();
+
+    console.log("Hello World!");
+}
+
+// Render function
+var render = function() {
+    gl.clear(gl.COLOR_BUFFER_BIT);
+    traverse(BODY_ID);
+    requestAnimationFrame(render);
+}

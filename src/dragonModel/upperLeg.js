@@ -15,13 +15,13 @@ var upperLegWidth = 0.5;
 // Function to initalize the left upper leg
 function initLeftUpperLeg(){
     var m = mat4();
-    figure[UPPER_LEFT_LEG_ID] = createNode(m, renderLeftUpperLeg, RIGHT_UPPER_LEG_ID, LEFT_LOWER_LEG_ID);
+    figure[LEFT_UPPER_LEG_ID] = createNode(m, renderLeftUpperLeg, RIGHT_UPPER_LEG_ID, LEFT_LOWER_LEG_ID);
 }
 
 // Function to initialize the right upper leg
 function initRightUpperLeg(){
     var m = mat4();
-    figure[UPPER_RIGHT_LEG_ID] = createNode(m, renderRightUpperLeg, LEFT_UPPER_WING_ID, RIGHT_LOWER_LEG_ID);
+    figure[RIGHT_UPPER_LEG_ID] = createNode(m, renderRightUpperLeg, LEFT_UPPER_WING_ID, RIGHT_LOWER_LEG_ID);
 }
 
 // Function to render the left upper leg
