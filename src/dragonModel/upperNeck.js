@@ -19,9 +19,9 @@ function initLeftUpperNeck() {
 }
 
 // Function to initialize the middle upper neck
-function initMiddleUpperNeck() {
+function initMidUpperNeck() {
     var m = mat4();
-    figure[MIDDLE_UPPER_NECK_ID] = createNode(m, renderMiddleUpperNeck, null, MIDDLE_JAW_ID);
+    figure[MID_UPPER_NECK_ID] = createNode(m, renderMiddleUpperNeck, null, MIDDLE_JAW_ID);
 }
 
 // Function to initialize the right upper neck
