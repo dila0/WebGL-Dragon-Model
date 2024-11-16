@@ -1,16 +1,15 @@
-function createFoot(gl) {
-    // Define positions for a simple rectangle representing the foot
-    const positions = [
-        -0.3, 0.3, 0.0,  // Top-left
-        0.3, 0.3, 0.0,   // Top-right
-        0.3, -0.3, 0.0,  // Bottom-right
-        -0.3, -0.3, 0.0  // Bottom-left
-    ];
+/**
+ * @fileoverview Contains the left and right feet.
+ * 
+ * @author Dila Tosun
+ * @id 22102100
+ * 
+ * @author Ahmet Kaan Sever
+ * @id 22102278
+ */
 
-    const indices = [
-        0, 1, 2,
-        2, 3, 0
-    ];
-
-    return { positions, indices };
-}
+// Global variables
+const LEFT_FOOT_ID = 23;
+const RIGHT_FOOT_ID = 24;
+var footHeight = 0.5;
+var footWidth = 0.5;

@@ -1,16 +1,16 @@
-function createHead(gl) {
-    // Define positions for a simple rectangle representing the head
-    const positions = [
-        -0.5, 0.5, 0.0,  // Top-left
-        0.5, 0.5, 0.0,   // Top-right
-        0.5, -0.5, 0.0,  // Bottom-right
-        -0.5, -0.5, 0.0  // Bottom-left
-    ];
+/**
+ * @fileoverview Contains the left, middle, and right heads.
+ * 
+ * @author Dila Tosun
+ * @id 22102100
+ * 
+ * @author Ahmet Kaan Sever
+ * @id 22102278
+ */
 
-    const indices = [
-        0, 1, 2,  // First triangle
-        2, 3, 0   // Second triangle
-    ];
-
-    return { positions, indices };
-}
+// Global variables
+const LEFT_HEAD_ID = 0;
+const MID_HEAD_ID = 1;
+const RIGHT_HEAD_ID = 2;
+var headHeight = 0.5;
+var headWidth = 0.5;
