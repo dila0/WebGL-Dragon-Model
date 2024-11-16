@@ -9,6 +9,5 @@
  */
 
 // Global variables
-const LOWER_TAIL_ID = 26;
 var lowerTailHeight = 0.5;
 var lowerTailWidth = 0.5;

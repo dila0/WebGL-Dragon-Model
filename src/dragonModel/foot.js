@@ -9,7 +9,5 @@
  */
 
 // Global variables
-const LEFT_FOOT_ID = 23;
-const RIGHT_FOOT_ID = 24;
 var footHeight = 0.5;
 var footWidth = 0.5;

@@ -9,8 +9,5 @@
  */
 
 // Global variables
-const LEFT_JAW_ID = 3;
-const MID_JAW_ID = 4;
-const RIGHT_JAW_ID = 5;
 var jawHeight = 0.5;
 var jawWidth = 0.5;

@@ -7,3 +7,13 @@
  * @author Ahmet Kaan Sever
  * @id 22102278
  */
+
+// Create Node function for the hiearchy
+function createNode(transform, render, sibling, child) {
+    return {
+        transform: transform,
+        render: render,
+        sibling: sibling,
+        child: child,
+    };
+}

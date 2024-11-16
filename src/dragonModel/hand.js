@@ -9,7 +9,5 @@
  */
 
 // Global variables
-const LEFT_HAND_ID = 16;
-const RIGHT_HAND_ID = 17;
 var handHeight = 0.5;
 var handWidth = 0.5;

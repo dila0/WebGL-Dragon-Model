@@ -9,7 +9,28 @@
  */
 
 // Global variables 
-const LEFT_UPPER_WING_ID = 12;
-const RIGHT_UPPER_WING_ID = 13;
 var upperWingHeight = 0.5;
 var upperWingWidth = 0.5;
+
+// Function to initialize the left upper wing node
+function initLeftUpperWingNode() {
+    var m = mat4();
+    // fill for var m = mat4(), translate and mult
+    figure[LEFT_UPPER_WING_ID] = createNode(m, renderLeftUpperWing, RIGHT_UPPER_WING_ID, LEFT_LOWER_WING_ID);
+}
+
+// Function to initialize the right upper wing node
+function initRightUpperWingNode() {
+    var m = mat4();
+    figure[RIGHT_UPPER_WING_ID] = createNode(m, renderRightUpperWing, UPPER_TAIL_ID, RIGHT_LOWER_WING_ID);
+}
+
+// Function to render the left upper wing 
+function renderLeftUpperWing() {
+
+}
+
+// Function to render the right upper wing
+function renderRightUpperWing() {
+
+}

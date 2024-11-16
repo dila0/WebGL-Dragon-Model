@@ -9,6 +9,5 @@
  */
 
 // Global variables 
-const BODY_ID = 18;
 var bodyHeight = 1.5;
 var bodyWidth = 1.5;

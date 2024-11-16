@@ -9,7 +9,5 @@
  */
 
 // Global variables 
-const LEFT_LOWER_WING_ID = 14;
-const RIGHT_LOWER_WING_ID = 15;
 var lowerWingHeight = 0.5;
 var lowerWingWidth = 0.5;  
