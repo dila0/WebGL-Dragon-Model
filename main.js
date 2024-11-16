@@ -50,6 +50,14 @@ const LOWER_TAIL_ID = 26;
 
 var vertices = [
     // TODO: fill
+    vec4(-0.5, -0.5,  0.5, 1.0),
+    vec4(-0.5,  0.5,  0.5, 1.0),
+    vec4( 0.5,  0.5,  0.5, 1.0),
+    vec4( 0.5, -0.5,  0.5, 1.0),
+    vec4(-0.5, -0.5, -0.5, 1.0),
+    vec4(-0.5,  0.5, -0.5, 1.0),
+    vec4( 0.5,  0.5, -0.5, 1.0),
+    vec4( 0.5, -0.5, -0.5, 1.0)
 ];
 
 var numNodes = 27;
@@ -82,14 +90,17 @@ window.onload = function init() {
     }
 
     gl.viewport(0, 0, canvas.width, canvas.height);
-    gl.clearColor(1.0, 0.0, 0.0, 1.0); 
+    gl.clearColor(0.0, 0.0, 0.0, 1.0); 
+    gl.enable(gl.DEPTH_TEST);
 
     program = initShaders(gl, "vertex-shader", "fragment-shader");
     gl.useProgram(program);
 
+    cube();
+
     instanceMatrix = mat4();
 
-    projectionMatrix = ortho(-1, 1, -1, 1, -100, 100); //TODO: change
+    projectionMatrix = ortho(-1, 1, -1, 1, -1, 1); //TODO: change
     modelViewMatrix = mat4();
 
     gl.uniformMatrix4fv(gl.getUniformLocation(program, "modelViewMatrix"), false, flatten(modelViewMatrix));
@@ -115,7 +126,9 @@ window.onload = function init() {
 
 // Render function
 var render = function() {
-    gl.clear(gl.COLOR_BUFFER_BIT);
+    gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
     traverse(BODY_ID);
+    gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(modelViewMatrix));
+    gl.drawArrays(gl.TRIANGLES, 0, pointsArray.length);
     requestAnimationFrame(render);
 }
