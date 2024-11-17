@@ -27,7 +27,7 @@ function initLeftUpperLeg(){
 function initRightUpperLeg(){
     var m = mat4();
     m = translate(legSeparation, -0.5 * bodyHeight + 0.35 * upperLegHeight, 0.0);
-    m = mult(m, rotate(theta[LEFT_UPPER_LEG_ID], 1, 0, 0));
+    m = mult(m, rotate(theta[RIGHT_UPPER_LEG_ID], 1, 0, 0));
     m = mult(m, translate(0.0, -0.5 * upperLegHeight, 0.0));
 
     figure[RIGHT_UPPER_LEG_ID] = createNode(m, renderRightUpperLeg, LEFT_UPPER_WING_ID, RIGHT_LOWER_LEG_ID);

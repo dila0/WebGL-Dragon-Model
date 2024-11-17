@@ -17,7 +17,7 @@ function initUpperTail() {
     var m = mat4();
     m = translate(0.0, 0.5 * bodyHeight, -(0.5 * bodyWidth + 0.5 * upperTailWidth));
     console.log("z upper tail: " + -(0.5 * bodyWidth + upperTailWidth));
-    m = mult(m, rotate(180, 0, 1, 1)); // add upper tail rotation theta
+    m = mult(m, rotate(theta[UPPER_TAIL_ID], 0, 1, 1)); // add upper tail rotation theta
     m = mult(m, translate(0.0, -0.5 * upperTailHeight, 0.0));
     
     figure[UPPER_TAIL_ID] = createNode(m, renderUpperTail, null, LOWER_TAIL_ID);
