@@ -9,13 +9,13 @@
  */
 
 // Global variables 
-var bodyHeight = 1.5;
-var bodyWidth = 1.5;
+var bodyHeight = 2.5;
+var bodyWidth = 2.5;
 
 // Function to initialize the body
 function initBody(){
     var m = mat4();
-    m = rotate(90, 1, 1, 1);
+    m = rotate(theta[BODY_ID], 1, 1, 1);
     figure[BODY_ID] = createNode(m, renderBody, null, LEFT_LOWER_NECK_ID);
 }
 
@@ -26,7 +26,7 @@ function renderBody(){
     instanceMatrix = mult(instanceMatrix, scale4(bodyWidth, bodyHeight, bodyWidth));
     gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(instanceMatrix));
 
-    gl.uniform4fv(gl.getUniformLocation(program, "uColor"), flatten(vec4(0.0, 0.0, 1.0, 1.0)));
+    gl.uniform4fv(gl.getUniformLocation(program, "uColor"), flatten(vec4(0.753, 0.439, 0.0, 1.0)));
     for(var i = 0; i < 6; i++){
         gl.drawArrays(gl.TRIANGLE_FAN, 4*i, 4);
     }
