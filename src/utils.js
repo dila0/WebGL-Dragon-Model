@@ -161,7 +161,7 @@ function quad(a, b, c, d){
     pointsArray.push(vertices[a]);
     pointsArray.push(vertices[b]);
     pointsArray.push(vertices[c]);
-    pointsArray.push(vertices[a]);
+    pointsArray.push(vertices[d]);
 }
 
 // Function to draw a cube
