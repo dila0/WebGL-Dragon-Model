@@ -63,9 +63,7 @@ var vertices = [
 var numNodes = 27;
 var numAngles = 28;
 var angle = 0;
-var theta = [
-    // TODO: fill
-];
+var theta = Array(numNodes).fill(0);
 
 var numVertices = 0; // TODO: fill
 var stack = [];
@@ -100,7 +98,7 @@ window.onload = function init() {
 
     instanceMatrix = mat4();
 
-    projectionMatrix = ortho(-1, 1, -1, 1, -1, 1); //TODO: change
+    projectionMatrix = ortho(-10.0, 10.0, -10.0, 10.0, -100.0, 100.0); //TODO: change
     modelViewMatrix = mat4();
 
     gl.uniformMatrix4fv(gl.getUniformLocation(program, "modelViewMatrix"), false, flatten(modelViewMatrix));
@@ -128,7 +126,7 @@ window.onload = function init() {
 var render = function() {
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
     traverse(BODY_ID);
-    gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(modelViewMatrix));
-    gl.drawArrays(gl.TRIANGLES, 0, pointsArray.length);
+    // gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(modelViewMatrix));
+    // gl.drawArrays(gl.TRIANGLES, 0, pointsArray.length);
     requestAnimationFrame(render);
 }

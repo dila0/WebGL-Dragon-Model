@@ -15,10 +15,17 @@ var bodyWidth = 1.5;
 // Function to initialize the body
 function initBody(){
     var m = mat4();
+    m = rotate(theta[BODY_ID], 0, 1, 1);
     figure[BODY_ID] = createNode(m, renderBody, null, LEFT_LOWER_NECK_ID);
 }
 
 // Function to render the body
 function renderBody(){
+    console.log("Rendering body...");
+    instanceMatrix = mult(modelViewMatrix, translate(0.0, 0.5*bodyHeight, 0.0));
+    instanceMatrix = mult(instanceMatrix, scale4(bodyWidth, bodyHeight, bodyWidth));
+    gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(instanceMatrix));
 
+    gl.uniform4fv(gl.getUniformLocation(program, "uColor"), flatten(vec4(0.0, 0.0, 1.0, 1.0)));
+    gl.drawArrays(gl.TRIANGLE_FAN, 0, pointsArray.length);  
 }
