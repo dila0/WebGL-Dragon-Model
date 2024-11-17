@@ -94,7 +94,7 @@ window.onload = function init() {
     program = initShaders(gl, "vertex-shader", "fragment-shader");
     gl.useProgram(program);
 
-    cube();
+    //cube();
 
     instanceMatrix = mat4();
 
