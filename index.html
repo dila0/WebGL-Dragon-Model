@@ -19,48 +19,89 @@
   <script src="Common/initShaders.js"></script>
 </head>
 <body>
-  <canvas id="gl-canvas" width="800" height="600"></canvas>
+    <canvas id="gl-canvas" width="800" height="600"></canvas>
+    <!-- SLIDERS -->
+    <div>
+      <label for="limbSelect">Select the limb you want to rotate:</label>
+      <select id="limbSelect">
+        <option value="LEFT_HEAD_ID">Left Head</option>
+        <option value="MID_HEAD_ID">Middle Head</option>
+        <option value="RIGHT_HEAD_ID">Right Head</option>
+        <option value="LEFT_JAW_ID">Left Jaw</option>
+        <option value="MID_JAW_ID">Middle Jaw</option>
+        <option value="RIGHT_JAW_ID">Right Jaw</option>
+        <option value="LEFT_UPPER_NECK_ID">Left Upper Neck</option>
+        <option value="MID_UPPER_NECK_ID">Middle Upper Neck</option>
+        <option value="RIGHT_UPPER_NECK_ID">Right Upper Neck</option>
+        <option value="LEFT_LOWER_NECK_ID">Left Lower Neck</option>
+        <option value="MID_LOWER_NECK_ID">Middle Lower Neck</option>
+        <option value="RIGHT_LOWER_NECK_ID">Right Lower Neck</option>
+        <option value="LEFT_UPPER_WING_ID">Left Upper Wing</option>
+        <option value="RIGHT_UPPER_WING_ID">Right Upper Wing</option>
+        <option value="LEFT_LOWER_WING_ID">Left Lower Wing</option>
+        <option value="RIGHT_LOWER_WING_ID">Right Lower Wing</option>
+        <option value="LEFT_HAND_ID">Left Hand</option>
+        <option value="RIGHT_HAND_ID">Right Hand</option>
+        <option value="BODY_ID">Body</option>
+        <option value="LEFT_UPPER_LEG_ID">Left Upper Leg</option>
+        <option value="RIGHT_UPPER_LEG_ID">Right Upper Leg</option>
+        <option value="LEFT_LOWER_LEG_ID">Left Lower Leg</option>
+        <option value="RIGHT_LOWER_LEG_ID">Right Lower Leg</option>
+        <option value="LEFT_FOOT_ID">Left Foot</option>
+        <option value="RIGHT_FOOT_ID">Right Foot</option>
+        <option value="UPPER_TAIL_ID">Upper Tail</option>
+        <option value="LOWER_TAIL_ID">Lower Tail</option>
+      </select>
+    </div>
+    <div>
+      <label for="xRotation">X Rotation Angle:</label>
+      <input type="range" id="xRotation" min="-180" max="180" value="0">
+      <label for="yRotation">Y Rotation Angle:</label>
+      <input type="range" id="yRotation" min="-180" max="180" value="0">
+      <label for="zRotation">Z Rotation Angle:</label>
+      <input type="range" id="zRotation" min="-180" max="180" value="0">
+    </div>
 
-  <!-- SHADERS -->
-  <script id="vertex-shader" type="x-shader/x-vertex">
-    attribute  vec4 vPos;
-    
-    uniform mat4 modelViewMatrix;
-    uniform mat4 projectionMatrix;
+    <!-- SHADERS -->
+    <script id="vertex-shader" type="x-shader/x-vertex">
+      attribute  vec4 vPos;
       
-    void main(){
-        gl_Position = projectionMatrix * modelViewMatrix * vPos;
-    } 
-  </script>
+      uniform mat4 modelViewMatrix;
+      uniform mat4 projectionMatrix;
+        
+      void main(){
+          gl_Position = projectionMatrix * modelViewMatrix * vPos;
+      } 
+    </script>
 
-  <script id="fragment-shader" type="x-shader/x-fragment">
-    precision mediump float;
-    uniform vec4 uColor;
+    <script id="fragment-shader" type="x-shader/x-fragment">
+      precision mediump float;
+      uniform vec4 uColor;
 
-    void main(){
-      gl_FragColor = uColor;
-    }
-  </script>
+      void main(){
+        gl_FragColor = uColor;
+      }
+    </script>
 
-  <!-- Body Parts -->
-  <script src="src/dragonModel/body.js"></script>
-  <script src="src/dragonModel/foot.js"></script>
-  <script src="src/dragonModel/hand.js"></script>
-  <script src="src/dragonModel/head.js"></script>
-  <script src="src/dragonModel/jaw.js"></script>
-  <script src="src/dragonModel/lowerLeg.js"></script>
-  <script src="src/dragonModel/lowerNeck.js"></script>
-  <script src="src/dragonModel/lowerTail.js"></script>
-  <script src="src/dragonModel/lowerWing.js"></script>
-  <script src="src/dragonModel/upperLeg.js"></script>
-  <script src="src/dragonModel/upperNeck.js"></script>
-  <script src="src/dragonModel/upperTail.js"></script>
-  <script src="src/dragonModel/upperWing.js"></script>
+    <!-- Body Parts -->
+    <script src="src/dragonModel/body.js"></script>
+    <script src="src/dragonModel/foot.js"></script>
+    <script src="src/dragonModel/hand.js"></script>
+    <script src="src/dragonModel/head.js"></script>
+    <script src="src/dragonModel/jaw.js"></script>
+    <script src="src/dragonModel/lowerLeg.js"></script>
+    <script src="src/dragonModel/lowerNeck.js"></script>
+    <script src="src/dragonModel/lowerTail.js"></script>
+    <script src="src/dragonModel/lowerWing.js"></script>
+    <script src="src/dragonModel/upperLeg.js"></script>
+    <script src="src/dragonModel/upperNeck.js"></script>
+    <script src="src/dragonModel/upperTail.js"></script>
+    <script src="src/dragonModel/upperWing.js"></script>
 
-  <!-- Main Script -->
-  <script src="src/uiControllers.js"></script>
-  <script src="src/utils.js"></script>
-  <script src="main.js"></script>
+    <!-- Main Script -->
+    <script src="src/uiControllers.js"></script>
+    <script src="src/utils.js"></script>
+    <script src="main.js"></script>
 </body>
 </html>
 
