@@ -98,6 +98,7 @@ var theta = new Array(numNodes);
 for(var i = 0; i < theta.length; i++) {
     theta[i] = new Array(3).fill(0);
 }
+
 console.log(theta[i]);
 
 var numVertices = 0; // TODO: fill
@@ -117,12 +118,18 @@ var pointsArray = [];
 const limbSelect = document.getElementById("limbSelect");
 const selectedBodyPart = document.getElementById("selectedBodyPart");
 const rotationVal = document.getElementById("rotationVals");
+
 const xRotation = document.getElementById("xRotation");
 const yRotation = document.getElementById("yRotation");
 const zRotation = document.getElementById("zRotation");
+
 const xValue = document.getElementById("xValue");
 const yValue = document.getElementById("yValue");
 const zValue = document.getElementById("zValue");
+
+const resetX = document.getElementById("resetX");
+const resetY = document.getElementById("resetY");
+const resetZ = document.getElementById("resetZ");
 
 var xVal = 0.0;
 var yVal = 0.0;
@@ -176,6 +183,26 @@ window.onload = function init() {
     zRotation.addEventListener("input", (event) =>{
         zVal = parseFloat(event.target.value);
         zValue.textContent = zVal.toFixed(1);
+    });
+
+    // Reset buttons
+    resetX.addEventListener("click", () => {
+        xRotation.value = 0;
+        xVal = 0;
+        xValue.textContent = xVal;
+        updateRotationValues();
+    });
+    resetY.addEventListener("click", () => {
+        yRotation.value = 0;
+        yVal = 0;
+        yValue.textContent = yVal;
+        updateRotationValues();
+    });
+    resetZ.addEventListener("click", () => {
+        zRotation.value = 0;
+        zVal = 0;
+        zValue.textContent = zVal;
+        updateRotationValues();
     });
 
     for(var i = 0; i < numNodes; i++) initNodes(i);
