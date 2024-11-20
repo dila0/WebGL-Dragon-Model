@@ -187,20 +187,20 @@ window.onload = function init() {
 
     // Reset buttons
     resetX.addEventListener("click", () => {
-        xRotation.value = 0;
-        xVal = 0;
+        xRotation.value = 0.0;
+        xVal = 0.0;
         xValue.textContent = xVal;
         updateRotationValues();
     });
     resetY.addEventListener("click", () => {
-        yRotation.value = 0;
-        yVal = 0;
+        yRotation.value = 0.0;
+        yVal = 0.0;
         yValue.textContent = yVal;
         updateRotationValues();
     });
     resetZ.addEventListener("click", () => {
-        zRotation.value = 0;
-        zVal = 0;
+        zRotation.value = 0.0;
+        zVal = 0.0;
         zValue.textContent = zVal;
         updateRotationValues();
     });
