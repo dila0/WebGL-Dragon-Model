@@ -17,6 +17,7 @@ function initUpperTail() {
     var m = mat4();
     m = translate(0.0, 0.5 * bodyHeight, -(0.5 * bodyWidth + 0.5 * upperTailWidth));
     console.log("z upper tail: " + -(0.5 * bodyWidth + upperTailWidth));
+    theta[UPPER_TAIL_ID][0] = 90
     m = rotatePart(UPPER_TAIL_ID, m);
     m = mult(m, translate(0.0, -0.5 * upperTailHeight, 0.0));
     
