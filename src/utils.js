@@ -40,6 +40,7 @@ function traverse(id){
 
 // Init nodes function containing the initializer functions
 function initNodes(id){
+    id = parseInt(id)
     switch(id){
         case LEFT_HEAD_ID:
             initLeftHead();
@@ -196,7 +197,7 @@ function updateRotationValues() {
       const x = xRotation.value;
       const y = yRotation.value;
       const z = zRotation.value;
-  
+
       // Parse to float
       const xFloat = Number(x);
       const yFloat = Number(y);
@@ -211,7 +212,18 @@ function updateRotationValues() {
           console.error("Invalid rotation values detected.");
           return;
       }
-  
+      console.log("TYPE X: " + typeof(x));
+      console.log("TYPE X FLOAT: " + typeof(xFloat));
+      
+      theta[limbSelect.value][0] = xFloat;
+      theta[limbSelect.value][1] = yFloat;
+      theta[limbSelect.value][2] = zFloat;
+    
+      initNodes(limbSelect.value);
+      console.log("THETA X: " + theta[limbSelect.value][0]);
+
+      console.log(limbSelect.value);
+
       // Display rotation values
       rotationVal.textContent = `Rotation Values: x: ${xFloat}, y: ${yFloat}, z: ${zFloat}`;
 }

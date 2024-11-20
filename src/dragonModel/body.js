@@ -15,8 +15,7 @@ var bodyWidth = 2.5;
 // Function to initialize the body
 function initBody(){
     var m = mat4();
-    // m = rotatePart(BODY_ID, m);
-    m = mult(m, rotate(0, 0, 1, 1));
+    m = rotatePart(BODY_ID, m);
     figure[BODY_ID] = createNode(m, renderBody, null, LEFT_LOWER_NECK_ID);
 }
 
