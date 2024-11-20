@@ -77,6 +77,14 @@ var modelViewLoc;
 
 var pointsArray = [];
 
+// Sliders
+const limbSelect = document.getElementById("limbSelect");
+const selectedBodyPart = document.getElementById("selectedBodyPart");
+const rotationVal = document.getElementById("rotationVals");
+const xRotation = document.getElementById("xRotation");
+const yRotation = document.getElementById("yRotation");
+const zRotation = document.getElementById("zRotation");
+
 // Main function
 window.onload = function init() {
     canvas = document.getElementById('gl-canvas');
@@ -106,6 +114,10 @@ window.onload = function init() {
     initCubeBuffers();
 
     // TODO: fill sliders 
+    limbSelect.onchange = updateSelectedBodyPart;
+    xRotation.oninput = updateRotationValues;
+    yRotation.oninput = updateRotationValues;
+    zRotation.oninput = updateRotationValues;
 
     for(var i = 0; i < numNodes; i++) initNodes(i);
     render();
@@ -129,4 +141,20 @@ function initCubeBuffers(){
     var vPos = gl.getAttribLocation(program, "vPos");
     gl.vertexAttribPointer(vPos, 4, gl.FLOAT, false, 0, 0); 
     gl.enableVertexAttribArray(vPos);
+}
+
+// Update selected body part
+function updateSelectedBodyPart() {
+    const selectedLimb = limbSelect.value;
+    selectedBodyPart.textContent = `Selected Part: ${selectedLimb}`;
+    console.log(`Selected Part: ${selectedLimb}`);
+}
+
+// Update rotation values
+function updateRotationValues() {
+    const x = xRotation.value;
+    const y = yRotation.value;
+    const z = zRotation.value;
+    rotationVal.textContent = `Rotation Values: x: ${x}, y: ${y}, z: ${z}`;
+    console.log(`Rotation Values - X: ${x}, Y: ${y}, Z: ${z}`);
 }

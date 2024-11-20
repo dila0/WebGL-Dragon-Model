@@ -16,7 +16,7 @@ var lowerWingWidth = 1.0;
 function initLeftLowerWing(){
     var m = mat4();
     m = translate(-(0.5 * upperWingWidth + 0.5 * lowerWingWidth), 0.5 * upperWingHeight - lowerWingHeight, 0.0);
-    m = mult(m, rotate(theta[LEFT_LOWER_WING_ID], 1, 0, 0));
+    m = rotatePart(LEFT_LOWER_WING_ID, m);
     m = mult(m, translate(0.0, 0.5 * lowerWingHeight, 0.0));
 
     figure[LEFT_LOWER_WING_ID] = createNode(m, renderLeftLowerWing, null, LEFT_HAND_ID);
@@ -26,7 +26,7 @@ function initLeftLowerWing(){
 function initRightLowerWing(){
     var m = mat4();
     m = translate(0.5 * upperWingWidth + 0.5 * lowerWingWidth, 0.5 * upperWingHeight - lowerWingHeight, 0.0);
-    m = mult(m, rotate(theta[RIGHT_LOWER_WING_ID], 1, 0, 0));
+    m = rotatePart(RIGHT_LOWER_WING_ID, m);
     m = mult(m, translate(0.0, 0.5 * lowerWingHeight, 0.0));
 
     figure[RIGHT_LOWER_WING_ID] = createNode(m, renderRightLowerWing, null, RIGHT_HAND_ID);

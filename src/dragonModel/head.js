@@ -16,7 +16,7 @@ var headWidth = 0.5;
 function initLeftHead(){
     var m = mat4();
     m = translate(0.0, jawHeight + 0.5 * headHeight, 0.0);
-    m = mult(m, rotate(theta[LEFT_HEAD_ID], 0, 1, 0));
+    m = rotatePart(LEFT_HEAD_ID, m);
     m = mult(m, translate(0.0, -0.5 * headHeight, 0.0));
 
     figure[LEFT_HEAD_ID] = createNode(m, renderLeftHead, null, null);
@@ -26,7 +26,7 @@ function initLeftHead(){
 function initMidHead(){
     var m = mat4();
     m = translate(0.0, jawHeight + 0.5 * headHeight, 0.0);
-    m = mult(m, rotate(theta[MID_HEAD_ID], 0, 1, 0));
+    m = rotatePart(MID_HEAD_ID, m);
     m = mult(m, translate(0.0, -0.5 * headHeight, 0.0));
 
     figure[MID_HEAD_ID] = createNode(m, renderMidHead, null, null);
@@ -36,7 +36,7 @@ function initMidHead(){
 function initRightHead(){
     var m = mat4();
     m = translate(0.0, jawHeight + 0.5 * headHeight, 0.0);
-    m = mult(m, rotate(theta[RIGHT_HEAD_ID], 0, 1, 0));
+    m = rotatePart(RIGHT_HEAD_ID, m);
     m = mult(m, translate(0.0, -0.5 * headHeight, 0.0));
 
     figure[RIGHT_HEAD_ID] = createNode(m, renderRightHead, null, null);

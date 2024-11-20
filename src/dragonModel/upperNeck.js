@@ -16,7 +16,7 @@ var upperNeckWidth = 0.5;
 function initLeftUpperNeck() {
     var m = mat4();
     m = translate(0.0, lowerNeckHeight + 0.5 * upperNeckHeight, 0.0);
-    m = mult(m, rotate(theta[LEFT_UPPER_NECK_ID], 0, 0, 1));
+    m = rotatePart(LEFT_UPPER_NECK_ID, m);
     m = mult(m, translate(0.0, -0.5 * upperNeckHeight, 0.0));
 
     figure[LEFT_UPPER_NECK_ID] = createNode(m, renderLeftUpperNeck, null, LEFT_JAW_ID);
@@ -26,7 +26,7 @@ function initLeftUpperNeck() {
 function initMidUpperNeck() {
     var m = mat4();
     m = translate(0.0, lowerNeckHeight + 0.5 * upperNeckHeight, 0.0);
-    m = mult(m, rotate(theta[MID_UPPER_NECK_ID], 0, 0, 1));
+    m = rotatePart(MID_UPPER_NECK_ID, m);
     m = mult(m, translate(0.0, -0.5 * upperNeckHeight, 0.0));
     
     figure[MID_UPPER_NECK_ID] = createNode(m, renderMiddleUpperNeck, null, MID_JAW_ID);
@@ -36,7 +36,7 @@ function initMidUpperNeck() {
 function initRightUpperNeck() {
     var m = mat4();
     m = translate(0.0, lowerNeckHeight + 0.5 * upperNeckHeight, 0.0);
-    m = mult(m, rotate(theta[RIGHT_UPPER_NECK_ID], 0, 0, 1));
+    m = rotatePart(RIGHT_UPPER_NECK_ID, m);
     m = mult(m, translate(0.0, -0.5 * upperNeckHeight, 0.0));
     
     figure[RIGHT_UPPER_NECK_ID] = createNode(m, renderRightUpperNeck, null, RIGHT_JAW_ID);

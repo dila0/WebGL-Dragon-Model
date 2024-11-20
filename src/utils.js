@@ -173,3 +173,11 @@ function cube(){
     quad(4, 5, 6, 7);
     quad(5, 4, 0, 1);
 }
+
+// Rotation Function
+function rotatePart(id, m){
+    m = mult(m, rotate(theta[id], 1, 0, 0));
+    m = mult(m, rotate(theta[id], 0, 1, 0));
+    m = mult(m, rotate(theta[id], 0, 0, 1));
+    return m;
+}

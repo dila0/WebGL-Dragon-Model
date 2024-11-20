@@ -16,7 +16,7 @@ var handWidth = 1.0;
 function initLeftHand() {
     var m = mat4();
     m = translate(-(0.5 * lowerWingWidth + 0.5 * handWidth), 0.5 * lowerWingHeight - handHeight, 0.0);
-    m = mult(m, rotate(theta[LEFT_HAND_ID], 1, 0, 0));
+    m = rotatePart(LEFT_HAND_ID, m);
     m = mult(m, translate(0.0, 0.5 * handHeight, 0.0));
 
     figure[LEFT_HAND_ID] = createNode(m, renderLeftHand, null, null);
@@ -26,7 +26,7 @@ function initLeftHand() {
 function initRightHand() {
     var m = mat4();
     m = translate(0.5 * lowerWingWidth + 0.5 * handWidth, 0.5 * lowerWingHeight - handHeight, 0.0);
-    m = mult(m, rotate(theta[RIGHT_HAND_ID], 1, 0, 0));
+    m = rotatePart(RIGHT_HAND_ID, m);
     m = mult(m, translate(0.0, 0.5 * handHeight, 0.0));
 
     figure[RIGHT_HAND_ID] = createNode(m, renderRightHand, null, null);

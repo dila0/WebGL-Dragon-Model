@@ -16,7 +16,7 @@ var lowerLegWidth = 0.5;
 function initLeftLowerLeg() {
     var m = mat4();
     m = translate(0.0, - 0.5 * upperLegHeight + lowerLegHeight, 0.0);
-    m = mult(m, rotate(theta[LEFT_LOWER_LEG_ID], 0, 0, 1));
+    m = rotatePart(LEFT_LOWER_LEG_ID, m);
     m = mult(m, translate(0.0, -0.5 * lowerLegHeight, 0.0));
 
     figure[LEFT_LOWER_LEG_ID] = createNode(m, renderLeftLowerLeg, null, LEFT_FOOT_ID);
@@ -26,7 +26,7 @@ function initLeftLowerLeg() {
 function initRightLowerLeg() {
     var m = mat4();
     m = translate(0.0, - 0.5 * upperLegHeight + lowerLegHeight, 0.0);
-    m = mult(m, rotate(theta[RIGHT_LOWER_LEG_ID], 0, 0, 1));
+    m = rotatePart(RIGHT_LOWER_LEG_ID, m);
     m = mult(m, translate(0.0, -0.5 * lowerLegHeight, 0.0));
 
     figure[RIGHT_LOWER_LEG_ID] = createNode(m, renderRightLowerLeg, null, RIGHT_FOOT_ID);

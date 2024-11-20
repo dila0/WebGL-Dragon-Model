@@ -16,7 +16,7 @@ var footWidth = 0.7;
 function initLeftFoot() {
     var m = mat4();
     m = translate(0.0, - lowerLegHeight + 0.5 * footHeight, 0.0);
-    m = mult(m, rotate(theta[LEFT_FOOT_ID], 0, 0, 1));
+    m = rotatePart(LEFT_FOOT_ID, m);
     m = mult(m, translate(0.0, -0.5 * footHeight, 0.0)); 
 
     figure[LEFT_FOOT_ID] = createNode(m, renderLeftFoot, null, null);
@@ -26,7 +26,7 @@ function initLeftFoot() {
 function initRightFoot() {
     var m = mat4();
     m = translate(0.0, - lowerLegHeight + 0.5 * footHeight, 0.0);
-    m = mult(m, rotate(theta[RIGHT_FOOT_ID], 0, 0, 1));
+    m = rotatePart(RIGHT_FOOT_ID, m);
     m = mult(m, translate(0.0, -0.5 * footHeight, 0.0)); 
 
     figure[RIGHT_FOOT_ID] = createNode(m, renderRightFoot, null, null);

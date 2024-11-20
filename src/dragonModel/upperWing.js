@@ -16,7 +16,7 @@ var upperWingWidth = 1.0;
 function initLeftUpperWing() {
     var m = mat4();
     m = translate(-(0.5 * bodyWidth + 0.5 * upperWingWidth), 0.5 * bodyHeight - upperWingHeight, 0.0);
-    m = mult(m, rotate(theta[LEFT_UPPER_WING_ID], 1, 0, 0));
+    m = rotatePart(LEFT_UPPER_WING_ID, m);
     m = mult(m, translate(0.0, 0.5 * upperWingHeight, 0.0));
 
     figure[LEFT_UPPER_WING_ID] = createNode(m, renderLeftUpperWing, RIGHT_UPPER_WING_ID, LEFT_LOWER_WING_ID);
@@ -26,7 +26,7 @@ function initLeftUpperWing() {
 function initRightUpperWing() {
     var m = mat4();
     m = translate(0.5 * bodyWidth + 0.5 * upperWingWidth, 0.5 * bodyHeight - upperWingHeight, 0.0);
-    m = mult(m, rotate(theta[RIGHT_UPPER_WING_ID], 1, 0, 0));
+    m = rotatePart(RIGHT_UPPER_WING_ID, m);
     m = mult(m, translate(0.0, 0.5 * upperWingHeight, 0.0));
     
     figure[RIGHT_UPPER_WING_ID] = createNode(m, renderRightUpperWing, UPPER_TAIL_ID, RIGHT_LOWER_WING_ID);
