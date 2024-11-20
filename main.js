@@ -61,8 +61,12 @@ var cubeVertices = [
 
 var numNodes = 27;
 var numAngles = 28;
-var angle = 0;
-var theta = Array(numNodes).fill(0);
+
+// Angles
+var theta = new Array(numNodes);
+for(var i = 0; i < theta.length; i++) {
+    theta[i] = new Array(3).fill(0);
+}
 
 var numVertices = 0; // TODO: fill
 var stack = [];
@@ -155,6 +159,7 @@ function updateRotationValues() {
     const x = xRotation.value;
     const y = yRotation.value;
     const z = zRotation.value;
+
     rotationVal.textContent = `Rotation Values: x: ${x}, y: ${y}, z: ${z}`;
     console.log(`Rotation Values - X: ${x}, Y: ${y}, Z: ${z}`);
 }

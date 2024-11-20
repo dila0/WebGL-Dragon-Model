@@ -176,8 +176,8 @@ function cube(){
 
 // Rotation Function
 function rotatePart(id, m){
-    m = mult(m, rotate(theta[id], 1, 0, 0));
-    m = mult(m, rotate(theta[id], 0, 1, 0));
-    m = mult(m, rotate(theta[id], 0, 0, 1));
+    m = mult(m, rotate(theta[id][0], 1, 0, 0));
+    m = mult(m, rotate(theta[id][1], 0, 1, 0));
+    m = mult(m, rotate(theta[id][2], 0, 0, 1));
     return m;
 }
