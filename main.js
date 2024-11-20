@@ -48,6 +48,37 @@ const RIGHT_FOOT_ID = 24;
 const UPPER_TAIL_ID = 25;
 const LOWER_TAIL_ID = 26;
 
+// Mapping
+const bodyPartNames = {
+    0: "Left Head",
+    1: "Middle Head",
+    2: "Right Head",
+    3: "Left Jaw",
+    4: "Middle Jaw",
+    5: "Right Jaw",
+    6: "Left Upper Neck",
+    7: "Middle Upper Neck",
+    8: "Right Upper Neck",
+    9: "Left Lower Neck",
+    10: "Middle Lower Neck",
+    11: "Right Lower Neck",
+    12: "Left Upper Wing",
+    13: "Right Upper Wing",
+    14: "Left Lower Wing",
+    15: "Right Lower Wing",
+    16: "Left Hand",
+    17: "Right Hand",
+    18: "Body",
+    19: "Left Upper Leg",
+    20: "Right Upper Leg",
+    21: "Left Lower Leg",
+    22: "Right Lower Leg",
+    23: "Left Foot",
+    24: "Right Foot",
+    25: "Upper Tail",
+    26: "Lower Tail"
+}
+
 var cubeVertices = [
     vec4(-0.5, -0.5,  0.5, 1.0),
     vec4(-0.5,  0.5,  0.5, 1.0),
@@ -149,9 +180,12 @@ function initCubeBuffers(){
 
 // Update selected body part
 function updateSelectedBodyPart() {
-    const selectedLimb = limbSelect.value;
-    selectedBodyPart.textContent = `Selected Part: ${selectedLimb}`;
-    console.log(`Selected Part: ${selectedLimb}`);
+    let selectedLimb = limbSelect.value;
+    let bodyPartName = bodyPartNames[selectedLimb];
+    selectedBodyPart.textContent = `Selected Part: ${bodyPartName}`;
+    console.log(`Selected Part: ${bodyPartName}`);
+    selectedLimb = parseFloat(limbSelect.value);
+    console.log("limb; " + selectedLimb);
 }
 
 // Update rotation values
