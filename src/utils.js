@@ -282,3 +282,21 @@ function initCubeBuffers(){
     gl.vertexAttribPointer(vPos, 4, gl.FLOAT, false, 0, 0); 
     gl.enableVertexAttribArray(vPos);
 }
+
+function resetAllRotations() {
+    for (let i = 0; i < theta.length; i++) {
+        theta[i][0] = 0.0; 
+        theta[i][1] = 0.0; 
+        theta[i][2] = 0.0; 
+        initNodes(i);    
+    }
+
+    // Reset slider values and text
+    xRotation.value = 0.0;
+    yRotation.value = 0.0;
+    zRotation.value = 0.0;
+
+    xValue.textContent = 0.0;
+    yValue.textContent = 0.0;
+    zValue.textContent = 0.0;
+}

@@ -130,6 +130,7 @@ const zValue = document.getElementById("zValue");
 const resetX = document.getElementById("resetX");
 const resetY = document.getElementById("resetY");
 const resetZ = document.getElementById("resetZ");
+const resetAll = document.getElementById("resetAll");
 
 var xVal = 0.0;
 var yVal = 0.0;
@@ -166,6 +167,7 @@ window.onload = function init() {
     // Update Sliders and Reset 
     updateSliders();
     resetRotations();
+    resetAll.addEventListener("click", resetAllRotations);
 
     for(var i = 0; i < numNodes; i++) initNodes(i);
     render();
