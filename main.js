@@ -123,18 +123,37 @@ const xRotation = document.getElementById("xRotation");
 const yRotation = document.getElementById("yRotation");
 const zRotation = document.getElementById("zRotation");
 
-const xValue = document.getElementById("xValue");
-const yValue = document.getElementById("yValue");
-const zValue = document.getElementById("zValue");
+const xRotValue = document.getElementById("xValue");
+const yRotValue = document.getElementById("yValue");
+const zRotValue = document.getElementById("zValue");
 
-const resetX = document.getElementById("resetX");
-const resetY = document.getElementById("resetY");
-const resetZ = document.getElementById("resetZ");
-const resetAll = document.getElementById("resetAll");
+const resetRotX = document.getElementById("resetX");
+const resetRotY = document.getElementById("resetY");
+const resetRotZ = document.getElementById("resetZ");
+const resetRotAll = document.getElementById("resetAll");
 
-var xVal = 0.0;
-var yVal = 0.0;
-var zVal = 0.0;
+var xRotVal = 0.0;
+var yRotVal = 0.0;
+var zRotVal = 0.0;
+
+const xTranslation = document.getElementById("xTranslation");
+const yTranslation = document.getElementById("yTranslation");
+const zTranslation = document.getElementById("zTranslation");
+
+const xTransValue = document.getElementById("xTransValue");
+const yTransValue = document.getElementById("yTransValue");
+const zTransValue = document.getElementById("zTransValue");
+
+const resetTransX = document.getElementById("resetTransX");
+const resetTransY = document.getElementById("resetTransY");
+const resetTransZ = document.getElementById("resetTransZ");
+const resetTransAll = document.getElementById("resetTransAll");
+
+const translationVal = document.getElementById("translationVals");
+
+var xTransVal = 0.0;
+var yTransVal = 0.0;
+var zTransVal = 0.0;
 
 // Main function
 window.onload = function init() {
@@ -165,9 +184,10 @@ window.onload = function init() {
     initCubeBuffers();
 
     // Update Sliders and Reset 
-    updateSliders();
+    updateRotations();
     resetRotations();
-    resetAll.addEventListener("click", resetAllRotations);
+    updateTranslationValues();
+    resetTranslations();
 
     for(var i = 0; i < numNodes; i++) initNodes(i);
     render();
@@ -176,7 +196,9 @@ window.onload = function init() {
 // Render function
 var render = function() {
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+    modelViewMatrix = translate(xTransVal, yTransVal, zTransVal);
     traverse(BODY_ID);
     requestAnimationFrame(render);
 }
+
 

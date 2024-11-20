@@ -54,6 +54,7 @@
       </select>
     </div>
 
+    <!-- ROTATION SLIDERS -->
     <div>
       <label for="xRotation">X Rotation Angle:</label>
       <input type="range" id="xRotation" min="-180.0" max="180.0" value="0.0" step="1.0">
@@ -75,6 +76,26 @@
       <p id="selectedBodyPart"> Select a Body Part </p>
       <p id="rotationVals"> Rotation (X, Y, Z): x:0, y:0, z:0 </p>
     </div>
+
+    <!-- TRANSLATION SLIDERS -->
+    <div>
+      <label for="xTranslation">X Translation:</label>
+      <input type="range" id="xTranslation" min="-1.0" max="1.0" value="0.0" step="0.1">
+      <span id="xTransValue">0.0</span>
+      <label for="yTranslation">Y Translation:</label>
+      <input type="range" id="yTranslation" min="-1.0" max="1.0" value="0.0" step="0.1">
+      <span id="yTransValue">0.0</span>
+      <label for="zTranslation">Z Translation:</label>
+      <input type="range" id="zTranslation" min="-10.0" max="10.0" value="0.0" step="0.5">
+      <span id="zTransValue">0.0</span>
+    </div>
+
+    <button id="resetTransX">Reset Trans X</button>
+    <button id="resetTransY">Reset Trans Y</button>
+    <button id="resetTransZ">Reset Trans Z</button>
+    <button id="resetTransAll">Reset Trans All</button>
+
+    <p id="translationVals"> Translation (X, Y, Z): x:0, y:0, z:0 </p>
 
     <!-- SHADERS -->
     <script id="vertex-shader" type="x-shader/x-vertex">

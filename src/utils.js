@@ -188,16 +188,16 @@ function updateSelectedBodyPart() {
     let selectedLimb = limbSelect.value;
 
     xRotation.value = theta[selectedLimb][0];
-    xVal = parseFloat(xRotation.value);
-    xValue.textContent = xVal.toFixed(1);
+    xRotVal = parseFloat(xRotation.value);
+    xRotValue.textContent = xRotVal.toFixed(1);
 
     yRotation.value = theta[selectedLimb][1];
-    yVal = parseFloat(yRotation.value);
-    yValue.textContent = yVal.toFixed(1);
+    yRotVal = parseFloat(yRotation.value);
+    yRotValue.textContent = yRotVal.toFixed(1);
 
     zRotation.value = theta[selectedLimb][2];
-    zVal = parseFloat(zRotation.value);
-    zValue.textContent = zVal.toFixed(1);
+    zRotVal = parseFloat(zRotation.value);
+    zRotValue.textContent = zRotVal.toFixed(1);
     
     let bodyPartName = bodyPartNames[selectedLimb];
     selectedBodyPart.textContent = `Selected Part: ${bodyPartName}`;
@@ -228,28 +228,29 @@ function updateRotationValues() {
 
 // Reset rotations function
 function resetRotations(){
-    resetX.addEventListener("click", () => {
+    resetRotX.addEventListener("click", () => {
         xRotation.value = 0.0;
-        xVal = 0.0;
-        xValue.textContent = xVal;
+        xRotVal = 0.0;
+        xRotValue.textContent = xRotVal;
         updateRotationValues();
     });
-    resetY.addEventListener("click", () => {
+    resetRotY.addEventListener("click", () => {
         yRotation.value = 0.0;
-        yVal = 0.0;
-        yValue.textContent = yVal;
+        yRotVal = 0.0;
+        yRotValue.textContent = yRotVal;
         updateRotationValues();
     });
-    resetZ.addEventListener("click", () => {
+    resetRotZ.addEventListener("click", () => {
         zRotation.value = 0.0;
-        zVal = 0.0;
-        zValue.textContent = zVal;
+        zRotVal = 0.0;
+        zRotValue.textContent = zRotVal;
         updateRotationValues();
     });
+    resetAll.addEventListener("click", resetAllRotations);
 }
 
 // Update Sliders function
-function updateSliders() {
+function updateRotations() {
     limbSelect.onchange = updateSelectedBodyPart;
     xRotation.oninput = updateRotationValues;
     yRotation.oninput = updateRotationValues;
@@ -257,18 +258,18 @@ function updateSliders() {
 
     // Sliders
     xRotation.addEventListener("input", (event) =>{
-        xVal = parseFloat(event.target.value);
-        xValue.textContent = xVal.toFixed(1);
+        xRotVal = parseFloat(event.target.value);
+        xRotValue.textContent = xRotVal.toFixed(1);
     });
 
     yRotation.addEventListener("input", (event) =>{
-        yVal = parseFloat(event.target.value);
-        yValue.textContent = yVal.toFixed(1);
+        yRotVal = parseFloat(event.target.value);
+        yRotValue.textContent = yRotVal.toFixed(1);
     });
 
     zRotation.addEventListener("input", (event) =>{
-        zVal = parseFloat(event.target.value);
-        zValue.textContent = zVal.toFixed(1);
+        zRotVal = parseFloat(event.target.value);
+        zRotValue.textContent = zRotVal.toFixed(1);
     });
 }
 
@@ -291,12 +292,65 @@ function resetAllRotations() {
         initNodes(i);    
     }
 
-    // Reset slider values and text
     xRotation.value = 0.0;
     yRotation.value = 0.0;
     zRotation.value = 0.0;
 
-    xValue.textContent = 0.0;
-    yValue.textContent = 0.0;
-    zValue.textContent = 0.0;
+    xRotValue.textContent = 0.0;
+    yRotValue.textContent = 0.0;
+    zRotValue.textContent = 0.0;
+}
+
+// Translation values function
+function updateTranslationValues() {
+    xTransVal = parseFloat(xTranslation.value);
+    yTransVal = parseFloat(yTranslation.value);
+    zTransVal = parseFloat(zTranslation.value);
+
+    xTransValue.textContent = xTransVal.toFixed(1);
+    yTransValue.textContent = yTransVal.toFixed(1);
+    zTransValue.textContent = zTransVal.toFixed(1);
+
+    translationVal.textContent = `Translation Values: x: ${xTransVal}, y: ${yTransVal}, z: ${zTransVal}`;
+}
+
+// Reset Translations
+function resetTranslations() {
+    xTranslation.oninput = updateTranslationValues;
+    yTranslation.oninput = updateTranslationValues;
+    zTranslation.oninput = updateTranslationValues;
+
+    resetTransX.addEventListener("click", () => {
+        xTranslation.value = 0;
+        xTransVal = 0;
+        xTransValue.textContent = xTransVal.toFixed(1);
+        updateTranslationValues();
+    });
+
+    resetTransY.addEventListener("click", () => {
+        yTranslation.value = 0;
+        yTransVal = 0;
+        yTransValue.textContent = yTransVal.toFixed(1);
+        updateTranslationValues();
+    });
+
+    resetTransZ.addEventListener("click", () => {
+        zTranslation.value = 0;
+        zTransVal = 0.0;
+        zTransValue.textContent = zTransVal;
+        updateTranslationValues();
+    });
+
+    resetTransAll.addEventListener("click", () => {
+        xTranslation.value = 0;
+        yTranslation.value = 0;
+        zTranslation.value = 0;
+        xTransVal = 0;
+        yTransVal = 0;
+        zTransVal = 0;
+        xTransValue.textContent = xTransVal.toFixed(1);
+        yTransValue.textContent = yTransVal.toFixed(1);
+        zTransValue.textContent = zTransVal.toFixed(1);
+        updateTranslationValues();
+    });
 }
