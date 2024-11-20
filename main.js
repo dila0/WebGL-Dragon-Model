@@ -120,6 +120,13 @@ const rotationVal = document.getElementById("rotationVals");
 const xRotation = document.getElementById("xRotation");
 const yRotation = document.getElementById("yRotation");
 const zRotation = document.getElementById("zRotation");
+const xValue = document.getElementById("xValue");
+const yValue = document.getElementById("yValue");
+const zValue = document.getElementById("zValue");
+
+var xVal = 0.0;
+var yVal = 0.0;
+var zVal = 0.0;
 
 // Main function
 window.onload = function init() {
@@ -154,6 +161,22 @@ window.onload = function init() {
     xRotation.oninput = updateRotationValues;
     yRotation.oninput = updateRotationValues;
     zRotation.oninput = updateRotationValues;
+
+    // Sliders
+    xRotation.addEventListener("input", (event) =>{
+        xVal = parseFloat(event.target.value);
+        xValue.textContent = xVal.toFixed(1);
+    });
+
+    yRotation.addEventListener("input", (event) =>{
+        yVal = parseFloat(event.target.value);
+        yValue.textContent = yVal.toFixed(1);
+    });
+
+    zRotation.addEventListener("input", (event) =>{
+        zVal = parseFloat(event.target.value);
+        zValue.textContent = zVal.toFixed(1);
+    });
 
     for(var i = 0; i < numNodes; i++) initNodes(i);
     render();
