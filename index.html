@@ -55,11 +55,11 @@
     </div>
     <div>
       <label for="xRotation">X Rotation Angle:</label>
-      <input type="range" id="xRotation" min="-180" max="180" value="0">
+      <input type="range" id="xRotation" min="-180" max="180" value="0" step="1" oninput="updateRotationValues()">
       <label for="yRotation">Y Rotation Angle:</label>
-      <input type="range" id="yRotation" min="-180" max="180" value="0">
+      <input type="range" id="yRotation" min="-180" max="180" value="0" step="1" oninput="updateRotationValues()">
       <label for="zRotation">Z Rotation Angle:</label>
-      <input type="range" id="zRotation" min="-180" max="180" value="0">
+      <input type="range" id="zRotation" min="-180" max="180" value="0" step="1" oninput="updateRotationValues()">
     </div>
     <div>
       <p id="selectedBodyPart"> Select a Body Part </p>

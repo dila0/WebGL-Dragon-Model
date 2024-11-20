@@ -181,3 +181,37 @@ function rotatePart(id, m){
     m = mult(m, rotate(theta[id][2], 0, 0, 1));
     return m;
 }
+
+// Update selected body part
+function updateSelectedBodyPart() {
+    let selectedLimb = limbSelect.value;
+    let bodyPartName = bodyPartNames[selectedLimb];
+    selectedBodyPart.textContent = `Selected Part: ${bodyPartName}`;
+    selectedLimb = parseFloat(limbSelect.value);
+}
+
+// Update rotation values
+function updateRotationValues() {
+      // Get raw slider values
+      const x = xRotation.value;
+      const y = yRotation.value;
+      const z = zRotation.value;
+  
+      // Parse to float
+      const xFloat = Number(x);
+      const yFloat = Number(y);
+      const zFloat = Number(z);
+  
+      // Debug outputs
+      console.log(`Raw Values - X: ${x}, Y: ${y}, Z: ${z}`);
+      console.log(`Parsed Values - X: ${xFloat}, Y: ${yFloat}, Z: ${zFloat}`);
+  
+      // Check for invalid values
+      if (isNaN(xFloat) || isNaN(yFloat) || isNaN(zFloat)) {
+          console.error("Invalid rotation values detected.");
+          return;
+      }
+  
+      // Display rotation values
+      rotationVal.textContent = `Rotation Values: x: ${xFloat}, y: ${yFloat}, z: ${zFloat}`;
+}

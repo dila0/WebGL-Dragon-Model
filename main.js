@@ -98,6 +98,7 @@ var theta = new Array(numNodes);
 for(var i = 0; i < theta.length; i++) {
     theta[i] = new Array(3).fill(0);
 }
+console.log(theta[i]);
 
 var numVertices = 0; // TODO: fill
 var stack = [];
@@ -178,22 +179,3 @@ function initCubeBuffers(){
     gl.enableVertexAttribArray(vPos);
 }
 
-// Update selected body part
-function updateSelectedBodyPart() {
-    let selectedLimb = limbSelect.value;
-    let bodyPartName = bodyPartNames[selectedLimb];
-    selectedBodyPart.textContent = `Selected Part: ${bodyPartName}`;
-    console.log(`Selected Part: ${bodyPartName}`);
-    selectedLimb = parseFloat(limbSelect.value);
-    console.log("limb; " + selectedLimb);
-}
-
-// Update rotation values
-function updateRotationValues() {
-    const x = xRotation.value;
-    const y = yRotation.value;
-    const z = zRotation.value;
-
-    rotationVal.textContent = `Rotation Values: x: ${x}, y: ${y}, z: ${z}`;
-    console.log(`Rotation Values - X: ${x}, Y: ${y}, Z: ${z}`);
-}
