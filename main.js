@@ -180,8 +180,6 @@ window.onload = function init() {
 
     for(var i = 0; i < numNodes; i++) initNodes(i);
     render();
-
-    console.log("Hello World!");
 }
 
 // Render function
@@ -189,16 +187,5 @@ var render = function() {
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
     traverse(BODY_ID);
     requestAnimationFrame(render);
-}
-
-// Vertex cube initialization function
-function initCubeBuffers(){
-    cubeVBuffer = gl.createBuffer();
-    gl.bindBuffer(gl.ARRAY_BUFFER, cubeVBuffer);
-    gl.bufferData(gl.ARRAY_BUFFER, flatten(pointsArray), gl.STATIC_DRAW);
-
-    var vPos = gl.getAttribLocation(program, "vPos");
-    gl.vertexAttribPointer(vPos, 4, gl.FLOAT, false, 0, 0); 
-    gl.enableVertexAttribArray(vPos);
 }
 

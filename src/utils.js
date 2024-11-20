@@ -193,7 +193,7 @@ function updateSelectedBodyPart() {
 
 // Update rotation values
 function updateRotationValues() {
-      // Get raw slider values
+      // Slider values
       const x = xRotation.value;
       const y = yRotation.value;
       const z = zRotation.value;
@@ -202,28 +202,24 @@ function updateRotationValues() {
       const xFloat = Number(x);
       const yFloat = Number(y);
       const zFloat = Number(z);
-  
-      // Debug outputs
-      console.log(`Raw Values - X: ${x}, Y: ${y}, Z: ${z}`);
-      console.log(`Parsed Values - X: ${xFloat}, Y: ${yFloat}, Z: ${zFloat}`);
-  
-      // Check for invalid values
-      if (isNaN(xFloat) || isNaN(yFloat) || isNaN(zFloat)) {
-          console.error("Invalid rotation values detected.");
-          return;
-      }
-      console.log("TYPE X: " + typeof(x));
-      console.log("TYPE X FLOAT: " + typeof(xFloat));
       
       theta[limbSelect.value][0] = xFloat;
       theta[limbSelect.value][1] = yFloat;
       theta[limbSelect.value][2] = zFloat;
     
       initNodes(limbSelect.value);
-      console.log("THETA X: " + theta[limbSelect.value][0]);
-
-      console.log(limbSelect.value);
 
       // Display rotation values
       rotationVal.textContent = `Rotation Values: x: ${xFloat}, y: ${yFloat}, z: ${zFloat}`;
+}
+
+// Vertex cube initialization function
+function initCubeBuffers(){
+    cubeVBuffer = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, cubeVBuffer);
+    gl.bufferData(gl.ARRAY_BUFFER, flatten(pointsArray), gl.STATIC_DRAW);
+
+    var vPos = gl.getAttribLocation(program, "vPos");
+    gl.vertexAttribPointer(vPos, 4, gl.FLOAT, false, 0, 0); 
+    gl.enableVertexAttribArray(vPos);
 }
