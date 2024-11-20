@@ -186,6 +186,9 @@ function rotatePart(id, m){
 // Update selected body part
 function updateSelectedBodyPart() {
     let selectedLimb = limbSelect.value;
+    xRotation.value = theta[selectedLimb][0];
+    yRotation.value = theta[selectedLimb][1];
+    zRotation.value = theta[selectedLimb][2];
     let bodyPartName = bodyPartNames[selectedLimb];
     selectedBodyPart.textContent = `Selected Part: ${bodyPartName}`;
     selectedLimb = parseFloat(limbSelect.value);
