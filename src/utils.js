@@ -158,10 +158,10 @@ function initNodes(id){
 
 // Function to draw a quad
 function quad(a, b, c, d){
-    pointsArray.push(vertices[a]);
-    pointsArray.push(vertices[b]);
-    pointsArray.push(vertices[c]);
-    pointsArray.push(vertices[d]);
+    pointsArray.push(cubeVertices[a]);
+    pointsArray.push(cubeVertices[b]);
+    pointsArray.push(cubeVertices[c]);
+    pointsArray.push(cubeVertices[d]);
 }
 
 // Function to draw a cube

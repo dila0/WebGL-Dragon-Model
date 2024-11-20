@@ -31,7 +31,7 @@ function renderBody(){
     pointsArray = [];
     cube();
 
-    gl.bindBuffer(gl.ARRAY_BUFFER, vBuffer);
+    gl.bindBuffer(gl.ARRAY_BUFFER, cubeVBuffer);
     gl.bufferData(gl.ARRAY_BUFFER, flatten(pointsArray), gl.STATIC_DRAW);
 
     for(var i = 0; i < 6; i++){

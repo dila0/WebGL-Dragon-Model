@@ -48,8 +48,7 @@ const RIGHT_FOOT_ID = 24;
 const UPPER_TAIL_ID = 25;
 const LOWER_TAIL_ID = 26;
 
-var vertices = [
-    // TODO: fill
+var cubeVertices = [
     vec4(-0.5, -0.5,  0.5, 1.0),
     vec4(-0.5,  0.5,  0.5, 1.0),
     vec4( 0.5,  0.5,  0.5, 1.0),
@@ -73,7 +72,7 @@ for(var i = 0; i < numNodes; i++) {
     figure[i] = createNode(null, null, null, null);
 }
 
-var vBuffer;
+var cubeVBuffer;
 var modelViewLoc;
 
 var pointsArray = [];
@@ -94,8 +93,6 @@ window.onload = function init() {
     program = initShaders(gl, "vertex-shader", "fragment-shader");
     gl.useProgram(program);
 
-    //cube();
-
     instanceMatrix = mat4();
 
     projectionMatrix = ortho(-10.0, 10.0, -10.0, 10.0, -100.0, 100.0); //TODO: change
@@ -106,13 +103,7 @@ window.onload = function init() {
 
     modelViewMatrixLoc = gl.getUniformLocation(program, "modelViewMatrix");
 
-    vBuffer = gl.createBuffer();
-    gl.bindBuffer(gl.ARRAY_BUFFER, vBuffer);
-    gl.bufferData(gl.ARRAY_BUFFER, flatten(pointsArray), gl.STATIC_DRAW);
-
-    var vPos = gl.getAttribLocation(program, "vPos");
-    gl.vertexAttribPointer(vPos, 4, gl.FLOAT, false, 0, 0); 
-    gl.enableVertexAttribArray(vPos);
+    initCubeBuffers();
 
     // TODO: fill sliders 
 
@@ -126,7 +117,16 @@ window.onload = function init() {
 var render = function() {
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
     traverse(BODY_ID);
-    // gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(modelViewMatrix));
-    // gl.drawArrays(gl.TRIANGLES, 0, pointsArray.length);
     requestAnimationFrame(render);
+}
+
+// Vertex cube initialization function
+function initCubeBuffers(){
+    cubeVBuffer = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, cubeVBuffer);
+    gl.bufferData(gl.ARRAY_BUFFER, flatten(pointsArray), gl.STATIC_DRAW);
+
+    var vPos = gl.getAttribLocation(program, "vPos");
+    gl.vertexAttribPointer(vPos, 4, gl.FLOAT, false, 0, 0); 
+    gl.enableVertexAttribArray(vPos);
 }
