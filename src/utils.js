@@ -226,6 +226,52 @@ function updateRotationValues() {
       rotationVal.textContent = `Rotation Values: x: ${xFloat}, y: ${yFloat}, z: ${zFloat}`;
 }
 
+// Reset rotations function
+function resetRotations(){
+    resetX.addEventListener("click", () => {
+        xRotation.value = 0.0;
+        xVal = 0.0;
+        xValue.textContent = xVal;
+        updateRotationValues();
+    });
+    resetY.addEventListener("click", () => {
+        yRotation.value = 0.0;
+        yVal = 0.0;
+        yValue.textContent = yVal;
+        updateRotationValues();
+    });
+    resetZ.addEventListener("click", () => {
+        zRotation.value = 0.0;
+        zVal = 0.0;
+        zValue.textContent = zVal;
+        updateRotationValues();
+    });
+}
+
+// Update Sliders function
+function updateSliders() {
+    limbSelect.onchange = updateSelectedBodyPart;
+    xRotation.oninput = updateRotationValues;
+    yRotation.oninput = updateRotationValues;
+    zRotation.oninput = updateRotationValues;
+
+    // Sliders
+    xRotation.addEventListener("input", (event) =>{
+        xVal = parseFloat(event.target.value);
+        xValue.textContent = xVal.toFixed(1);
+    });
+
+    yRotation.addEventListener("input", (event) =>{
+        yVal = parseFloat(event.target.value);
+        yValue.textContent = yVal.toFixed(1);
+    });
+
+    zRotation.addEventListener("input", (event) =>{
+        zVal = parseFloat(event.target.value);
+        zValue.textContent = zVal.toFixed(1);
+    });
+}
+
 // Vertex cube initialization function
 function initCubeBuffers(){
     cubeVBuffer = gl.createBuffer();
