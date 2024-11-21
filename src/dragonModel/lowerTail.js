@@ -16,7 +16,6 @@ var lowerTailWidth = 1.5;
 function initLowerTail(){
     var m = mat4();
     m = translate(0.0, - 0.5 * bodyHeight + 0.5 * upperTailHeight, -(0.5 * bodyWidth - 0.82 * lowerTailWidth));
-    console.log("z: " + -(0.5 * bodyWidth + upperTailWidth + lowerTailWidth));
     theta[LOWER_TAIL_ID][0] = 90;
     m = rotatePart(LOWER_TAIL_ID, m);
     m = mult(m, translate(0.0, -0.5 * lowerTailHeight, 0.0));

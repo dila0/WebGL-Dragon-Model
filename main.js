@@ -180,7 +180,6 @@ window.onload = function init() {
 
     gl.viewport(0, 0, canvas.width, canvas.height);
     gl.clearColor(0.0, 0.0, 0.0, 1.0); 
-    gl.enable(gl.DEPTH_TEST);
 
     program = initShaders(gl, "vertex-shader", "fragment-shader");
     gl.useProgram(program);
@@ -205,7 +204,7 @@ window.onload = function init() {
 
     // Animations
     saveCurrKeyframe();
-    playCurrentKeyframe();
+    playCurrentKeyframe(keyframes);
     resetKeyFrames();
 
     for(var i = 0; i < numNodes; i++) initNodes(i);
@@ -215,6 +214,7 @@ window.onload = function init() {
 // Render function
 var render = function() {
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+    gl.enable(gl.DEPTH_TEST);
     modelViewMatrix = translate(xTransVal, yTransVal, zTransVal);
     traverse(BODY_ID);
     requestAnimationFrame(render);
