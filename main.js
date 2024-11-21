@@ -114,6 +114,12 @@ var modelViewLoc;
 
 var pointsArray = [];
 
+// Keyframes for animations
+var keyframes = {
+    thetaVals: [],
+    translationVals: [],
+};
+
 // Sliders
 const limbSelect = document.getElementById("limbSelect");
 const selectedBodyPart = document.getElementById("selectedBodyPart");
@@ -196,6 +202,9 @@ window.onload = function init() {
     resetRotations();
     updateTranslationValues();
     resetTranslations();
+
+    // Animations
+    saveCurrKeyframe();
 
     for(var i = 0; i < numNodes; i++) initNodes(i);
     render();
