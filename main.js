@@ -117,8 +117,8 @@ var pointsArray = [];
 // Sliders
 const limbSelect = document.getElementById("limbSelect");
 const selectedBodyPart = document.getElementById("selectedBodyPart");
-const rotationVal = document.getElementById("rotationVals");
 
+// Rotation
 const xRotation = document.getElementById("xRotation");
 const yRotation = document.getElementById("yRotation");
 const zRotation = document.getElementById("zRotation");
@@ -132,10 +132,13 @@ const resetRotY = document.getElementById("resetY");
 const resetRotZ = document.getElementById("resetZ");
 const resetRotAll = document.getElementById("resetAll");
 
+const rotationVal = document.getElementById("rotationVals");
+
 var xRotVal = 0.0;
 var yRotVal = 0.0;
 var zRotVal = 0.0;
 
+//  Translation
 const xTranslation = document.getElementById("xTranslation");
 const yTranslation = document.getElementById("yTranslation");
 const zTranslation = document.getElementById("zTranslation");
@@ -154,6 +157,11 @@ const translationVal = document.getElementById("translationVals");
 var xTransVal = 0.0;
 var yTransVal = 0.0;
 var zTransVal = 0.0;
+
+// Animation
+const saveKeyframeButton = document.getElementById("save-keyframe");
+const playCurrKFButton = document.getElementById("play-curr-keyframe");
+const resetKFButton = document.getElementById("reset-keyframes");
 
 // Main function
 window.onload = function init() {
@@ -200,5 +208,3 @@ var render = function() {
     traverse(BODY_ID);
     requestAnimationFrame(render);
 }
-
-

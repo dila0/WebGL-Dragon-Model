@@ -97,6 +97,13 @@
 
     <p id="translationVals"> Translation (X, Y, Z): x:0, y:0, z:0 </p>
 
+    <!-- ANIMATION BUTTONS -->
+    <div>
+      <button id="save-keyframe">Save Keyframe</button>
+      <button id="play-curr-keyframe">Play Current Keyframe</button>
+      <button id="reset-keyframes">Reset Keyframes</button>
+    </div>
+
     <!-- SHADERS -->
     <script id="vertex-shader" type="x-shader/x-vertex">
       attribute  vec4 vPos;
@@ -135,7 +142,12 @@
 
     <!-- Main Script -->
     <script src="src/uiControllers.js"></script>
-    <script src="src/utils.js"></script>
+    <script src="src/utils/animationHelpers.js"></script>
+    <script src="src/utils/bodyPartInitializers.js"></script>
+    <script src="src/utils/cubeHelpers.js"></script>
+    <script src="src/utils/matrixHelpers.js"></script>
+    <script src="src/utils/rotationHelpers.js"></script>
+    <script src="src/utils/translationHelpers.js"></script>
     <script src="main.js"></script>
 </body>
 </html>
