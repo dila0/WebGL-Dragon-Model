@@ -16,3 +16,21 @@ function saveCurrKeyframe(){
         console.log(keyframes);
     }
 }
+
+// Plays the latest saved keyframes.
+function playCurrentKeyframe() {
+    playCurrKFButton.onclick = function () {
+        console.log("Playing keyframes...");
+    }
+}
+
+// Resets the saved keyframes. 
+function resetKeyFrames() {
+    resetKFButton.onclick = function () {
+        keyframes.thetaVals = [];
+        keyframes.translationVals = [];
+        console.log("Resetting keyframes...");
+        console.log(keyframes);
+    }
+    
+}

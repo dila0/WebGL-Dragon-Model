@@ -205,6 +205,8 @@ window.onload = function init() {
 
     // Animations
     saveCurrKeyframe();
+    playCurrentKeyframe();
+    resetKeyFrames();
 
     for(var i = 0; i < numNodes; i++) initNodes(i);
     render();
@@ -217,3 +219,4 @@ var render = function() {
     traverse(BODY_ID);
     requestAnimationFrame(render);
 }
+
