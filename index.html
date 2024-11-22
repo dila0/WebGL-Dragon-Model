@@ -116,12 +116,32 @@
       } 
     </script>
 
+    <script id="background-vertex-shader" type="x-shader/x-vertex">
+      attribute  vec4 vPos;
+      varying vec2 vCoord;
+        
+      void main(){
+          vCoord = vPos.xy * 0.5 + 0.5;
+          gl_Position = vPos;
+      }
+    </script>
+
     <script id="fragment-shader" type="x-shader/x-fragment">
       precision mediump float;
       uniform vec4 uColor;
 
       void main(){
         gl_FragColor = uColor;
+      }
+    </script>
+
+    <script id="background-fragment-shader" type="x-shader/x-fragment">
+      precision mediump float;
+      uniform sampler2D uTexture;
+      varying vec2 vCoord;
+
+      void main(){
+        gl_FragColor = texture2D(uTexture, vCoord);
       }
     </script>
 
