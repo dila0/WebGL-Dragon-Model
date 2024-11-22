@@ -215,10 +215,14 @@ window.onload = function init() {
 
 // Render function
 var render = function() {
+    renderOnce()
+    requestAnimationFrame(render);
+}
+
+var renderOnce = function(){
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
     gl.enable(gl.DEPTH_TEST);
     modelViewMatrix = translate(xTransVal, yTransVal, zTransVal);
     traverse(BODY_ID);
-    requestAnimationFrame(render);
 }
 

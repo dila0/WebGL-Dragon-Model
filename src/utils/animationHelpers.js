@@ -24,6 +24,7 @@ function animate(duration = 1000) {
         console.log("At least two keyframes are required to animate.");
         return;
     }
+    console.log(keyframes);
 
     let currentFrame = 0;
     const totalFrames = keyframes.thetaVals.length - 1;
@@ -72,7 +73,7 @@ function animate(duration = 1000) {
 
         [xTransVal, yTransVal, zTransVal] = interpolatedTranslation[currentStep];
 
-        render();
+        renderOnce();
 
         currentStep++;
 
