@@ -114,6 +114,12 @@ var modelViewLoc;
 
 var pointsArray = [];
 
+// Keyframes for animations
+var keyframes = {
+    thetaVals: [],
+    translationVals: [],
+};
+
 // Sliders
 const limbSelect = document.getElementById("limbSelect");
 const selectedBodyPart = document.getElementById("selectedBodyPart");
@@ -174,7 +180,6 @@ window.onload = function init() {
 
     gl.viewport(0, 0, canvas.width, canvas.height);
     gl.clearColor(0.0, 0.0, 0.0, 1.0); 
-    gl.enable(gl.DEPTH_TEST);
 
     program = initShaders(gl, "vertex-shader", "fragment-shader");
     gl.useProgram(program);
@@ -197,14 +202,27 @@ window.onload = function init() {
     updateTranslationValues();
     resetTranslations();
 
+    // Animations
+    saveCurrKeyframe();
+    playCurrKFButton.onclick = function() {
+        animate(200);
+    }
+    resetKeyFrames();
+
     for(var i = 0; i < numNodes; i++) initNodes(i);
     render();
 }
 
 // Render function
 var render = function() {
-    gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
-    modelViewMatrix = translate(xTransVal, yTransVal, zTransVal);
-    traverse(BODY_ID);
+    renderOnce()
     requestAnimationFrame(render);
 }
+
+var renderOnce = function(){
+    gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+    gl.enable(gl.DEPTH_TEST);
+    modelViewMatrix = translate(xTransVal, yTransVal, zTransVal);
+    traverse(BODY_ID);
+}
+

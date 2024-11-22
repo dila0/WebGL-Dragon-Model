@@ -16,3 +16,19 @@ function scale4(a, b, c) {
     result[2][2] = c;
     return result;
 }
+
+// Function to insert keyframes in steps
+function insert(start, end, step){
+    res = [];
+    for (let i = 0; i < step; i++){
+        temp = [];
+        for (let j = 0; j < start.length; j++){
+            console.log("Type of array element: " + typeof(start[j]));
+            let interploatedValue = start[j] + (end[j] - start[j]) * i / step
+            temp.push(interploatedValue);
+        }
+        res.push(temp);
+    }
+    res.push(end);
+    return res;
+}

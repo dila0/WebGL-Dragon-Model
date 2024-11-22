@@ -147,6 +147,12 @@ function initNodes(id){
     }
 }
 
+function initNodesForAll(){
+    for(let i = 0; i < numNodes; i++){
+        initNodes(i);
+    }
+}
+
 // Update selected body part
 function updateSelectedBodyPart() {
     let selectedLimb = limbSelect.value;
