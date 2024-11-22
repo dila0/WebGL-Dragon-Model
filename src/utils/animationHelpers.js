@@ -11,7 +11,8 @@
 // Saves the current theta and translation values of the current keyframe.
 function saveCurrKeyframe(){
     saveKeyframeButton.onclick = function () {
-        keyframes.thetaVals.push(theta.slice());
+        console.log("Type of array element original: " + typeof(theta[0][0]));
+        keyframes.thetaVals.push(JSON.parse(JSON.stringify(theta)));
         keyframes.translationVals.push([xTransVal, yTransVal, zTransVal]);
         console.log(keyframes);
         console.log("keyframes saved");
@@ -67,9 +68,20 @@ function animate(duration = 1000) {
             interpolatedTranslation = translationSteps;
         }
         // TODO: Fix
-        theta = interpolatedTheta[currentStep].map((value, index) => {
-            return [value, value, value]; 
-        });
+        // theta = interpolatedTheta[currentStep].map((value, index) => {
+        //     return [value, value, value]; 
+        // });
+
+        for (let i = 0; i < 27; i++) {
+            theta[i] = [
+                interpolatedTheta[currentStep][i * 3],       // X value
+                interpolatedTheta[currentStep][i * 3 + 1],   // Y value
+                interpolatedTheta[currentStep][i * 3 + 2]    // Z value
+            ];
+        }
+
+        initNodesForAll();
+        
 
         [xTransVal, yTransVal, zTransVal] = interpolatedTranslation[currentStep];
 

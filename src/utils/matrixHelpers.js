@@ -23,7 +23,9 @@ function insert(start, end, step){
     for (let i = 0; i < step; i++){
         temp = [];
         for (let j = 0; j < start.length; j++){
-            temp.push(start[j] + (end[j] - start[j]) * i / step);
+            console.log("Type of array element: " + typeof(start[j]));
+            let interploatedValue = start[j] + (end[j] - start[j]) * i / step
+            temp.push(interploatedValue);
         }
         res.push(temp);
     }
