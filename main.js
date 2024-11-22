@@ -204,7 +204,9 @@ window.onload = function init() {
 
     // Animations
     saveCurrKeyframe();
-    playCurrentKeyframe(keyframes);
+    playCurrKFButton.onclick = function() {
+        animate(200);
+    }
     resetKeyFrames();
 
     for(var i = 0; i < numNodes; i++) initNodes(i);

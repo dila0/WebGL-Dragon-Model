@@ -19,58 +19,73 @@ function saveCurrKeyframe(){
 }
 
 // Plays the latest saved keyframes.
-function playCurrentKeyframe(currKf) {
-    playCurrKFButton.onclick = function () {
-        console.log("Playing keyframes...");
-        console.log(keyframes);
-        const keyframeThetas = currKf.thetaVals;
-        const keyframeTranslations = currKf.translationVals;
+function animate(duration = 1000) {
+    if (keyframes.thetaVals.length < 2) {
+        console.log("At least two keyframes are required to animate.");
+        return;
+    }
 
-        if(keyframeThetas.length < 2 || keyframeTranslations.length < 2){
-            console.log("Not enough keyframes to play.");
+    let currentFrame = 0;
+    const totalFrames = keyframes.thetaVals.length - 1;
+    const steps = Math.floor((60 * duration) / 1000); // Number of steps
+    const interval = duration / (steps * totalFrames); // Time interval
+
+    let currentStep = 0;
+    let interpolatedTheta = [];
+    let interpolatedTranslation = [];
+
+    function interpolateKeyframes(startTheta, endTheta, startTranslation, endTranslation) {
+        const thetaSteps = insert(startTheta.flat(), endTheta.flat(), steps);
+        const translationSteps = insert(startTranslation, endTranslation, steps);
+
+        return { thetaSteps, translationSteps };
+    }
+
+    function interpolate() {
+        if (currentFrame >= totalFrames) {
+            console.log("Animation complete.");
             return;
         }
 
-        let tempThetas = [];
-        let tempTranslations = [];
+        if (currentStep === 0) {
+            // Start end keyframes
+            const startTheta = keyframes.thetaVals[currentFrame];
+            const endTheta = keyframes.thetaVals[currentFrame + 1];
+            const startTranslation = keyframes.translationVals[currentFrame];
+            const endTranslation = keyframes.translationVals[currentFrame + 1];
 
-        // Push thetas to the temporary array
-        for(let i = 0; i < keyframeThetas.length - 1; i++){
-            tempThetas.push(...insert(keyframeThetas[i], keyframeThetas[i+1], 50));
-            console.log(tempThetas);
+            // Interpolation
+            const { thetaSteps, translationSteps } = interpolateKeyframes(
+                startTheta,
+                endTheta,
+                startTranslation,
+                endTranslation
+            );
+
+            interpolatedTheta = thetaSteps;
+            interpolatedTranslation = translationSteps;
+        }
+        // TODO: Fix
+        theta = interpolatedTheta[currentStep].map((value, index) => {
+            return [value, value, value]; 
+        });
+
+        [xTransVal, yTransVal, zTransVal] = interpolatedTranslation[currentStep];
+
+        render();
+
+        currentStep++;
+
+        if (currentStep >= steps) {
+            currentFrame++;
+            currentStep = 0;
         }
 
-        // Push translations to the temporary array
-        for (let i = 0; i < keyframeTranslations.length - 1; i++){
-            tempTranslations.push(...insert(keyframeTranslations[i], keyframeTranslations[i+1], 50));
-            console.log(tempTranslations);
-        }
-
-        // Play the keyframes
-        let frameIndex = 0;
-        let currInterval = setInterval(() => {
-            if(frameIndex >= tempThetas.length){
-                clearInterval(currInterval);
-                console.log("Keyframes played.");
-                return;
-            }
-            for(let i = 0; i < tempThetas[frameIndex].length; i++){
-                theta[i] = tempThetas[frameIndex][i];
-            }
-            xTransVal = tempTranslations[frameIndex][0];
-            yTransVal = tempTranslations[frameIndex][1];
-            zTransVal = tempTranslations[frameIndex][2];
-
-            console.log(`[DEBUG] Updating frame ${frameIndex}:`);
-            console.log("Theta:", theta);
-            console.log("Translations:", [xTransVal, yTransVal, zTransVal]);
-
-            for(let i = 0; i < numNodes; i++){
-                initNodes(i);
-            }
-            frameIndex++;
-        }, 50);
+        setTimeout(() => requestAnimationFrame(interpolate), interval);
     }
+
+    console.log("Starting animation...");
+    interpolate();
 }
 
 // Resets the saved keyframes. 
