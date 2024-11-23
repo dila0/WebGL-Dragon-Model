@@ -49,9 +49,7 @@ function renderLeftJaw(){
     gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(instanceMatrix));
 
     gl.uniform4fv(gl.getUniformLocation(program, "uColor"), flatten(vec4(1.0, 0.424, 0.0, 1.0)));
-    for(var i = 0; i < 6; i++){
-        gl.drawArrays(gl.TRIANGLE_FAN, 4*i, 4);
-    }
+    drawCube();
 }
 
 // Function to render the middle jaw
@@ -61,9 +59,7 @@ function renderMidJaw(){
     gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(instanceMatrix));
 
     gl.uniform4fv(gl.getUniformLocation(program, "uColor"), flatten(vec4(1.0, 0.424, 0.0, 1.0)));
-    for(var i = 0; i < 6; i++){
-        gl.drawArrays(gl.TRIANGLE_FAN, 4*i, 4);
-    }
+    drawCylinder();
 }
 
 // Function to render the right jaw
@@ -73,7 +69,5 @@ function renderRightJaw(){
     gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(instanceMatrix));
 
     gl.uniform4fv(gl.getUniformLocation(program, "uColor"), flatten(vec4(1.0, 0.424, 0.0, 1.0)));
-    for(var i = 0; i < 6; i++){
-        gl.drawArrays(gl.TRIANGLE_FAN, 4*i, 4);
-    }
+    drawCube();
 }

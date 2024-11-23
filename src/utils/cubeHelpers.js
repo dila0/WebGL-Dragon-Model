@@ -8,6 +8,7 @@
  * @id 22102278
  */
 
+var cubeOffset = 0;
 // Function to draw a quad
 function quad(a, b, c, d){
     pointsArray.push(cubeVertices[a]);
@@ -35,4 +36,10 @@ function initCubeBuffers(){
     var vPos = gl.getAttribLocation(program, "vPos");
     gl.vertexAttribPointer(vPos, 4, gl.FLOAT, false, 0, 0); 
     gl.enableVertexAttribArray(vPos);
+}
+
+function drawCube(){
+    for(var i = 0; i < 6; i++){
+        gl.drawArrays(gl.TRIANGLE_FAN, cubeOffset + 4*i, 4);
+    }
 }

@@ -8,6 +8,8 @@
  * @id 22102278
  */
 
+var slices = 15;
+var cylinderOffset = 24;
 
 // Function to generate a circular face (top or bottom of the cylinder)
 function generateCircle(radius, height, slices, top = true) {
@@ -53,4 +55,13 @@ function cylinder(){
     // side(4, 5, 13, 12);
     // side(5, 6, 14, 13);
     // side(6, 1, 9, 14);
+}
+
+function drawCylinder(){
+    for(var i = 0; i < 2; i++){
+        gl.drawArrays(gl.TRIANGLE_FAN, cylinderOffset + (slices+2)*i, (slices+2));
+    }
+    for(var i = 0; i < slices; i++){
+        gl.drawArrays(gl.TRIANGLE_FAN, cylinderOffset + (2 * (slices+2)) + 4*i, 4);
+    }
 }
