@@ -68,7 +68,7 @@ function animate(duration = 1000) {
             interpolatedTranslation = translationSteps;
         }
 
-        for (let i = 0; i < 27; i++) {
+        for (let i = 0; i < numNodes; i++) {
             theta[i] = [
                 interpolatedTheta[currentStep][i * 3],       // X value
                 interpolatedTheta[currentStep][i * 3 + 1],   // Y value
@@ -84,7 +84,7 @@ function animate(duration = 1000) {
 
         currentStep++;
 
-        if (currentStep >= steps) {
+        if (currentStep > steps) {
             currentFrame++;
             currentStep = 0;
         }
