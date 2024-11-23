@@ -174,6 +174,10 @@ const saveKeyframeButton = document.getElementById("save-keyframe");
 const playCurrKFButton = document.getElementById("play-curr-keyframe");
 const resetKFButton = document.getElementById("reset-keyframes");
 
+// Background
+let background;
+let backgroundProgram;
+
 // Main function
 window.onload = function init() {
     canvas = document.getElementById('gl-canvas');
@@ -185,13 +189,17 @@ window.onload = function init() {
 
     gl.viewport(0, 0, canvas.width, canvas.height);
     gl.clearColor(0.0, 0.0, 1.0, 1.0); 
+    gl.enable(gl.DEPTH_TEST);
+
+    backgroundProgram = initShaders(gl, "background-vertex-shader", "background-fragment-shader");
+    background = initBackground(gl);
 
     program = initShaders(gl, "vertex-shader", "fragment-shader");
     gl.useProgram(program);
-
+    
     instanceMatrix = mat4();
 
-    projectionMatrix = ortho(-10.0, 10.0, -10.0, 10.0, -100.0, 100.0); //TODO: change
+    projectionMatrix = ortho(-10.0, 10.0, -10.0, 10.0, -100.0, 100.0);
     modelViewMatrix = mat4();
 
     gl.uniformMatrix4fv(gl.getUniformLocation(program, "modelViewMatrix"), false, flatten(modelViewMatrix));
@@ -226,8 +234,8 @@ var render = function() {
 
 var renderOnce = function(){
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
-    gl.enable(gl.DEPTH_TEST);
+    renderBackground(gl, backgroundProgram, background.buffer, background.texture);
+    gl.useProgram(program);
     modelViewMatrix = translate(xTransVal, yTransVal, zTransVal);
     traverse(BODY_ID);
 }
-
