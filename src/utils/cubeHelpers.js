@@ -32,13 +32,13 @@ function initCubeBuffers(){
     cubeVBuffer = gl.createBuffer();
     gl.bindBuffer(gl.ARRAY_BUFFER, cubeVBuffer);
     gl.bufferData(gl.ARRAY_BUFFER, flatten(pointsArray), gl.STATIC_DRAW);
-
-    var vPos = gl.getAttribLocation(program, "vPos");
-    gl.vertexAttribPointer(vPos, 4, gl.FLOAT, false, 0, 0); 
-    gl.enableVertexAttribArray(vPos);
 }
 
 function drawCube(){
+    var vPos = gl.getAttribLocation(program, "vPos");
+    gl.vertexAttribPointer(vPos, 4, gl.FLOAT, false, 0, 0); 
+    gl.enableVertexAttribArray(vPos);
+
     for(var i = 0; i < 6; i++){
         gl.drawArrays(gl.TRIANGLE_FAN, cubeOffset + 4*i, 4);
     }
