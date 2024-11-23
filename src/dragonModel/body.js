@@ -29,12 +29,22 @@ function renderBody(){
     gl.uniform4fv(gl.getUniformLocation(program, "uColor"), flatten(vec4(0.753, 0.439, 0.0, 1.0)));
  
     pointsArray = [];
-    cube();
+    //cube();
+    cylinder();
 
     gl.bindBuffer(gl.ARRAY_BUFFER, cubeVBuffer);
     gl.bufferData(gl.ARRAY_BUFFER, flatten(pointsArray), gl.STATIC_DRAW);
 
-    for(var i = 0; i < 6; i++){
-        gl.drawArrays(gl.TRIANGLE_FAN, 4*i, 4);
+    // Create buffer for the cylinder
+    let cylinderOffset = 0;
+    for(var i = 0; i < 2; i++){
+        gl.drawArrays(gl.TRIANGLE_FAN, cylinderOffset + (slices+2)*i, (slices+2));
     }
+    // for(var i = 0; i < slices; i++){
+    //     gl.drawArrays(gl.TRIANGLE_FAN, cylinderOffset + (2 * (slices+2)) + 4*i, 4);
+    // }
+
+    // for(var i = 0; i < 6; i++){
+    //     gl.drawArrays(gl.TRIANGLE_FAN, 4*i, 4);
+    // }
 }

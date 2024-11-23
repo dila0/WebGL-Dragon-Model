@@ -90,6 +90,12 @@ var cubeVertices = [
     vec4( 0.5, -0.5, -0.5, 1.0)
 ];
 
+var slices = 6;
+var topCylinderCircleVertices = generateCircle(1.0, 1.0, slices, true);
+var bottomCylinderCircleVertices = generateCircle(1.0, 1.0, slices, false);
+var cylinderVertices = topCylinderCircleVertices.concat(bottomCylinderCircleVertices);
+console.log(cylinderVertices);
+
 var numNodes = 27;
 var numAngles = 28;
 
@@ -179,7 +185,7 @@ window.onload = function init() {
     }
 
     gl.viewport(0, 0, canvas.width, canvas.height);
-    gl.clearColor(0.0, 0.0, 0.0, 1.0); 
+    gl.clearColor(0.0, 0.0, 1.0, 1.0); 
 
     program = initShaders(gl, "vertex-shader", "fragment-shader");
     gl.useProgram(program);
