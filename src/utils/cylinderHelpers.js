@@ -43,10 +43,14 @@ function cylinder(){
         pointsArray.push(cylinderVertices[i]);
     }
     //Push sides
-    side(1, 2, 10, 9);
-    side(2, 3, 11, 10);
-    side(3, 4, 12, 11);
-    side(4, 5, 13, 12);
-    side(5, 6, 14, 13);
-    side(6, 1, 9, 14);
+    for(let i = 1; i < slices + 1; i++){
+        side(i, (i % slices) + 1, (i % slices) + slices + 2 + 1, i + slices + 2);
+    }
+    //Example for 6 sides:
+    // side(1, 2, 10, 9);
+    // side(2, 3, 11, 10);
+    // side(3, 4, 12, 11);
+    // side(4, 5, 13, 12);
+    // side(5, 6, 14, 13);
+    // side(6, 1, 9, 14);
 }
