@@ -173,6 +173,8 @@ var zTransVal = 0.0;
 const saveKeyframeButton = document.getElementById("save-keyframe");
 const playCurrKFButton = document.getElementById("play-curr-keyframe");
 const resetKFButton = document.getElementById("reset-keyframes");
+const saveAnimationButton = document.getElementById("save-button");
+const loadAnimationButton = document.getElementById("load-button");
 
 // Background
 let background;
@@ -221,6 +223,8 @@ window.onload = function init() {
         animate(200);
     }
     resetKeyFrames();
+    saveAnimationButton.addEventListener("click", saveAnimation);
+    loadAnimationButton.addEventListener("change", loadAnimation);
 
     for(var i = 0; i < numNodes; i++) initNodes(i);
     render();

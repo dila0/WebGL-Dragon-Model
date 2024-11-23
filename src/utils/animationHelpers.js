@@ -67,10 +67,6 @@ function animate(duration = 1000) {
             interpolatedTheta = thetaSteps;
             interpolatedTranslation = translationSteps;
         }
-        // TODO: Fix
-        // theta = interpolatedTheta[currentStep].map((value, index) => {
-        //     return [value, value, value]; 
-        // });
 
         for (let i = 0; i < 27; i++) {
             theta[i] = [
@@ -81,7 +77,6 @@ function animate(duration = 1000) {
         }
 
         initNodesForAll();
-        
 
         [xTransVal, yTransVal, zTransVal] = interpolatedTranslation[currentStep];
 
@@ -109,4 +104,47 @@ function resetKeyFrames() {
         console.log("Resetting keyframes...");
         console.log(keyframes);
     }
+}
+
+// SAVE AND LOAD
+// Save the keyframes to a file.
+function saveAnimation() {
+    console.log("Save button clicked");
+    const animationData = JSON.stringify(keyframes, null, 2);
+    const blob = new Blob([animationData], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "animation.json"; 
+    a.click();
+    URL.revokeObjectURL(url); 
+}
+
+// Load the keyframes from a file.
+function loadAnimation() {
+    console.log("Load button clicked");
+    const file = event.target.files[0];
+    if (!file) {
+        console.error("No file selected");
+        return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = (e) => {
+        try {
+            const loadedKeyframes = JSON.parse(e.target.result);
+
+            if (loadedKeyframes.thetaVals && loadedKeyframes.translationVals) {
+                keyframes.thetaVals = loadedKeyframes.thetaVals;
+                keyframes.translationVals = loadedKeyframes.translationVals;
+                console.log("Keyframes loaded:", keyframes);
+            } else {
+                console.error("Invalid animation file format");
+            }
+        } catch (error) {
+            console.error("Error parsing animation file:", error);
+        }
+    };
+    reader.readAsText(file);
 }
