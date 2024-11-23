@@ -9,7 +9,7 @@
  */
 
 // Global variables
-var headHeight = 1.0;
+var headHeight = 3.0;
 var headWidth = 0.5;
 
 // Function to initialize the left head
@@ -49,9 +49,7 @@ function renderLeftHead(){
     gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(instanceMatrix));
 
     gl.uniform4fv(gl.getUniformLocation(program, "uColor"), flatten(vec4(1.0, 0.796, 0.0, 1.0)));
-    for(var i = 0; i < 6; i++){
-        gl.drawArrays(gl.TRIANGLE_FAN, 4*i, 4);
-    }
+    drawCube();
 }
 
 // Function to render the middle head
@@ -61,9 +59,7 @@ function renderMidHead(){
     gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(instanceMatrix));
 
     gl.uniform4fv(gl.getUniformLocation(program, "uColor"), flatten(vec4(1.0, 0.796, 0.0, 1.0)));
-    for(var i = 0; i < 6; i++){
-        gl.drawArrays(gl.TRIANGLE_FAN, 4*i, 4);
-    }
+    drawCylinder();
 }
 
 // Function to render the right head
@@ -73,7 +69,5 @@ function renderRightHead(){
     gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(instanceMatrix));
 
     gl.uniform4fv(gl.getUniformLocation(program, "uColor"), flatten(vec4(1.0, 0.796, 0.0, 1.0)));
-    for(var i = 0; i < 6; i++){
-        gl.drawArrays(gl.TRIANGLE_FAN, 4*i, 4);
-    }
+    drawCube();
 }

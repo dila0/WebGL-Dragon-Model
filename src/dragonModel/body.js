@@ -30,11 +30,10 @@ function renderBody(){
  
     pointsArray = [];
     cube();
+    cylinder();
 
     gl.bindBuffer(gl.ARRAY_BUFFER, cubeVBuffer);
     gl.bufferData(gl.ARRAY_BUFFER, flatten(pointsArray), gl.STATIC_DRAW);
 
-    for(var i = 0; i < 6; i++){
-        gl.drawArrays(gl.TRIANGLE_FAN, 4*i, 4);
-    }
+    drawCube();
 }

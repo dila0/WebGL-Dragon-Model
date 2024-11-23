@@ -50,9 +50,7 @@ function renderLeftLowerNeck(){
     gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(instanceMatrix));
 
     gl.uniform4fv(gl.getUniformLocation(program, "uColor"), flatten(vec4(0.0, 0.333, 0.0, 1.0)));
-    for(var i = 0; i < 6; i++){
-        gl.drawArrays(gl.TRIANGLE_FAN, 4*i, 4);
-    }
+    drawCube();
 }
 
 // Function to render the middle lower neck
@@ -62,9 +60,7 @@ function renderMidLowerNeck(){
     gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(instanceMatrix));
 
     gl.uniform4fv(gl.getUniformLocation(program, "uColor"), flatten(vec4(0.0, 0.333, 0.0, 1.0)));
-    for(var i = 0; i < 6; i++){
-        gl.drawArrays(gl.TRIANGLE_FAN, 4*i, 4);
-    }
+    drawCylinder();
 }
 
 // Function to render the right lower neck
@@ -74,7 +70,5 @@ function renderRightLowerNeck(){
     gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(instanceMatrix));
 
     gl.uniform4fv(gl.getUniformLocation(program, "uColor"), flatten(vec4(0.0, 0.333, 0.0, 1.0)));
-    for(var i = 0; i < 6; i++){
-        gl.drawArrays(gl.TRIANGLE_FAN, 4*i, 4);
-    }
+    drawCube();
 }
