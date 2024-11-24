@@ -12,12 +12,15 @@
 var upperNeckHeight = 1.0;
 var upperNeckWidth = 0.5;
 
+var leftUpperNeckHeight = 1.0;
+var leftUpperNeckWidth = 1.7;
+
 // Function to initialize the left upper neck 
 function initLeftUpperNeck() {
     var m = mat4();
-    m = translate(0.0, lowerNeckHeight + 0.5 * upperNeckHeight, 0.0);
+    m = translate(0.0, lowerNeckHeight + 0.5 * leftUpperNeckHeight, 0.0);
     m = rotatePart(LEFT_UPPER_NECK_ID, m);
-    m = mult(m, translate(0.0, -0.5 * upperNeckHeight, 0.0));
+    m = mult(m, translate(0.0, -0.5 * leftUpperNeckHeight, 0.0));
 
     figure[LEFT_UPPER_NECK_ID] = createNode(m, renderLeftUpperNeck, null, LEFT_JAW_ID);
 }
@@ -44,11 +47,25 @@ function initRightUpperNeck() {
 
 // Function to render the left upper neck 
 function renderLeftUpperNeck() {
-    instanceMatrix = mult(modelViewMatrix, translate(0.0, 0.5 * upperNeckHeight, 0.0));
-    instanceMatrix = mult(instanceMatrix, scale4(upperNeckWidth, upperNeckHeight, upperNeckWidth));
+    instanceMatrix = mult(modelViewMatrix, translate(0.0, 0.5 * leftUpperNeckHeight, 0.0));
+    instanceMatrix = mult(instanceMatrix, scale4(leftUpperNeckWidth, leftUpperNeckHeight, leftUpperNeckWidth));
     gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(instanceMatrix));
 
-    gl.uniform4fv(gl.getUniformLocation(program, "uColor"), flatten(vec4(0.404, 0.812, 0.0, 1.0)));
+    gl.uniform4fv(gl.getUniformLocation(program, "uColor"), flatten(vec4(0.961, 0.878, 0.314, 1.0)));
+    drawCylinder();
+
+    let frontStripMatrix = mult(modelViewMatrix, translate(-0.5, 0.5 * leftUpperNeckHeight, 0.9)); 
+    frontStripMatrix = mult(frontStripMatrix, scale4(0.15, leftUpperNeckHeight, 0.05)); 
+    gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(frontStripMatrix));
+
+    gl.uniform4fv(gl.getUniformLocation(program, "uColor"), flatten(vec4(0.314, 0.396, 0.961, 1.0))); 
+    drawCube();
+
+    let frontStrip2Matrix = mult(modelViewMatrix, translate(0.5, 0.5 * leftUpperNeckHeight, 0.9)); 
+    frontStrip2Matrix = mult(frontStrip2Matrix, scale4(0.15, leftUpperNeckHeight, 0.05)); 
+    gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(frontStrip2Matrix));
+
+    gl.uniform4fv(gl.getUniformLocation(program, "uColor"), flatten(vec4(0.314, 0.396, 0.961, 1.0))); 
     drawCube();
 }
 
