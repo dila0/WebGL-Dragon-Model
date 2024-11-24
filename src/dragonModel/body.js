@@ -31,6 +31,7 @@ function renderBody(){
     pointsArray = [];
     cube();
     cylinder();
+    sphere();
 
     gl.bindBuffer(gl.ARRAY_BUFFER, cubeVBuffer);
     gl.bufferData(gl.ARRAY_BUFFER, flatten(pointsArray), gl.STATIC_DRAW);
