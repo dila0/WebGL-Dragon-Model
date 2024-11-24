@@ -12,6 +12,9 @@
 var leftLowerNeckHeight = 1.0;
 var leftLowerNeckWidth = 1.7;
 
+var rightLowerNeckHeight = 0.7;
+var rightLowerNeckWidth = 1.4;
+
 var lowerNeckHeight = 1.0;
 var lowerNeckWidth = 0.5;
 var neckSeparation = 2;
@@ -37,7 +40,7 @@ function initMidLowerNeck(){
 // Function to create the right lower neck
 function initRightLowerNeck(){
     var m = mat4();
-    m = translate(neckSeparation, 0.5 * bodyHeight + 0.5 * lowerNeckHeight, 0.0);
+    m = translate(neckSeparation, 0.5 * bodyHeight + 0.5 * rightLowerNeckHeight, 0.0);
     m = rotatePart(RIGHT_LOWER_NECK_ID, m);
 
     figure[RIGHT_LOWER_NECK_ID] = createNode(m, renderRightLowerNeck, LEFT_UPPER_LEG_ID, RIGHT_UPPER_NECK_ID);
@@ -66,9 +69,9 @@ function renderMidLowerNeck(){
 // Function to render the right lower neck
 function renderRightLowerNeck(){
     instanceMatrix = modelViewMatrix;
-    instanceMatrix = mult(instanceMatrix, scale4(lowerNeckWidth, lowerNeckHeight, lowerNeckWidth));
+    instanceMatrix = mult(instanceMatrix, scale4(rightLowerNeckWidth, rightLowerNeckHeight, rightLowerNeckWidth));
     gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(instanceMatrix));
 
-    gl.uniform4fv(gl.getUniformLocation(program, "uColor"), flatten(vec4(0.0, 0.333, 0.0, 1.0)));
+    gl.uniform4fv(gl.getUniformLocation(program, "uColor"), flatten(vec4(0.125, 0.643, 0.624, 1.0)));
     drawCube();
 }
