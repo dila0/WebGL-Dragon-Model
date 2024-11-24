@@ -18,9 +18,8 @@ var leftJawWidth = 1.7;
 // Function to initialize the left jaw
 function initLeftJaw(){
     var m = mat4();
-    m = translate(0.0, upperNeckHeight + 0.5 * leftJawHeight, 0.0);
+    m = translate(0.0, 0.5 * upperNeckHeight + 0.5 * leftJawHeight, 0.0);
     m = rotatePart(LEFT_JAW_ID, m);
-    m = mult(m, translate(0.0, -0.5 * leftJawHeight, 0.0));
     
     figure[LEFT_JAW_ID] = createNode(m, renderLeftJaw, null, LEFT_HEAD_ID);
 }
@@ -28,9 +27,8 @@ function initLeftJaw(){
 // Function to initialize the middle jaw
 function initMidJaw(){
     var m = mat4();
-    m = translate(0.0, upperNeckHeight + 0.5 * jawHeight, 0.0);
+    m = translate(0.0, 0.5 * upperNeckHeight + 0.5 * jawHeight, 0.0);
     m = rotatePart(MID_JAW_ID, m);
-    m = mult(m, translate(0.0, -0.5 * jawHeight, 0.0));
 
     figure[MID_JAW_ID] = createNode(m, renderMidJaw, null, MID_HEAD_ID);
 }   
@@ -38,16 +36,15 @@ function initMidJaw(){
 // Function to initialize the right jaw
 function initRightJaw(){
     var m = mat4();
-    m = translate(0.0, upperNeckHeight + 0.5 * jawHeight, 0.0);
+    m = translate(0.0, 0.5 * upperNeckHeight + 0.5 * jawHeight, 0.0);
     m = rotatePart(RIGHT_JAW_ID, m);
-    m = mult(m, translate(0.0, -0.5 * jawHeight, 0.0));
 
     figure[RIGHT_JAW_ID] = createNode(m, renderRightJaw, null, RIGHT_HEAD_ID);
 }
 
 // Function to render the left jaw
 function renderLeftJaw(){
-    instanceMatrix = mult(modelViewMatrix, translate(0.0, 0.5 * leftJawHeight, 0.0));
+    instanceMatrix = modelViewMatrix;
     instanceMatrix = mult(instanceMatrix, scale4(leftJawWidth, leftJawHeight, leftJawWidth));
     gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(instanceMatrix));
 
@@ -80,7 +77,7 @@ function renderLeftJaw(){
 
 // Function to render the middle jaw
 function renderMidJaw(){
-    instanceMatrix = mult(modelViewMatrix, translate(0.0, 0.5 * jawHeight, 0.0));
+    instanceMatrix = modelViewMatrix;
     instanceMatrix = mult(instanceMatrix, scale4(jawWidth, jawHeight, jawWidth));
     gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(instanceMatrix));
 
@@ -90,7 +87,7 @@ function renderMidJaw(){
 
 // Function to render the right jaw
 function renderRightJaw(){
-    instanceMatrix = mult(modelViewMatrix, translate(0.0, 0.5 * jawHeight, 0.0));
+    instanceMatrix = modelViewMatrix;
     instanceMatrix = mult(instanceMatrix, scale4(jawWidth, jawHeight, jawWidth));
     gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(instanceMatrix));
 

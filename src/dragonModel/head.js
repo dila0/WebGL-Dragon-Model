@@ -18,9 +18,8 @@ var leftHeadWidth = 1.7;
 // Function to initialize the left head
 function initLeftHead(){
     var m = mat4();
-    m = translate(0.0, jawHeight + 0.5 * leftHeadHeight, 0.0);
+    m = translate(0.0, 0.5 * jawHeight + 0.5 * leftHeadHeight, 0.0);
     m = rotatePart(LEFT_HEAD_ID, m);
-    m = mult(m, translate(0.0, -0.5 * leftHeadHeight, 0.0));
 
     figure[LEFT_HEAD_ID] = createNode(m, renderLeftHead, null, null);
 }
@@ -28,9 +27,8 @@ function initLeftHead(){
 // Function to initialize the middle head
 function initMidHead(){
     var m = mat4();
-    m = translate(0.0, jawHeight + 0.5 * headHeight, 0.0);
+    m = translate(0.0, 0.5 * jawHeight + 0.5 * headHeight, 0.0);
     m = rotatePart(MID_HEAD_ID, m);
-    m = mult(m, translate(0.0, -0.5 * headHeight, 0.0));
 
     figure[MID_HEAD_ID] = createNode(m, renderMidHead, null, null);
 }
@@ -38,16 +36,15 @@ function initMidHead(){
 // Function to initialize the right head
 function initRightHead(){
     var m = mat4();
-    m = translate(0.0, jawHeight + 0.5 * headHeight, 0.0);
+    m = translate(0.0, 0.5 * jawHeight + 0.5 * headHeight, 0.0);
     m = rotatePart(RIGHT_HEAD_ID, m);
-    m = mult(m, translate(0.0, -0.5 * headHeight, 0.0));
 
     figure[RIGHT_HEAD_ID] = createNode(m, renderRightHead, null, null);
 }
 
 // Function to render the left head
 function renderLeftHead(){
-    instanceMatrix = mult(modelViewMatrix, translate(0.0, 0.5 * leftHeadHeight, 0.0));
+    instanceMatrix = modelViewMatrix;
     instanceMatrix = mult(instanceMatrix, scale4(leftHeadWidth, leftHeadHeight, leftHeadWidth));
     gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(instanceMatrix));
 
@@ -109,7 +106,7 @@ function renderLeftHead(){
 
 // Function to render the middle head
 function renderMidHead(){
-    instanceMatrix = mult(modelViewMatrix, translate(0.0, 0.5 * headHeight, 0.0));
+    instanceMatrix = modelViewMatrix;
     instanceMatrix = mult(instanceMatrix, scale4(headWidth, headHeight, headWidth));
     gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(instanceMatrix));
 
@@ -119,7 +116,7 @@ function renderMidHead(){
 
 // Function to render the right head
 function renderRightHead(){
-    instanceMatrix = mult(modelViewMatrix, translate(0.0, 0.5 * headHeight, 0.0));
+    instanceMatrix = modelViewMatrix;
     instanceMatrix = mult(instanceMatrix, scale4(headWidth, headHeight, headWidth));
     gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(instanceMatrix));
 

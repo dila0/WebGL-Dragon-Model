@@ -19,9 +19,8 @@ var neckSeparation = 2;
 // Function to create the left lower neck
 function initLeftLowerNeck(){
     var m = mat4();
-    m = translate(-neckSeparation, bodyHeight + 0.5 * leftLowerNeckHeight, 0.0);
+    m = translate(-neckSeparation, 0.5 * bodyHeight + 0.5 * leftLowerNeckHeight, 0.0);
     m = rotatePart(LEFT_LOWER_NECK_ID, m);
-    m = mult(m, translate(0.0, -0.5 * leftLowerNeckHeight, 0.0));
 
     figure[LEFT_LOWER_NECK_ID] = createNode(m, renderLeftLowerNeck, MID_LOWER_NECK_ID, LEFT_UPPER_NECK_ID);
 }
@@ -29,9 +28,8 @@ function initLeftLowerNeck(){
 // Function to create the middle lower neck
 function initMidLowerNeck(){
     var m = mat4();
-    m = translate(0.0, bodyHeight + 0.5 * lowerNeckHeight, 0.0);
+    m = translate(0.0, 0.5 * bodyHeight + 0.5 * lowerNeckHeight, 0.0);
     m = rotatePart(MID_LOWER_NECK_ID, m);
-    m = mult(m, translate(0.0, -0.5 * lowerNeckHeight, 0.0));
 
     figure[MID_LOWER_NECK_ID] = createNode(m, renderMidLowerNeck, RIGHT_LOWER_NECK_ID, MID_UPPER_NECK_ID);
 }
@@ -39,16 +37,15 @@ function initMidLowerNeck(){
 // Function to create the right lower neck
 function initRightLowerNeck(){
     var m = mat4();
-    m = translate(neckSeparation, bodyHeight + 0.5 * lowerNeckHeight, 0.0);
+    m = translate(neckSeparation, 0.5 * bodyHeight + 0.5 * lowerNeckHeight, 0.0);
     m = rotatePart(RIGHT_LOWER_NECK_ID, m);
-    m = mult(m, translate(0.0, -0.5 * lowerNeckHeight, 0.0));
 
     figure[RIGHT_LOWER_NECK_ID] = createNode(m, renderRightLowerNeck, LEFT_UPPER_LEG_ID, RIGHT_UPPER_NECK_ID);
 }
 
 // Function to render the left lower neck
 function renderLeftLowerNeck(){
-    instanceMatrix = mult(modelViewMatrix, translate(0.0, 0.5*leftLowerNeckHeight, 0.0));
+    instanceMatrix = modelViewMatrix;
     instanceMatrix = mult(instanceMatrix, scale4(leftLowerNeckWidth, leftLowerNeckHeight, leftLowerNeckWidth));
     gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(instanceMatrix));
 
@@ -58,7 +55,7 @@ function renderLeftLowerNeck(){
 
 // Function to render the middle lower neck
 function renderMidLowerNeck(){
-    instanceMatrix = mult(modelViewMatrix, translate(0.0, 0.5*lowerNeckHeight, 0.0));
+    instanceMatrix = modelViewMatrix;
     instanceMatrix = mult(instanceMatrix, scale4(lowerNeckWidth, lowerNeckHeight, lowerNeckWidth));
     gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(instanceMatrix));
 
@@ -68,7 +65,7 @@ function renderMidLowerNeck(){
 
 // Function to render the right lower neck
 function renderRightLowerNeck(){
-    instanceMatrix = mult(modelViewMatrix, translate(0.0, 0.5*lowerNeckHeight, 0.0));
+    instanceMatrix = modelViewMatrix;
     instanceMatrix = mult(instanceMatrix, scale4(lowerNeckWidth, lowerNeckHeight, lowerNeckWidth));
     gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(instanceMatrix));
 

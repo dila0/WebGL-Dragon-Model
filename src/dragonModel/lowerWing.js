@@ -15,9 +15,8 @@ var lowerWingWidth = 1.0;
 // Function to create the left lower wing
 function initLeftLowerWing(){
     var m = mat4();
-    m = translate(-(0.5 * upperWingWidth + 0.5 * lowerWingWidth), 0.5 * upperWingHeight - lowerWingHeight, 0.0);
+    m = translate(-(0.5 * upperWingWidth + 0.5 * lowerWingWidth), 0.0, 0.0);
     m = rotatePart(LEFT_LOWER_WING_ID, m);
-    m = mult(m, translate(0.0, 0.5 * lowerWingHeight, 0.0));
 
     figure[LEFT_LOWER_WING_ID] = createNode(m, renderLeftLowerWing, null, LEFT_HAND_ID);
 }
@@ -25,16 +24,15 @@ function initLeftLowerWing(){
 // Function to create the right lower wing
 function initRightLowerWing(){
     var m = mat4();
-    m = translate(0.5 * upperWingWidth + 0.5 * lowerWingWidth, 0.5 * upperWingHeight - lowerWingHeight, 0.0);
+    m = translate(0.5 * upperWingWidth + 0.5 * lowerWingWidth, 0.0, 0.0);
     m = rotatePart(RIGHT_LOWER_WING_ID, m);
-    m = mult(m, translate(0.0, 0.5 * lowerWingHeight, 0.0));
 
     figure[RIGHT_LOWER_WING_ID] = createNode(m, renderRightLowerWing, null, RIGHT_HAND_ID);
 }
 
 // Function to render the left lower wing
 function renderLeftLowerWing(){
-    instanceMatrix = mult(modelViewMatrix, translate(0.0, 0.5 * lowerWingHeight, 0.0));
+    instanceMatrix = modelViewMatrix;
     instanceMatrix = mult(instanceMatrix, scale4(lowerWingWidth, lowerWingHeight, lowerWingWidth));
     gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(instanceMatrix));
 
@@ -44,7 +42,7 @@ function renderLeftLowerWing(){
 
 // Function to render the right lower wing
 function renderRightLowerWing(){
-    instanceMatrix = mult(modelViewMatrix, translate(0.0, 0.5 * lowerWingHeight, 0.0));
+    instanceMatrix = modelViewMatrix;
     instanceMatrix = mult(instanceMatrix, scale4(lowerWingWidth, lowerWingHeight, lowerWingWidth));
     gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(instanceMatrix));
 

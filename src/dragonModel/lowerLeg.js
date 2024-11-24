@@ -15,9 +15,8 @@ var lowerLegWidth = 0.5;
 // Function to initialize the left lower leg
 function initLeftLowerLeg() {
     var m = mat4();
-    m = translate(0.0, - 0.5 * upperLegHeight + lowerLegHeight, 0.0);
+    m = translate(0.0, - 0.5 * upperLegHeight - 0.5 * lowerLegHeight, 0.0);
     m = rotatePart(LEFT_LOWER_LEG_ID, m);
-    m = mult(m, translate(0.0, -0.5 * lowerLegHeight, 0.0));
 
     figure[LEFT_LOWER_LEG_ID] = createNode(m, renderLeftLowerLeg, null, LEFT_FOOT_ID);
 }
@@ -25,16 +24,15 @@ function initLeftLowerLeg() {
 // Function to initialize the right lower leg
 function initRightLowerLeg() {
     var m = mat4();
-    m = translate(0.0, - 0.5 * upperLegHeight + lowerLegHeight, 0.0);
+    m = translate(0.0, - 0.5 * upperLegHeight - 0.5 * lowerLegHeight, 0.0);
     m = rotatePart(RIGHT_LOWER_LEG_ID, m);
-    m = mult(m, translate(0.0, -0.5 * lowerLegHeight, 0.0));
 
     figure[RIGHT_LOWER_LEG_ID] = createNode(m, renderRightLowerLeg, null, RIGHT_FOOT_ID);
 }
 
 // Function to render the left lower leg
 function renderLeftLowerLeg() {
-    instanceMatrix = mult(modelViewMatrix, translate(0.0, 0.5 * lowerLegHeight, 0.0));
+    instanceMatrix = modelViewMatrix;
     instanceMatrix = mult(instanceMatrix, scale4(lowerLegWidth, lowerLegHeight, lowerLegWidth));
     gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(instanceMatrix));
 
@@ -44,7 +42,7 @@ function renderLeftLowerLeg() {
 
 // Function to render the right lower leg
 function renderRightLowerLeg() {
-    instanceMatrix = mult(modelViewMatrix, translate(0.0, 0.5 * lowerLegHeight, 0.0));
+    instanceMatrix = modelViewMatrix;
     instanceMatrix = mult(instanceMatrix, scale4(lowerLegWidth, lowerLegHeight, lowerLegWidth));
     gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(instanceMatrix));
 
