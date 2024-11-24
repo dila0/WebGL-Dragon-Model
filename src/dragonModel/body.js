@@ -9,20 +9,21 @@
  */
 
 // Global variables 
-var bodyHeight = 2.5;
-var bodyWidth = 2.5;
+var bodyHeight = 4;
+var bodyWidth = 4;
 
 // Function to initialize the body
 function initBody(){
     var m = mat4();
     m = rotatePart(BODY_ID, m);
+    m = mult(m, translate(0.0, 0.5 * bodyHeight, 0.0));
     figure[BODY_ID] = createNode(m, renderBody, null, LEFT_LOWER_NECK_ID);
 }
 
 // Function to render the body
 function renderBody(){
-    console.log("Rendering body...");
-    instanceMatrix = mult(modelViewMatrix, translate(0.0, 0.5 * bodyHeight, 0.0));
+    //console.log("Rendering body...");
+    instanceMatrix = modelViewMatrix;
     instanceMatrix = mult(instanceMatrix, scale4(bodyWidth, bodyHeight, bodyWidth));
     gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(instanceMatrix));
 
@@ -35,6 +36,6 @@ function renderBody(){
 
     gl.bindBuffer(gl.ARRAY_BUFFER, cubeVBuffer);
     gl.bufferData(gl.ARRAY_BUFFER, flatten(pointsArray), gl.STATIC_DRAW);
-
+    
     drawCube();
 }

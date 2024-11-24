@@ -57,10 +57,16 @@ function cylinder(){
     // side(6, 1, 9, 14);
 }
 
-function drawCylinder(){
-    for(var i = 0; i < 2; i++){
-        gl.drawArrays(gl.TRIANGLE_FAN, cylinderOffset + (slices+2)*i, (slices+2));
+function drawCylinder(drawTop = true, drawBottom = true){
+    if(drawTop){
+        gl.drawArrays(gl.TRIANGLE_FAN, cylinderOffset, slices+2);
     }
+    if(drawBottom){
+        gl.drawArrays(gl.TRIANGLE_FAN, cylinderOffset + slices+2, slices+2);
+    }
+    // for(var i = 0; i < 2; i++){
+    //     gl.drawArrays(gl.TRIANGLE_FAN, cylinderOffset + (slices+2)*i, (slices+2));
+    // }
     for(var i = 0; i < slices; i++){
         gl.drawArrays(gl.TRIANGLE_FAN, cylinderOffset + (2 * (slices+2)) + 4*i, 4);
     }

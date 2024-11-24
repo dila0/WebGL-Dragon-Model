@@ -15,9 +15,8 @@ var upperWingWidth = 1.0;
 // Function to initialize the left upper wing node
 function initLeftUpperWing() {
     var m = mat4();
-    m = translate(-(0.5 * bodyWidth + 0.5 * upperWingWidth), 0.5 * bodyHeight - upperWingHeight, 0.0);
+    m = translate(-(0.5 * bodyWidth + 0.5 * upperWingWidth), 0.0, 0.0);
     m = rotatePart(LEFT_UPPER_WING_ID, m);
-    m = mult(m, translate(0.0, 0.5 * upperWingHeight, 0.0));
 
     figure[LEFT_UPPER_WING_ID] = createNode(m, renderLeftUpperWing, RIGHT_UPPER_WING_ID, LEFT_LOWER_WING_ID);
 }
@@ -25,16 +24,15 @@ function initLeftUpperWing() {
 // Function to initialize the right upper wing node
 function initRightUpperWing() {
     var m = mat4();
-    m = translate(0.5 * bodyWidth + 0.5 * upperWingWidth, 0.5 * bodyHeight - upperWingHeight, 0.0);
+    m = translate(0.5 * bodyWidth + 0.5 * upperWingWidth, 0.0, 0.0);
     m = rotatePart(RIGHT_UPPER_WING_ID, m);
-    m = mult(m, translate(0.0, 0.5 * upperWingHeight, 0.0));
     
     figure[RIGHT_UPPER_WING_ID] = createNode(m, renderRightUpperWing, UPPER_TAIL_ID, RIGHT_LOWER_WING_ID);
 }
 
 // Function to render the left upper wing 
 function renderLeftUpperWing() {
-    instanceMatrix = mult(modelViewMatrix, translate(0.0, 0.5 * upperWingHeight, 0.0));
+    instanceMatrix = modelViewMatrix;
     instanceMatrix = mult(instanceMatrix, scale4(upperWingWidth, upperWingHeight, upperWingWidth));
     gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(instanceMatrix));
 
@@ -46,7 +44,7 @@ function renderLeftUpperWing() {
 
 // Function to render the right upper wing
 function renderRightUpperWing() {
-    instanceMatrix = mult(modelViewMatrix, translate(0.0, 0.5 * upperWingHeight, 0.0));
+    instanceMatrix = modelViewMatrix;
     instanceMatrix = mult(instanceMatrix, scale4(upperWingWidth, upperWingHeight, upperWingWidth));
     gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(instanceMatrix));
 

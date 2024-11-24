@@ -9,7 +9,7 @@
  */
 
 var sphereOffset = 118;
-var sphereDensity = 10;
+var sphereDensity = 15;
 var sphereRadius = 0.5;
 
 function sphere() {
