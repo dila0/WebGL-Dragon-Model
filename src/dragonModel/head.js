@@ -9,11 +9,12 @@
  */
 
 // Global variables
-var headHeight = 3.0;
-var headWidth = 0.5;
+var headHeight = 2.0;
+var headWidth = 1.6;
 
 var leftHeadHeight = 1.0;
 var leftHeadWidth = 1.7;
+
 var rightHeadHeight = 1.2;
 var rightHeadWidth = 1.4;
 
@@ -137,7 +138,7 @@ function renderMidHead(){
     gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(instanceMatrix));
 
     gl.uniform4fv(gl.getUniformLocation(program, "uColor"), flatten(vec4(1.0, 0.796, 0.0, 1.0)));
-    drawCylinder();
+    drawCube();
 }
 
 // Function to render the right head

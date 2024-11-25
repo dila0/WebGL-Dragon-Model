@@ -41,7 +41,9 @@ function sphere() {
     }
 }
 
-function drawSphere() {
+function drawSphere(topScale = 1.0) {
+    gl.uniform1f(gl.getUniformLocation(program, "uTopScale"), topScale);
+
     for (let i = 0; i < sphereDensity * 2; i++) {
         gl.drawArrays(gl.TRIANGLE_STRIP, sphereOffset + (sphereDensity + 1) * 2 * i, (sphereDensity + 1) * 2);
     }

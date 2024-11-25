@@ -16,8 +16,9 @@ var rightLowerNeckHeight = 0.7;
 var rightLowerNeckWidth = 1.4;
 
 var lowerNeckHeight = 1.0;
-var lowerNeckWidth = 0.5;
-var neckSeparation = 2;
+var lowerNeckWidth = 1.1;
+
+var neckSeparation = 3;
 
 // Function to create the left lower neck
 function initLeftLowerNeck(){
@@ -64,6 +65,20 @@ function renderMidLowerNeck(){
 
     gl.uniform4fv(gl.getUniformLocation(program, "uColor"), flatten(vec4(0.0, 0.333, 0.0, 1.0)));
     drawCylinder();
+
+    const paletteCount = 6; 
+    const paletteSpacing = 0.25; 
+    const paletteScale = vec3(0.25, 0.15, 0.8); 
+
+    for (let i = 0; i < paletteCount; i++) {
+        let paletteMatrix = mult(modelViewMatrix, translate(0.0, 0.5 * lowerNeckHeight - i * paletteSpacing, -0.7));
+        paletteMatrix = mult(paletteMatrix, scale4(paletteScale[0], paletteScale[1], paletteScale[2]));
+
+        gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(paletteMatrix));
+
+        gl.uniform4fv(gl.getUniformLocation(program, "uColor"), flatten(vec4(0.5, 0.2, 0.0, 1.0))); // Brown color
+        drawCube(0.0);
+    }
 }
 
 // Function to render the right lower neck

@@ -10,7 +10,7 @@
 
 // Global variables 
 var bodyHeight = 4;
-var bodyWidth = 4;
+var bodyWidth = 6;
 
 // Function to initialize the body
 function initBody(){
