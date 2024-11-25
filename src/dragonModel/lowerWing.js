@@ -9,8 +9,8 @@
  */
 
 // Global variables 
-var lowerWingHeight = 4.1;
-var lowerWingWidth = 2.1;  
+var lowerWingHeight = 3.0;
+var lowerWingWidth = 2.0;  
 
 // Function to create the left lower wing
 function initLeftLowerWing(){
@@ -51,7 +51,7 @@ function renderRightLowerWing(){
     instanceMatrix = modelViewMatrix;
     instanceMatrix = mult(instanceMatrix, rotate(90, 1, 0, 0));
     instanceMatrix = mult(instanceMatrix, rotate(-90, 0, 0, 1));
-    instanceMatrix = mult(instanceMatrix, scale4(lowerWingWidth, lowerWingHeight, 0.3));
+    instanceMatrix = mult(instanceMatrix, scale4(lowerWingWidth, lowerWingHeight + 0.3, 0.3));
     gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(instanceMatrix));
 
     gl.uniform4fv(gl.getUniformLocation(program, "uColor"), flatten(vec4(0.0, 0.4, 0.953, 1.0)));
