@@ -9,11 +9,12 @@
  */
 
 // Global variables
-var headHeight = 2.0;
+var headHeight = 1.5;
 var headWidth = 1.6;
+var headDepth = 2.5;
 
 var leftHeadHeight = 1.0;
-var leftHeadWidth = 1.7;
+var leftHeadWidth = 1.4;
 
 var rightHeadHeight = 1.2;
 var rightHeadWidth = 1.4;
@@ -59,37 +60,37 @@ function renderLeftHead(){
 
     // Upper head
     let sphereMatrix = mult(modelViewMatrix, translate(0.0, leftHeadHeight, 0.0));
-    sphereMatrix = mult(sphereMatrix, scale4(2.05, 2.05, 2.0)); 
+    sphereMatrix = mult(sphereMatrix, scale4(1.405, 1.405, 2.0)); 
     gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(sphereMatrix));
 
     gl.uniform4fv(gl.getUniformLocation(program, "uColor"), flatten(vec4(0.961, 0.878, 0.314, 1.0))); 
     drawSphere();
 
     // Small cap
-    let sphere5Matrix = mult(modelViewMatrix, translate(0.0, leftHeadHeight + 0.8, 0.0));
-    sphere5Matrix = mult(sphere5Matrix, scale4(1.0, 1.0, 1.0)); 
+    let sphere5Matrix = mult(modelViewMatrix, translate(0.0, leftHeadHeight + 0.6, 0.0));
+    sphere5Matrix = mult(sphere5Matrix, scale4(0.8, 0.8, 0.8)); 
     gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(sphere5Matrix));
 
     gl.uniform4fv(gl.getUniformLocation(program, "uColor"), flatten(vec4(0.416, 0.078, 0.078, 1.0))); 
     drawSphere();
 
     // Horns
-    let leftHornMatrix = mult(modelViewMatrix, translate(-0.4, leftHeadHeight + 1.2, 0.0)); 
+    let leftHornMatrix = mult(modelViewMatrix, translate(-0.5, leftHeadHeight + 1.2, 0.0)); 
     leftHornMatrix = mult(leftHornMatrix, rotate(40, 0, 0, 1)); 
-    leftHornMatrix = mult(leftHornMatrix, scale4(0.13, 0.8, 0.2)); 
+    leftHornMatrix = mult(leftHornMatrix, scale4(0.2, 0.8, 0.2)); 
     gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(leftHornMatrix));
 
     gl.uniform4fv(gl.getUniformLocation(program, "uColor"), flatten(vec4(0.137, 0.122, 0.125, 1.0))); 
-    drawCylinder();
+    drawCube(0.0);
 
     // Right horn
-    let rightHornMatrix = mult(modelViewMatrix, translate(0.4, leftHeadHeight + 1.2, 0.0)); 
+    let rightHornMatrix = mult(modelViewMatrix, translate(0.5, leftHeadHeight + 1.2, 0.0)); 
     rightHornMatrix = mult(rightHornMatrix, rotate(-40, 0, 0, 1)); 
-    rightHornMatrix = mult(rightHornMatrix, scale4(0.13, 0.8, 0.2));
+    rightHornMatrix = mult(rightHornMatrix, scale4(0.2, 0.8, 0.2));
     gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(rightHornMatrix));
 
     gl.uniform4fv(gl.getUniformLocation(program, "uColor"), flatten(vec4(0.137, 0.122, 0.125, 1.0))); 
-    drawCylinder();
+    drawCube(0.0);
     
     // Back eye
     let sphere4Matrix = mult(modelViewMatrix, translate(0.0, leftHeadHeight - 0.3, 1.0)); 
@@ -101,7 +102,7 @@ function renderLeftHead(){
 
     // Outer glasses
     let headWrapMatrix = mult(modelViewMatrix, translate(0, leftHeadHeight - 0.3 , -0.05));
-    headWrapMatrix = mult(headWrapMatrix, scale4(1.8, 0.4, 1.8));
+    headWrapMatrix = mult(headWrapMatrix, scale4(1.5, 0.4, 1.5));
     gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(headWrapMatrix));
 
     gl.uniform4fv(gl.getUniformLocation(program, "uColor"), flatten(vec4(0.137, 0.122, 0.125, 1.0))); 
@@ -137,11 +138,24 @@ function renderLeftHead(){
 // Function to render the middle head
 function renderMidHead(){
     instanceMatrix = modelViewMatrix;
-    instanceMatrix = mult(instanceMatrix, scale4(headWidth, headHeight, headWidth));
+    instanceMatrix = mult(instanceMatrix, scale4(headWidth, headHeight, headDepth));
     gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(instanceMatrix));
 
     gl.uniform4fv(gl.getUniformLocation(program, "uColor"), flatten(vec4(1.0, 0.796, 0.0, 1.0)));
     drawCube();
+
+    /// Left eye
+    let sphere2Matrix = mult(modelViewMatrix, translate(-0.3, rightHeadHeight - 1.6, 2.5)); 
+    sphere2Matrix = mult(sphere2Matrix, scale4(0.45, 0.40, 0.3)); 
+    gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(sphere2Matrix));
+    gl.uniform4fv(gl.getUniformLocation(program, "uColor"), flatten(vec4(1.0, 1.0, 1.0, 1.0)));
+    drawSphere();
+    
+    let sphere3Matrix = mult(modelViewMatrix, translate(-0.2, rightHeadHeight - 1.6, 0.85)); 
+    sphere3Matrix = mult(sphere3Matrix, scale4(0.2, 0.2, 0.1)); 
+    gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(sphere3Matrix));
+    gl.uniform4fv(gl.getUniformLocation(program, "uColor"), flatten(vec4(0.0, 0.0, 0.0, 1.0)));
+    drawSphere();
 }
 
 // Function to render the right head

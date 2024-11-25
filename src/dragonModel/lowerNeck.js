@@ -10,13 +10,13 @@
 
 // Global variables
 var leftLowerNeckHeight = 1.0;
-var leftLowerNeckWidth = 1.7;
+var leftLowerNeckWidth = 1.4;
 
 var rightLowerNeckHeight = 0.7;
 var rightLowerNeckWidth = 1.4;
 
-var lowerNeckHeight = 1.0;
-var lowerNeckWidth = 1.1;
+var lowerNeckHeight = 1.2;
+var lowerNeckWidth = 1.5;
 
 var neckSeparation = 3;
 
@@ -67,7 +67,7 @@ function renderMidLowerNeck(){
     gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(instanceMatrix));
 
     gl.uniform4fv(gl.getUniformLocation(program, "uColor"), flatten(vec4(0.0, 0.333, 0.0, 1.0)));
-    drawCylinder();
+    drawCube(0.8);
 
     const paletteCount = 6; 
     const paletteSpacing = 0.25; 

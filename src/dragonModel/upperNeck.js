@@ -10,10 +10,10 @@
 
 // Global variables 
 var upperNeckHeight = 1.0;
-var upperNeckWidth = 1.1;
+var upperNeckWidth = 1.2;
 
 var leftUpperNeckHeight = 0.6;
-var leftUpperNeckWidth = 1.7;
+var leftUpperNeckWidth = 1.4;
 var rightUpperNeckHeight = 0.6;
 var rightUpperNeckWidth = 1.4;
 
@@ -79,7 +79,7 @@ function renderMiddleUpperNeck() {
     gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(instanceMatrix));
 
     gl.uniform4fv(gl.getUniformLocation(program, "uColor"), flatten(vec4(0.404, 0.812, 0.0, 1.0)));
-    drawCylinder();
+    drawCube();
 }
 
 // Function to render the right upper neck
