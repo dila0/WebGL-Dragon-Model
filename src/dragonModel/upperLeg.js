@@ -16,8 +16,9 @@ var legSeparation = 0.5;
 // Function to initalize the left upper leg
 function initLeftUpperLeg(){
     var m = mat4();
-    m = translate(-legSeparation, -0.5 * bodyHeight + -0.5 * upperLegHeight, 0.0);
+    m = translate(-legSeparation, -0.5 * bodyHeight, 0.0);
     m = rotatePart(LEFT_UPPER_LEG_ID, m);
+    m = mult(m, translate(0.0, -0.5 * upperLegHeight, 0.0));
 
     figure[LEFT_UPPER_LEG_ID] = createNode(m, renderLeftUpperLeg, RIGHT_UPPER_LEG_ID, LEFT_LOWER_LEG_ID);
 }
@@ -25,8 +26,9 @@ function initLeftUpperLeg(){
 // Function to initialize the right upper leg
 function initRightUpperLeg(){
     var m = mat4();
-    m = translate(legSeparation, -0.5 * bodyHeight + -0.5 * upperLegHeight, 0.0);
+    m = translate(legSeparation, -0.5 * bodyHeight, 0.0);
     m = rotatePart(RIGHT_UPPER_LEG_ID, m);
+    m = mult(m, translate(0.0, -0.5 * upperLegHeight, 0.0));
 
     figure[RIGHT_UPPER_LEG_ID] = createNode(m, renderRightUpperLeg, LEFT_UPPER_WING_ID, RIGHT_LOWER_LEG_ID);
 }

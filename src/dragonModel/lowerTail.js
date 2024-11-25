@@ -15,8 +15,9 @@ var lowerTailWidth = 1.5;
 // Function to initialize the lower tail
 function initLowerTail(){
     var m = mat4();
-    m = translate(0.0, 0.0, -(0.5 * upperTailHeight + 0.5 * lowerTailHeight));
+    m = translate(0.0, 0.0, -0.5 * upperTailHeight);
     m = rotatePart(LOWER_TAIL_ID, m);
+    m = mult(m, translate(0.0, 0.0, -0.5 * lowerTailHeight));
     
     figure[LOWER_TAIL_ID] = createNode(m, renderLowerTail, null, null);
 }

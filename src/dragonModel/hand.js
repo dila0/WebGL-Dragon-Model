@@ -15,8 +15,9 @@ var handWidth = 1.0;
 // Function to initialize the left hand
 function initLeftHand() {
     var m = mat4();
-    m = translate(-(0.5 * lowerWingWidth + 0.5 * handWidth), 0.0, 0.0);
+    m = translate(-0.5 * lowerWingWidth, 0.0, 0.0);
     m = rotatePart(LEFT_HAND_ID, m);
+    m = mult(m, translate(-0.5 * handWidth, 0.0, 0.0));
 
     figure[LEFT_HAND_ID] = createNode(m, renderLeftHand, null, null);
 }
@@ -24,8 +25,9 @@ function initLeftHand() {
 // Function to initialize the right hand
 function initRightHand() {
     var m = mat4();
-    m = translate(0.5 * lowerWingWidth + 0.5 * handWidth, 0.0, 0.0);
+    m = translate(0.5 * lowerWingWidth, 0.0, 0.0);
     m = rotatePart(RIGHT_HAND_ID, m);
+    m = mult(m, translate(0.5 * handWidth, 0.0, 0.0));
 
     figure[RIGHT_HAND_ID] = createNode(m, renderRightHand, null, null);
 }
