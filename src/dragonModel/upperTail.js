@@ -15,8 +15,9 @@ var upperTailWidth = 0.3;
 // Function to initialize the upper tail
 function initUpperTail() {
     var m = mat4();
-    m = translate(0.0, 0.0, -(0.5 * bodyWidth + 0.5 * upperTailHeight));
+    m = translate(0.0, 0.0, -0.5 * bodyWidth);
     m = rotatePart(UPPER_TAIL_ID, m);
+    m = mult(m, translate(0.0, 0.0, -0.5 * upperTailHeight));
     
     figure[UPPER_TAIL_ID] = createNode(m, renderUpperTail, null, LOWER_TAIL_ID);
 }

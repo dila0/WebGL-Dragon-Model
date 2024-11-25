@@ -21,8 +21,9 @@ var rightJawWidth = 1.4;
 // Function to initialize the left jaw
 function initLeftJaw(){
     var m = mat4();
-    m = translate(0.0, 0.5 * leftUpperNeckHeight + 0.5 * leftJawHeight, 0.0);
+    m = translate(0.0, 0.5 * leftUpperNeckHeight, 0.0);
     m = rotatePart(LEFT_JAW_ID, m);
+    m = mult(m, translate(0.0, 0.5 * leftJawHeight, 0.0));
     
     figure[LEFT_JAW_ID] = createNode(m, renderLeftJaw, null, LEFT_HEAD_ID);
 }
@@ -30,8 +31,9 @@ function initLeftJaw(){
 // Function to initialize the middle jaw
 function initMidJaw(){
     var m = mat4();
-    m = translate(0.0, 0.5 * upperNeckHeight + 0.5 * jawHeight, 0.0);
+    m = translate(0.0, 0.5 * upperNeckHeight, 0.0);
     m = rotatePart(MID_JAW_ID, m);
+    m = mult(m, translate(0.0, 0.5 * jawHeight, 0.0));
 
     figure[MID_JAW_ID] = createNode(m, renderMidJaw, null, MID_HEAD_ID);
 }   
@@ -39,8 +41,9 @@ function initMidJaw(){
 // Function to initialize the right jaw
 function initRightJaw(){
     var m = mat4();
-    m = translate(0.0, 0.5 * rightUpperNeckHeight + 0.5 * rightJawHeight, 0.0);
+    m = translate(0.0, 0.5 * rightUpperNeckHeight, 0.0);
     m = rotatePart(RIGHT_JAW_ID, m);
+    m = mult(m, translate(0.0, 0.5 * rightJawHeight, 0.0));
 
     figure[RIGHT_JAW_ID] = createNode(m, renderRightJaw, null, RIGHT_HEAD_ID);
 }
