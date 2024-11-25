@@ -57,6 +57,7 @@ function renderLeftLowerNeck(){
     gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(instanceMatrix));
 
     gl.uniform4fv(gl.getUniformLocation(program, "uColor"), flatten(vec4(0.314, 0.396, 0.961, 1.0)));
+    setTexture(TEXTURES.pants, vec2(2.0, 1.0), vec2(0.5, 0.0));
     drawCylinder();
 }
 

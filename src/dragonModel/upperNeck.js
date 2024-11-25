@@ -63,6 +63,7 @@ function renderLeftUpperNeck() {
     gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(frontStripMatrix));
 
     gl.uniform4fv(gl.getUniformLocation(program, "uColor"), flatten(vec4(0.314, 0.396, 0.961, 1.0))); 
+    setTexture(TEXTURES.pants);
     drawCube();
 
     let frontStrip2Matrix = mult(modelViewMatrix, translate(0.5, 0.0, 0.93)); 
@@ -70,6 +71,7 @@ function renderLeftUpperNeck() {
     gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(frontStrip2Matrix));
 
     gl.uniform4fv(gl.getUniformLocation(program, "uColor"), flatten(vec4(0.314, 0.396, 0.961, 1.0))); 
+    setTexture(TEXTURES.pants);
     drawCube();
 }
 

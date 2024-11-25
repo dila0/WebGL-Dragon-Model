@@ -115,14 +115,15 @@
       uniform mat4 projectionMatrix;
       uniform float uTopScale;
       uniform vec2 uTexRepeat;
+      uniform vec2 uTexTranslate;
 
       varying vec2 vCoord;
         
       void main(){
-          float scalePower = vPos.y + 0.5;
-          vec4 pos = vec4(mix(vPos.x, vPos.x * uTopScale, scalePower), vPos.y, mix(vPos.z, vPos.z * uTopScale, scalePower), vPos.w);
-          gl_Position = projectionMatrix * modelViewMatrix * pos;
-          vCoord = vTexCoord * uTexRepeat;
+        float scalePower = vPos.y + 0.5;
+        vec4 pos = vec4(mix(vPos.x, vPos.x * uTopScale, scalePower), vPos.y, mix(vPos.z, vPos.z * uTopScale, scalePower), vPos.w);
+        gl_Position = projectionMatrix * modelViewMatrix * pos;
+        vCoord = vTexCoord * uTexRepeat + uTexTranslate;
       } 
     </script>
 

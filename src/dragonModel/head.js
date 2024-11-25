@@ -77,22 +77,22 @@ function renderLeftHead(){
     drawSphere();
 
     // Horns
-    let leftHornMatrix = mult(modelViewMatrix, translate(-0.5, leftHeadHeight + 1.2, 0.0)); 
+    let leftHornMatrix = mult(modelViewMatrix, translate(-0.5, leftHeadHeight + 1.05, 0.0)); 
     leftHornMatrix = mult(leftHornMatrix, rotate(40, 0, 0, 1)); 
-    leftHornMatrix = mult(leftHornMatrix, scale4(0.2, 0.8, 0.2)); 
+    leftHornMatrix = mult(leftHornMatrix, scale4(0.2, 0.6, 0.2)); 
     gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(leftHornMatrix));
 
-    gl.uniform4fv(gl.getUniformLocation(program, "uColor"), flatten(vec4(0.137, 0.122, 0.125, 1.0))); 
-    drawCube(0.0);
+    gl.uniform4fv(gl.getUniformLocation(program, "uColor"), flatten(vec4(0.416, 0.078, 0.078, 1.))); 
+    drawCube(0.3);
 
     // Right horn
-    let rightHornMatrix = mult(modelViewMatrix, translate(0.5, leftHeadHeight + 1.2, 0.0)); 
+    let rightHornMatrix = mult(modelViewMatrix, translate(0.5, leftHeadHeight + 1.05, 0.0)); 
     rightHornMatrix = mult(rightHornMatrix, rotate(-40, 0, 0, 1)); 
-    rightHornMatrix = mult(rightHornMatrix, scale4(0.2, 0.8, 0.2));
+    rightHornMatrix = mult(rightHornMatrix, scale4(0.2, 0.6, 0.2));
     gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(rightHornMatrix));
 
-    gl.uniform4fv(gl.getUniformLocation(program, "uColor"), flatten(vec4(0.137, 0.122, 0.125, 1.0))); 
-    drawCube(0.0);
+    gl.uniform4fv(gl.getUniformLocation(program, "uColor"), flatten(vec4(0.416, 0.078, 0.078, 1.))); 
+    drawCube(0.3);
     
     // Back eye
     let sphere4Matrix = mult(modelViewMatrix, translate(0.0, leftHeadHeight - 0.3, 1.0)); 

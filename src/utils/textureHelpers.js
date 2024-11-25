@@ -31,6 +31,10 @@ const TEXTURES = {
         url: 'assets/minion.png',
         id: 7
     },
+    'pants': {
+        url: 'assets/pants.png',
+        id: 8
+    },
 }
 
 async function initTextures() {
