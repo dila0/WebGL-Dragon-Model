@@ -93,8 +93,6 @@ for(var i = 0; i < theta.length; i++) {
     theta[i] = new Array(3).fill(0);
 }
 
-console.log(theta[i]);
-
 var numVertices = 0; // TODO: fill
 var stack = [];
 var figure = [];

@@ -10,7 +10,7 @@
 
 // Global variables
 var footHeight = 0.5;
-var footWidth = 0.7;
+var footWidth = 2;
 
 // Function to initialize the left foot
 function initLeftFoot() {

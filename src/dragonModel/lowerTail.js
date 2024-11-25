@@ -67,8 +67,9 @@ function renderLowerTail(){
     drawSphere();
 
     tinyTailStart = mult(tinyTailStart, translate(0.3, -0.1, -0.7)); 
+    tinyTailStart = mult(tinyTailStart, scale4(1.5, 1.5, 1.5)); 
     gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(tinyTailStart));
     gl.uniform4fv(gl.getUniformLocation(program, "uColor"), flatten(vec4(0.137, 0.122, 0.125, 1.0))); 
-    setTexture(TEXTURES.dragon_neck);
+    setTexture(TEXTURES.dragon_rock);
     drawSphere();
 }

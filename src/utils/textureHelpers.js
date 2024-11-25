@@ -47,6 +47,14 @@ const TEXTURES = {
         url: 'assets/dragon_body.png',
         id: 11
     },
+    'dragon_rock': {
+        url: 'assets/dragon_rock.png',
+        id: 12
+    },
+    'dragon_white': {
+        url: 'assets/dragon_white.png',
+        id: 13
+    },
 }
 
 async function initTextures() {
