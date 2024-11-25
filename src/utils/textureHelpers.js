@@ -58,6 +58,7 @@ async function initTextures() {
 function loadTexture(url, id) {
     const texture = gl.createTexture();
     const image = new Image();
+    image.setAttribute('crossorigin', 'anonymous');
     return new Promise(resolve => {
         image.onload = () => {
             gl.activeTexture(gl.TEXTURE0 + id);

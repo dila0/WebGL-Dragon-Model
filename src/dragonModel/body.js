@@ -10,7 +10,7 @@
 
 // Global variables 
 var bodyHeight = 1;
-var bodyWidth = 7;
+var bodyWidth = 8;
 
 var upperBodyHeight = 3;
 var upperBodyWidth = 6;
@@ -42,7 +42,7 @@ function renderBody(){
     gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(instanceMatrix));
 
     gl.uniform4fv(gl.getUniformLocation(program, "uColor"), flatten(vec4(0.753, 0.439, 0.0, 1.0)));
-    setTexture(TEXTURES.dragon_neck, vec2(20.0, 1.0), vec2(0.33, 0.0));
+    setTexture(TEXTURES.dragon_head, vec2(0.8,0.8), vec2(5,5))
     drawCube();
 
     // Lower Body
@@ -54,7 +54,7 @@ function renderBody(){
     gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(lowerBodySphereMatrix));
 
     gl.uniform4fv(gl.getUniformLocation(program, "uColor"), flatten(vec4(0.137, 0.122, 0.125, 1.0))); 
-    setTexture(TEXTURES.dragon_neck, vec2(20.0, 1.0), vec2(0.33, 0.0));
+    setTexture(TEXTURES.dragon_head, vec2(1.3,1.3), vec2(4,3))
     drawSphere();
 
 }
