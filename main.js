@@ -79,17 +79,6 @@ const bodyPartNames = {
     26: "Lower Tail"
 }
 
-var cubeVertices = [
-    vec4(-0.5, -0.5,  0.5, 1.0),
-    vec4(-0.5,  0.5,  0.5, 1.0),
-    vec4( 0.5,  0.5,  0.5, 1.0),
-    vec4( 0.5, -0.5,  0.5, 1.0),
-    vec4(-0.5, -0.5, -0.5, 1.0),
-    vec4(-0.5,  0.5, -0.5, 1.0),
-    vec4( 0.5,  0.5, -0.5, 1.0),
-    vec4( 0.5, -0.5, -0.5, 1.0)
-];
-
 var topCylinderCircleVertices = generateCircle(0.6, 1.0, slices, true);
 var bottomCylinderCircleVertices = generateCircle(0.6, 1.0, slices, false);
 var cylinderVertices = topCylinderCircleVertices.concat(bottomCylinderCircleVertices);

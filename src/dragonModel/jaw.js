@@ -14,11 +14,13 @@ var jawWidth = 0.5;
 
 var leftJawHeight = 0.5;
 var leftJawWidth = 1.7;
+var rightJawHeight = 0.8;
+var rightJawWidth = 1.4;
 
 // Function to initialize the left jaw
 function initLeftJaw(){
     var m = mat4();
-    m = translate(0.0, 0.5 * upperNeckHeight + 0.5 * leftJawHeight, 0.0);
+    m = translate(0.0, 0.5 * leftUpperNeckHeight + 0.5 * leftJawHeight, 0.0);
     m = rotatePart(LEFT_JAW_ID, m);
     
     figure[LEFT_JAW_ID] = createNode(m, renderLeftJaw, null, LEFT_HEAD_ID);
@@ -36,7 +38,7 @@ function initMidJaw(){
 // Function to initialize the right jaw
 function initRightJaw(){
     var m = mat4();
-    m = translate(0.0, 0.5 * upperNeckHeight + 0.5 * jawHeight, 0.0);
+    m = translate(0.0, 0.5 * rightUpperNeckHeight + 0.5 * rightJawHeight, 0.0);
     m = rotatePart(RIGHT_JAW_ID, m);
 
     figure[RIGHT_JAW_ID] = createNode(m, renderRightJaw, null, RIGHT_HEAD_ID);
@@ -88,9 +90,28 @@ function renderMidJaw(){
 // Function to render the right jaw
 function renderRightJaw(){
     instanceMatrix = modelViewMatrix;
-    instanceMatrix = mult(instanceMatrix, scale4(jawWidth, jawHeight, jawWidth));
+    instanceMatrix = mult(instanceMatrix, scale4(rightJawWidth, rightJawHeight, rightJawWidth));
     gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(instanceMatrix));
 
-    gl.uniform4fv(gl.getUniformLocation(program, "uColor"), flatten(vec4(1.0, 0.424, 0.0, 1.0)));
+    gl.uniform4fv(gl.getUniformLocation(program, "uColor"), flatten(vec4(0.125, 0.643, 0.624, 1.0)));
     drawCube();
+
+    // Mouth
+    let mouthBaseMatrix = mult(modelViewMatrix, translate(0.0, -0.05, 0.7)); 
+    mouthBaseMatrix = mult(mouthBaseMatrix, rotate(90, 1, 0, 0)); 
+    mouthBaseMatrix = mult(mouthBaseMatrix, rotate(90, 0, 1, 0));
+    mouthBaseMatrix = mult(mouthBaseMatrix, scale4(0.5, 0.2, 0.7)); 
+    gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(mouthBaseMatrix));
+    gl.uniform4fv(gl.getUniformLocation(program, "uColor"), flatten(vec4(0.98, 0.588, 0.29, 1.0)));
+    drawCylinder(); 
+
+    // Nose
+    let mouthCylinderMatrix = mult(modelViewMatrix, translate(0.2, -0.1, 1.0)); 
+    mouthCylinderMatrix = mult(mouthCylinderMatrix, rotate(90, 1, 0, 0));
+    mouthCylinderMatrix = mult(mouthCylinderMatrix, rotate(-60, 0, 1, 1));
+    mouthCylinderMatrix = mult(mouthCylinderMatrix, rotate(-45, 0, 1, 0));
+    mouthCylinderMatrix = mult(mouthCylinderMatrix, scale4(0.25, 0.5, 0.4)); 
+    gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(mouthCylinderMatrix));
+    gl.uniform4fv(gl.getUniformLocation(program, "uColor"), flatten(vec4(0.961, 0.545, 0.227, 1.0)));
+    drawCylinder();
 }

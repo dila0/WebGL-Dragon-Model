@@ -32,3 +32,11 @@ function insert(start, end, step){
     res.push(end);
     return res;
 }
+
+// Function to shear 
+function shear(x = 0, y = 0){
+    var result = mat4();
+    result[0][1] = Math.tan(x);
+    result[1][0] = Math.tan(y);
+    return result;
+}

@@ -9,6 +9,18 @@
  */
 
 var cubeOffset = 0;
+
+var cubeVertices = [
+    vec4(-0.5,  0.5,  0.5, 1.0),
+    vec4(-0.5, -0.5,  0.5, 1.0),
+    vec4( 0.5,  0.5,  0.5, 1.0),
+    vec4( 0.5, -0.5,  0.5, 1.0),
+    vec4(-0.5,  0.5, -0.5, 1.0),
+    vec4(-0.5, -0.5, -0.5, 1.0),
+    vec4( 0.5,  0.5, -0.5, 1.0),
+    vec4( 0.5, -0.5, -0.5, 1.0),
+];
+
 // Function to draw a quad
 function quad(a, b, c, d){
     pointsArray.push(cubeVertices[a]);
@@ -19,12 +31,12 @@ function quad(a, b, c, d){
 
 // Function to draw a cube
 function cube(){
-    quad(1, 0, 3, 2);
-    quad(2, 3, 7, 6);
-    quad(3, 0, 4, 7);
-    quad(6, 5, 1, 2);
-    quad(4, 5, 6, 7);
-    quad(5, 4, 0, 1);
+    quad(0, 1, 2, 3); // front
+    quad(2, 3, 6, 7); // right
+    quad(6, 7, 4, 5); // back
+    quad(4, 5, 0, 1); // left
+    quad(4, 0, 6, 2); // top
+    quad(1, 5, 3, 7); // bottom
 }
 
 // Vertex cube initialization function
@@ -40,6 +52,6 @@ function drawCube(){
     gl.enableVertexAttribArray(vPos);
 
     for(var i = 0; i < 6; i++){
-        gl.drawArrays(gl.TRIANGLE_FAN, cubeOffset + 4*i, 4);
+        gl.drawArrays(gl.TRIANGLE_STRIP, cubeOffset + 4*i, 4);
     }
 }
