@@ -54,6 +54,7 @@ function renderLeftUpperNeck() {
     gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(instanceMatrix));
 
     gl.uniform4fv(gl.getUniformLocation(program, "uColor"), flatten(vec4(0.961, 0.878, 0.314, 1.0)));
+    setTexture(TEXTURES.minion_body, vec2(0.8, 0.4));
     drawCylinder();
 
     // Straps

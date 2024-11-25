@@ -56,15 +56,16 @@ function renderLeftHead(){
     gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(instanceMatrix));
 
     gl.uniform4fv(gl.getUniformLocation(program, "uColor"), flatten(vec4(0.961, 0.878, 0.314, 1.0)));
-    setTexture(TEXTURES.minion_body);
+    setTexture(TEXTURES.minion_body, vec2(0.8, 0.5));
     drawCylinder();
 
     // Upper head
     let sphereMatrix = mult(modelViewMatrix, translate(0.0, leftHeadHeight, 0.0));
-    sphereMatrix = mult(sphereMatrix, scale4(1.405, 1.405, 2.0)); 
+    sphereMatrix = mult(sphereMatrix, scale4(1.6, 1.5, 1.8)); 
     gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(sphereMatrix));
 
     gl.uniform4fv(gl.getUniformLocation(program, "uColor"), flatten(vec4(0.961, 0.878, 0.314, 1.0))); 
+    setTexture(TEXTURES.minion_body, vec2(0.8, 1.9));
     drawSphere();
 
     // Small cap

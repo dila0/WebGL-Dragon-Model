@@ -201,7 +201,8 @@ function setColor(color) {
     gl.uniform4fv(gl.getUniformLocation(program, "uColor"), flatten(color));
 }
 
-function setTexture(texture) {
+function setTexture(texture, repeat = vec2(1, 1)) {
     setColor(vec4(0, 0, 0, -1));
+    gl.uniform2fv(gl.getUniformLocation(program, "uTexRepeat"), flatten(repeat));
     gl.uniform1i(gl.getUniformLocation(program, "uTexture"), texture.id || texture);
 }
