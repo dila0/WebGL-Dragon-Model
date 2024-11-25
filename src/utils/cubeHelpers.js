@@ -20,6 +20,7 @@ var cubeVertices = [
     vec4( 0.5,  0.5, -0.5, 1.0),
     vec4( 0.5, -0.5, -0.5, 1.0),
 ];
+var cubeTextureVertices = [0, 1, 2, 3, 4, 5, 6].flatMap(i => [[i/6, 1], [i/6, 0]]);
 
 // Function to draw a quad
 function quad(a, b, c, d){
@@ -27,6 +28,13 @@ function quad(a, b, c, d){
     pointsArray.push(cubeVertices[b]);
     pointsArray.push(cubeVertices[c]);
     pointsArray.push(cubeVertices[d]);
+}
+
+function textureQuad(a, b, c, d){
+    texCoordsArray.push(cubeTextureVertices[a]);
+    texCoordsArray.push(cubeTextureVertices[b]);
+    texCoordsArray.push(cubeTextureVertices[c]);
+    texCoordsArray.push(cubeTextureVertices[d]);
 }
 
 // Function to draw a cube
@@ -37,22 +45,18 @@ function cube(){
     quad(4, 5, 0, 1); // left
     quad(4, 0, 6, 2); // top
     quad(1, 5, 3, 7); // bottom
-}
 
-// Vertex cube initialization function
-function initCubeBuffers(){
-    cubeVBuffer = gl.createBuffer();
-    gl.bindBuffer(gl.ARRAY_BUFFER, cubeVBuffer);
-    gl.bufferData(gl.ARRAY_BUFFER, flatten(pointsArray), gl.STATIC_DRAW);
+    textureQuad(0, 1, 2, 3);
+    textureQuad(2, 3, 4, 5);
+    textureQuad(4, 5, 6, 7);
+    textureQuad(6, 7, 8, 9);
+    textureQuad(8, 9, 10, 11);
+    textureQuad(10, 11, 12, 13);
 }
 
 function drawCube(topScale = 1.0){
-    var vPos = gl.getAttribLocation(program, "vPos");
-    gl.vertexAttribPointer(vPos, 4, gl.FLOAT, false, 0, 0); 
-    gl.enableVertexAttribArray(vPos);
-
     gl.uniform1f(gl.getUniformLocation(program, "uTopScale"), topScale);
-
+    
     for(var i = 0; i < 6; i++){
         gl.drawArrays(gl.TRIANGLE_STRIP, cubeOffset + 4*i, 4);
     }

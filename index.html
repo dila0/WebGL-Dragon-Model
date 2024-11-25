@@ -42,7 +42,7 @@
         <option value="15">Right Lower Wing</option>
         <option value="16">Left Hand</option>
         <option value="17">Right Hand</option>
-        <option value="18">Body</option>
+        <option value="18" selected>Body</option>
         <option value="19">Left Upper Leg</option>
         <option value="20">Right Upper Leg</option>
         <option value="21">Left Lower Leg</option>
@@ -109,44 +109,34 @@
     <!-- SHADERS -->
     <script id="vertex-shader" type="x-shader/x-vertex">
       attribute  vec4 vPos;
+      attribute  vec2 vTexCoord;
       
       uniform mat4 modelViewMatrix;
       uniform mat4 projectionMatrix;
       uniform float uTopScale;
+
+      varying vec2 vCoord;
         
       void main(){
           float scalePower = vPos.y + 0.5;
           vec4 pos = vec4(mix(vPos.x, vPos.x * uTopScale, scalePower), vPos.y, mix(vPos.z, vPos.z * uTopScale, scalePower), vPos.w);
           gl_Position = projectionMatrix * modelViewMatrix * pos;
-        } 
-    </script>
-
-    <script id="background-vertex-shader" type="x-shader/x-vertex">
-      attribute  vec4 vPos;
-      varying vec2 vCoord;
-        
-      void main(){
-          vCoord = vPos.xy * 0.5 + 0.5;
-          gl_Position = vPos;
-      }
+          vCoord = vTexCoord;
+      } 
     </script>
 
     <script id="fragment-shader" type="x-shader/x-fragment">
       precision mediump float;
       uniform vec4 uColor;
-
-      void main(){
-        gl_FragColor = uColor;
-      }
-    </script>
-
-    <script id="background-fragment-shader" type="x-shader/x-fragment">
-      precision mediump float;
       uniform sampler2D uTexture;
       varying vec2 vCoord;
 
       void main(){
-        gl_FragColor = texture2D(uTexture, vCoord);
+        if (false || uColor.a < 0.0) {
+          gl_FragColor = texture2D(uTexture, vCoord);
+        } else {
+          gl_FragColor = uColor;
+        }
       }
     </script>
 
@@ -168,14 +158,15 @@
     <!-- Main Script -->
     <script src="src/uiControllers.js"></script>
     <script src="src/utils/animationHelpers.js"></script>
+    <script src="src/utils/backgroundHelpers.js"></script>
     <script src="src/utils/bodyPartInitializers.js"></script>
     <script src="src/utils/cubeHelpers.js"></script>
     <script src="src/utils/cylinderHelpers.js"></script>
-    <script src="src/utils/sphereHelpers.js"></script>
     <script src="src/utils/matrixHelpers.js"></script>
     <script src="src/utils/rotationHelpers.js"></script>
+    <script src="src/utils/sphereHelpers.js"></script>
+    <script src="src/utils/textureHelpers.js"></script>
     <script src="src/utils/translationHelpers.js"></script>
-    <script src="src/utils/backgroundHelpers.js"></script>
     <script src="main.js"></script>
 </body>
 </html>

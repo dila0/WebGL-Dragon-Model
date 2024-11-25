@@ -11,6 +11,8 @@
 var slices = 15;
 var cylinderOffset = 24;
 
+var cylinderTextureVertices = [...Array(slices+1).keys()].flatMap(i => [[i/slices, 1], [i/slices, 0]]);
+
 // Function to generate a circular face (top or bottom of the cylinder)
 function generateCircle(radius, height, slices, top = true) {
     const angleStep = 2 * Math.PI / slices;
@@ -22,7 +24,7 @@ function generateCircle(radius, height, slices, top = true) {
 
     // Add vertices around the perimeter of the circle
     for (let i = 0; i < slices; i++) {
-        const angle = i * angleStep;
+        const angle = Math.PI / 2 + -i * angleStep;
         const x = radius * Math.cos(angle);
         const z = radius * Math.sin(angle);
         circleVertices.push(vec4(x, y, z, 1.0)); // Calculate the point and add it to the circle
@@ -39,14 +41,27 @@ function side(a, b, c, d){
     pointsArray.push(cylinderVertices[d]);
 }
 
+function textureSide(a, b, c, d){
+    texCoordsArray.push(cylinderTextureVertices[a]);
+    texCoordsArray.push(cylinderTextureVertices[b]);
+    texCoordsArray.push(cylinderTextureVertices[c]);
+    texCoordsArray.push(cylinderTextureVertices[d]);
+}
+
 function cylinder(){
     //Push top and bottom circles into pointsArray
     for(let i = 0; i < 2*(slices + 2); i++){
         pointsArray.push(cylinderVertices[i]);
+        texCoordsArray.push(cylinderTextureVertices[0]);
     }
     //Push sides
-    for(let i = 1; i < slices + 1; i++){
-        side(i, (i % slices) + 1, (i % slices) + slices + 2 + 1, i + slices + 2);
+    for(let i = 0; i < slices+1; i++){
+        let top = i + 1;
+        let bottom = slices + 2 + top;
+        pointsArray.push(cylinderVertices[top]);
+        pointsArray.push(cylinderVertices[bottom]);
+        texCoordsArray.push(cylinderTextureVertices[i * 2]);
+        texCoordsArray.push(cylinderTextureVertices[i * 2 + 1]);
     }
     //Example for 6 sides:
     // side(1, 2, 10, 9);
@@ -66,10 +81,6 @@ function drawCylinder(drawTop = true, drawBottom = true, topScale = 1.0){
     if(drawBottom){
         gl.drawArrays(gl.TRIANGLE_FAN, cylinderOffset + slices+2, slices+2);
     }
-    // for(var i = 0; i < 2; i++){
-    //     gl.drawArrays(gl.TRIANGLE_FAN, cylinderOffset + (slices+2)*i, (slices+2));
-    // }
-    for(var i = 0; i < slices; i++){
-        gl.drawArrays(gl.TRIANGLE_FAN, cylinderOffset + (2 * (slices+2)) + 4*i, 4);
-    }
+    
+    gl.drawArrays(gl.TRIANGLE_STRIP, cylinderOffset + (slices+2)*2, (slices+1) * 2);
 }

@@ -8,7 +8,7 @@
  * @id 22102278
  */
 
-var sphereOffset = 118;
+var sphereOffset = 90;
 var sphereDensity = 15;
 var sphereRadius = 0.5;
 
@@ -17,13 +17,14 @@ function sphere() {
     const verts = sphereDensity;
     const sliceStep = 2 * Math.PI / slices;
     const vertStep = Math.PI / verts;
+    const sliceOffset = -Math.PI / 2;
     const vertOffset = Math.PI / 2;
 
     // Generate the vertices of the sphere
     for (let slice = 0; slice < slices; slice++) {
         // Get the left and right angles of the slice
-        let sliceAngle1 = slice * sliceStep;
-        let sliceAngle2 = (slice + 1) * sliceStep;
+        let sliceAngle1 = sliceOffset + -slice * sliceStep;
+        let sliceAngle2 = sliceOffset + -(slice + 1) * sliceStep;
         for (let vert = 0; vert <= verts; vert++) {
             let vertAngle = vertOffset + vert * vertStep;
 
@@ -37,6 +38,9 @@ function sphere() {
 
             pointsArray.push([x1, y1, z1, 1.0]);
             pointsArray.push([x2, y2, z2, 1.0]);
+
+            texCoordsArray.push([slice / slices, 1 - vert / verts]);
+            texCoordsArray.push([(slice + 1) / slices, 1 - vert / verts]);
         }
     }
 }

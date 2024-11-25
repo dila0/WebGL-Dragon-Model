@@ -28,14 +28,5 @@ function renderBody(){
     gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(instanceMatrix));
 
     gl.uniform4fv(gl.getUniformLocation(program, "uColor"), flatten(vec4(0.753, 0.439, 0.0, 1.0)));
- 
-    pointsArray = [];
-    cube();
-    cylinder();
-    sphere();
-
-    gl.bindBuffer(gl.ARRAY_BUFFER, cubeVBuffer);
-    gl.bufferData(gl.ARRAY_BUFFER, flatten(pointsArray), gl.STATIC_DRAW);
-    
     drawCube();
 }
