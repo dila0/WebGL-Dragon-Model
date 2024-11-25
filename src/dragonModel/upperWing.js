@@ -28,7 +28,8 @@ function initRightUpperWing() {
     var m = mat4();
     m = translate(0.5 * bodyWidth, 0.0, 0.0);
     m = rotatePart(RIGHT_UPPER_WING_ID, m);
-    m = mult(m, translate(0.5 * upperWingWidth, 0.0, 0.0));
+    m = mult(m, rotate(40, 0, 0, 1));
+    m = mult(m, translate(0.5 * upperWingHeight, 0.0, 0.0));
     
     figure[RIGHT_UPPER_WING_ID] = createNode(m, renderRightUpperWing, UPPER_TAIL_ID, RIGHT_LOWER_WING_ID);
 }
@@ -48,7 +49,9 @@ function renderLeftUpperWing() {
 // Function to render the right upper wing
 function renderRightUpperWing() {
     instanceMatrix = modelViewMatrix;
-    instanceMatrix = mult(instanceMatrix, scale4(upperWingWidth, upperWingHeight, 0.3));
+    instanceMatrix = mult(instanceMatrix, rotate(90, 1, 0, 0));
+    instanceMatrix = mult(instanceMatrix, rotate(90, 0, 0, 1));
+    instanceMatrix = mult(instanceMatrix, scale4(upperWingWidth, upperWingHeight + 0.25, 0.3));
     gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(instanceMatrix));
 
     gl.uniform4fv(gl.getUniformLocation(program, "uColor"), flatten(vec4(0.0, 1.0, 0.937, 1.0)));
