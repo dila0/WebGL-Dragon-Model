@@ -23,7 +23,7 @@ var neckSeparation = 2.1;
 // Function to create the left lower neck
 function initLeftLowerNeck(){
     var m = mat4();
-    m = translate(-neckSeparation, 0.5 * bodyHeight, 0.0);
+    m = translate(-neckSeparation, 0.5 * upperBodyHeight, 0.0);
     m = rotatePart(LEFT_LOWER_NECK_ID, m);
     m = mult(m, translate(0.0, 0.3 * leftLowerNeckHeight, 0.0));
 
@@ -33,7 +33,7 @@ function initLeftLowerNeck(){
 // Function to create the middle lower neck
 function initMidLowerNeck(){
     var m = mat4();
-    m = translate(0.0, 0.5 * bodyHeight, 0.0);
+    m = translate(0.0, 0.5 * upperBodyHeight, 0.0);
     m = rotatePart(MID_LOWER_NECK_ID, m);
     m = mult(m, translate(0.0, 0.5 * lowerNeckHeight, 0.0));
 
@@ -43,7 +43,7 @@ function initMidLowerNeck(){
 // Function to create the right lower neck
 function initRightLowerNeck(){
     var m = mat4();
-    m = translate(neckSeparation, 0.5 * bodyHeight, 0.0);
+    m = translate(neckSeparation, 0.5 * upperBodyHeight, 0.0);
     m = rotatePart(RIGHT_LOWER_NECK_ID, m);
     m = mult(m, translate(0.0, 0.5 * rightLowerNeckHeight, 0.0));
 
