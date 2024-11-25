@@ -53,14 +53,15 @@ function renderLeftUpperNeck() {
     gl.uniform4fv(gl.getUniformLocation(program, "uColor"), flatten(vec4(0.961, 0.878, 0.314, 1.0)));
     drawCylinder();
 
-    let frontStripMatrix = mult(modelViewMatrix, translate(-0.5, 0.0, 0.9)); 
+    // Straps
+    let frontStripMatrix = mult(modelViewMatrix, translate(-0.5, 0.0, 0.93)); 
     frontStripMatrix = mult(frontStripMatrix, scale4(0.15, leftUpperNeckHeight, 0.05)); 
     gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(frontStripMatrix));
 
     gl.uniform4fv(gl.getUniformLocation(program, "uColor"), flatten(vec4(0.314, 0.396, 0.961, 1.0))); 
     drawCube();
 
-    let frontStrip2Matrix = mult(modelViewMatrix, translate(0.5, 0.0, 0.9)); 
+    let frontStrip2Matrix = mult(modelViewMatrix, translate(0.5, 0.0, 0.93)); 
     frontStrip2Matrix = mult(frontStrip2Matrix, scale4(0.15, leftUpperNeckHeight, 0.05)); 
     gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(frontStrip2Matrix));
 
