@@ -10,7 +10,7 @@
 
 // Global variables 
 var upperNeckHeight = 1.0;
-var upperNeckWidth = 0.5;
+var upperNeckWidth = 1.1;
 
 var leftUpperNeckHeight = 0.6;
 var leftUpperNeckWidth = 1.7;

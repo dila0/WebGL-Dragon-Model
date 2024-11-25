@@ -9,11 +9,12 @@
  */
 
 // Global variables
-var jawHeight = 0.5;
-var jawWidth = 0.5;
+var jawHeight = 1.0;
+var jawWidth = 1.6;
 
 var leftJawHeight = 0.5;
 var leftJawWidth = 1.7;
+
 var rightJawHeight = 0.8;
 var rightJawWidth = 1.4;
 
@@ -84,7 +85,7 @@ function renderMidJaw(){
     gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(instanceMatrix));
 
     gl.uniform4fv(gl.getUniformLocation(program, "uColor"), flatten(vec4(1.0, 0.424, 0.0, 1.0)));
-    drawCylinder();
+    drawCube();
 }
 
 // Function to render the right jaw
