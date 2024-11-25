@@ -9,8 +9,8 @@
  */
 
 // Global variables 
-var upperWingHeight = 0.7;
-var upperWingWidth = 1.0;
+var upperWingHeight = 5.0;
+var upperWingWidth = 2.0;
 
 // Function to initialize the left upper wing node
 function initLeftUpperWing() {
@@ -33,19 +33,19 @@ function initRightUpperWing() {
 // Function to render the left upper wing 
 function renderLeftUpperWing() {
     instanceMatrix = modelViewMatrix;
-    instanceMatrix = mult(instanceMatrix, scale4(upperWingWidth, upperWingHeight, upperWingWidth));
+    instanceMatrix = mult(instanceMatrix, scale4(upperWingWidth, upperWingHeight, 0.3));
     gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(instanceMatrix));
 
     gl.uniform4fv(gl.getUniformLocation(program, "uColor"), flatten(vec4(0.0, 1.0, 0.937, 1.0)));
-    drawCube();
+    drawCube(0.5);
 }
 
 // Function to render the right upper wing
 function renderRightUpperWing() {
     instanceMatrix = modelViewMatrix;
-    instanceMatrix = mult(instanceMatrix, scale4(upperWingWidth, upperWingHeight, upperWingWidth));
+    instanceMatrix = mult(instanceMatrix, scale4(upperWingWidth, upperWingHeight, 0.3));
     gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(instanceMatrix));
 
     gl.uniform4fv(gl.getUniformLocation(program, "uColor"), flatten(vec4(0.0, 1.0, 0.937, 1.0)));
-    drawCube();
+    drawCube(0.5);
 }
