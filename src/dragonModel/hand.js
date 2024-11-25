@@ -33,7 +33,7 @@ function initRightHand() {
 // Function to render the left hand
 function renderLeftHand() {
     instanceMatrix = modelViewMatrix;
-    instanceMatrix = mult(instanceMatrix, scale4(lowerWingWidth, lowerWingHeight, lowerWingWidth));
+    instanceMatrix = mult(instanceMatrix, scale4(handWidth, handHeight, handWidth));
     gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(instanceMatrix));
 
     gl.uniform4fv(gl.getUniformLocation(program, "uColor"), flatten(vec4(1.0, 0.0, 0.0, 1.0)));
@@ -43,7 +43,7 @@ function renderLeftHand() {
 // Function to render the right hand
 function renderRightHand() {
     instanceMatrix = modelViewMatrix;
-    instanceMatrix = mult(instanceMatrix, scale4(lowerWingWidth, lowerWingHeight, lowerWingWidth));
+    instanceMatrix = mult(instanceMatrix, scale4(handWidth, handHeight, handHeight));
     gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(instanceMatrix));
 
     gl.uniform4fv(gl.getUniformLocation(program, "uColor"), flatten(vec4(1.0, 0.0, 0.0, 1.0)));
