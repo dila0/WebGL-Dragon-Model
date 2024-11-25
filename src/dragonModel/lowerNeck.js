@@ -66,7 +66,7 @@ function renderMidLowerNeck(){
     instanceMatrix = mult(instanceMatrix, scale4(lowerNeckWidth, lowerNeckHeight, lowerNeckWidth));
     gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(instanceMatrix));
 
-    gl.uniform4fv(gl.getUniformLocation(program, "uColor"), flatten(vec4(0.0, 0.333, 0.0, 1.0)));
+    gl.uniform4fv(gl.getUniformLocation(program, "uColor"), flatten(vec4(0.086, 0.125, 0.376, 1.0)));
     drawCube(0.8);
 
     const paletteCount = 6; 

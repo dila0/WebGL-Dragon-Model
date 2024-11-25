@@ -9,7 +9,7 @@
  */
 
 // Global variables
-var jawHeight = 1.0;
+var jawHeight = 0.8;
 var jawWidth = 1.6;
 
 var leftJawHeight = 0.5;
@@ -88,7 +88,7 @@ function renderMidJaw(){
     instanceMatrix = mult(instanceMatrix, scale4(jawWidth, jawHeight, headDepth));
     gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(instanceMatrix));
 
-    gl.uniform4fv(gl.getUniformLocation(program, "uColor"), flatten(vec4(1.0, 0.424, 0.0, 1.0)));
+    gl.uniform4fv(gl.getUniformLocation(program, "uColor"), flatten(vec4(0.086, 0.125, 0.376, 1.0)));
     drawCube();
 
     // Teeth 

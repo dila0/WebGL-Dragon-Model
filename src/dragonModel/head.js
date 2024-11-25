@@ -141,19 +141,45 @@ function renderMidHead(){
     instanceMatrix = mult(instanceMatrix, scale4(headWidth, headHeight, headDepth));
     gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(instanceMatrix));
 
-    gl.uniform4fv(gl.getUniformLocation(program, "uColor"), flatten(vec4(1.0, 0.796, 0.0, 1.0)));
+    gl.uniform4fv(gl.getUniformLocation(program, "uColor"), flatten(vec4(0.086, 0.125, 0.376, 1.0)));
     drawCube();
 
     /// Left eye
-    let sphere2Matrix = mult(modelViewMatrix, translate(-0.3, rightHeadHeight - 1.6, 2.5)); 
-    sphere2Matrix = mult(sphere2Matrix, scale4(0.45, 0.40, 0.3)); 
+    let sphere2Matrix = mult(modelViewMatrix, translate(-0.45, headHeight - 1.35, 1.3)); 
+    sphere2Matrix = mult(sphere2Matrix, scale4(0.48, 0.43, 0.3)); 
     gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(sphere2Matrix));
     gl.uniform4fv(gl.getUniformLocation(program, "uColor"), flatten(vec4(1.0, 1.0, 1.0, 1.0)));
     drawSphere();
     
-    let sphere3Matrix = mult(modelViewMatrix, translate(-0.2, rightHeadHeight - 1.6, 0.85)); 
-    sphere3Matrix = mult(sphere3Matrix, scale4(0.2, 0.2, 0.1)); 
+    let sphere3Matrix = mult(modelViewMatrix, translate(-0.5, headHeight - 1.35, 1.4)); 
+    sphere3Matrix = mult(sphere3Matrix, scale4(0.23, 0.23, 0.2)); 
     gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(sphere3Matrix));
+    gl.uniform4fv(gl.getUniformLocation(program, "uColor"), flatten(vec4(0.0, 0.0, 0.0, 1.0)));
+    drawSphere();
+
+    // Right eye
+    let sphere4Matrix = mult(modelViewMatrix, translate(0.45, headHeight - 1.35, 1.3)); 
+    sphere4Matrix = mult(sphere4Matrix, scale4(0.48, 0.43, 0.3)); 
+    gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(sphere4Matrix));
+    gl.uniform4fv(gl.getUniformLocation(program, "uColor"), flatten(vec4(1.0, 1.0, 1.0, 1.0)));
+    drawSphere();
+    
+    let sphere5Matrix = mult(modelViewMatrix, translate(0.5, headHeight - 1.35, 1.4)); 
+    sphere5Matrix = mult(sphere5Matrix, scale4(0.23, 0.23, 0.2)); 
+    gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(sphere5Matrix));
+    gl.uniform4fv(gl.getUniformLocation(program, "uColor"), flatten(vec4(0.0, 0.0, 0.0, 1.0)));
+    drawSphere();
+
+    // Nostrils
+    let nostrilMatrix = mult(modelViewMatrix, translate(-0.2, headHeight - 1.9, 1.3)); 
+    nostrilMatrix = mult(nostrilMatrix, scale4(0.2, 0.13, 0.3)); 
+    gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(nostrilMatrix));
+    gl.uniform4fv(gl.getUniformLocation(program, "uColor"), flatten(vec4(0.0, 0.0, 0.0, 1.0)));
+    drawSphere();
+
+    let nostril1Matrix = mult(modelViewMatrix, translate(0.2, headHeight - 1.9, 1.3)); 
+    nostril1Matrix = mult(nostril1Matrix, scale4(0.2, 0.13, 0.3)); 
+    gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(nostril1Matrix));
     gl.uniform4fv(gl.getUniformLocation(program, "uColor"), flatten(vec4(0.0, 0.0, 0.0, 1.0)));
     drawSphere();
 }
