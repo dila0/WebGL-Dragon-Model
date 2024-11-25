@@ -6,7 +6,31 @@ const TEXTURES = {
     'test': {
         url: 'assets/test-cube-texture.png',
         id: 1
-    }
+    },
+    'dragon_neck': {
+        url: 'assets/dragon_neck.png',
+        id: 2
+    },
+    'dragon_head': {
+        url: 'assets/dragon_head.png',
+        id: 3
+    },
+    'dragon_bottom': {
+        url: 'assets/bottom_head.png',
+        id: 4
+    },    
+    'dragon_wings': {
+        url: 'assets/dragon_wings.png',
+        id: 5
+    },
+    'minion_body': {
+        url: 'assets/minion_body.png',
+        id: 6
+    },
+    'minion': {
+        url: 'assets/minion.png',
+        id: 7
+    },
 }
 
 async function initTextures() {
@@ -25,7 +49,7 @@ function loadTexture(url, id) {
             gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
             gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, image);
 
-            if (isPowerOf2(image.width) && isPowerOf2(image.height)) {
+            if (false && isPowerOf2(image.width) && isPowerOf2(image.height)) {
                 gl.generateMipmap(gl.TEXTURE_2D);
             } else {
                 gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);

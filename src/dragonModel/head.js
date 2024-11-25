@@ -56,6 +56,7 @@ function renderLeftHead(){
     gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(instanceMatrix));
 
     gl.uniform4fv(gl.getUniformLocation(program, "uColor"), flatten(vec4(0.961, 0.878, 0.314, 1.0)));
+    setTexture(TEXTURES.minion_body);
     drawCylinder();
 
     // Upper head
@@ -142,6 +143,7 @@ function renderMidHead(){
     gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(instanceMatrix));
 
     gl.uniform4fv(gl.getUniformLocation(program, "uColor"), flatten(vec4(0.086, 0.125, 0.376, 1.0)));
+    setTexture(TEXTURES.dragon_bottom);
     drawCube();
 
     /// Left eye

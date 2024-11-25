@@ -43,6 +43,7 @@ function renderLeftUpperWing() {
     gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(instanceMatrix));
 
     gl.uniform4fv(gl.getUniformLocation(program, "uColor"), flatten(vec4(0.463, 0.208, 0.251, 1.0)));
+    setTexture(TEXTURES.dragon_wings);
     drawCube(0.5);
 }
 
@@ -55,5 +56,6 @@ function renderRightUpperWing() {
     gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(instanceMatrix));
 
     gl.uniform4fv(gl.getUniformLocation(program, "uColor"), flatten(vec4(0.463, 0.208, 0.251, 1.0)));
+    setTexture(TEXTURES.dragon_wings);
     drawCube(0.5);
 }

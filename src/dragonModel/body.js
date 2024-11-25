@@ -28,5 +28,6 @@ function renderBody(){
     gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(instanceMatrix));
 
     gl.uniform4fv(gl.getUniformLocation(program, "uColor"), flatten(vec4(0.753, 0.439, 0.0, 1.0)));
+    setTexture(TEXTURES.test);
     drawCube();
 }

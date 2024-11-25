@@ -79,6 +79,7 @@ function renderMiddleUpperNeck() {
     gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(instanceMatrix));
 
     gl.uniform4fv(gl.getUniformLocation(program, "uColor"), flatten(vec4(0.086, 0.125, 0.376, 1.0)));
+    setTexture(TEXTURES.dragon_head);
     drawCube();
 }
 

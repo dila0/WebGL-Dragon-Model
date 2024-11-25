@@ -67,6 +67,7 @@ function renderMidLowerNeck(){
     gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(instanceMatrix));
 
     gl.uniform4fv(gl.getUniformLocation(program, "uColor"), flatten(vec4(0.086, 0.125, 0.376, 1.0)));
+    setTexture(TEXTURES.dragon_head);
     drawCube(0.8);
 
     const paletteCount = 6; 
@@ -79,7 +80,7 @@ function renderMidLowerNeck(){
 
         gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(paletteMatrix));
 
-        gl.uniform4fv(gl.getUniformLocation(program, "uColor"), flatten(vec4(0.5, 0.2, 0.0, 1.0))); // Brown color
+        gl.uniform4fv(gl.getUniformLocation(program, "uColor"), flatten(vec4(0.5, 0.2, 0.0, 1.0)));
         drawCube(0.0);
     }
 }
