@@ -42,7 +42,7 @@ function renderLeftUpperWing() {
     instanceMatrix = mult(instanceMatrix, scale4(upperWingWidth, upperWingHeight + 0.25, 0.3));
     gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(instanceMatrix));
 
-    gl.uniform4fv(gl.getUniformLocation(program, "uColor"), flatten(vec4(0.0, 1.0, 0.937, 1.0)));
+    gl.uniform4fv(gl.getUniformLocation(program, "uColor"), flatten(vec4(0.463, 0.208, 0.251, 1.0)));
     drawCube(0.5);
 }
 
@@ -54,6 +54,6 @@ function renderRightUpperWing() {
     instanceMatrix = mult(instanceMatrix, scale4(upperWingWidth, upperWingHeight + 0.25, 0.3));
     gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(instanceMatrix));
 
-    gl.uniform4fv(gl.getUniformLocation(program, "uColor"), flatten(vec4(0.0, 1.0, 0.937, 1.0)));
+    gl.uniform4fv(gl.getUniformLocation(program, "uColor"), flatten(vec4(0.463, 0.208, 0.251, 1.0)));
     drawCube(0.5);
 }
