@@ -67,7 +67,7 @@ function renderMidLowerNeck(){
     drawCylinder();
 
     const paletteCount = 6; 
-    const paletteSpacing = 0.25; // Spacing betwen palettes
+    const paletteSpacing = 0.25; 
     const paletteScale = vec3(0.25, 0.15, 0.8); 
 
     for (let i = 0; i < paletteCount; i++) {
@@ -77,7 +77,7 @@ function renderMidLowerNeck(){
         gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(paletteMatrix));
 
         gl.uniform4fv(gl.getUniformLocation(program, "uColor"), flatten(vec4(0.5, 0.2, 0.0, 1.0))); // Brown color
-        drawCube();
+        drawCube(0.0);
     }
 }
 

@@ -46,10 +46,12 @@ function initCubeBuffers(){
     gl.bufferData(gl.ARRAY_BUFFER, flatten(pointsArray), gl.STATIC_DRAW);
 }
 
-function drawCube(){
+function drawCube(topScale = 1.0){
     var vPos = gl.getAttribLocation(program, "vPos");
     gl.vertexAttribPointer(vPos, 4, gl.FLOAT, false, 0, 0); 
     gl.enableVertexAttribArray(vPos);
+
+    gl.uniform1f(gl.getUniformLocation(program, "uTopScale"), topScale);
 
     for(var i = 0; i < 6; i++){
         gl.drawArrays(gl.TRIANGLE_STRIP, cubeOffset + 4*i, 4);

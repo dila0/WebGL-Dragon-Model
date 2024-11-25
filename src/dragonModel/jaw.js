@@ -86,6 +86,26 @@ function renderMidJaw(){
 
     gl.uniform4fv(gl.getUniformLocation(program, "uColor"), flatten(vec4(1.0, 0.424, 0.0, 1.0)));
     drawCube();
+
+    // Teeth 
+    const toothCount = 5; 
+    const toothSpacing = 0.2; 
+    const toothSize = vec3(0.2, 0.3, 0.05); 
+
+    for (let i = 0; i < toothCount; i++) {
+        // Pos
+        let toothMatrix = mult(modelViewMatrix, translate(
+            jawWidth/2 - (i + 2) * toothSpacing, 
+            0.5 * jawHeight,      
+            0.5      
+        ));
+        toothMatrix = mult(toothMatrix, scale4(toothSize[0], toothSize[1], toothSize[2])); 
+
+        gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(toothMatrix));
+
+        gl.uniform4fv(gl.getUniformLocation(program, "uColor"), flatten(vec4(1.0, 1.0, 1.0, 1.0))); // White color
+        drawCube(0.5);
+    }
 }
 
 // Function to render the right jaw
@@ -114,5 +134,5 @@ function renderRightJaw(){
     mouthCylinderMatrix = mult(mouthCylinderMatrix, scale4(0.25, 0.5, 0.4)); 
     gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(mouthCylinderMatrix));
     gl.uniform4fv(gl.getUniformLocation(program, "uColor"), flatten(vec4(0.961, 0.545, 0.227, 1.0)));
-    drawCylinder();
+    drawCylinder(true, true, 0.7);
 }

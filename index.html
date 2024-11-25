@@ -112,10 +112,13 @@
       
       uniform mat4 modelViewMatrix;
       uniform mat4 projectionMatrix;
+      uniform float uTopScale;
         
       void main(){
-          gl_Position = projectionMatrix * modelViewMatrix * vPos;
-      } 
+          float scalePower = vPos.y + 0.5;
+          vec4 pos = vec4(mix(vPos.x, vPos.x * uTopScale, scalePower), vPos.y, mix(vPos.z, vPos.z * uTopScale, scalePower), vPos.w);
+          gl_Position = projectionMatrix * modelViewMatrix * pos;
+        } 
     </script>
 
     <script id="background-vertex-shader" type="x-shader/x-vertex">

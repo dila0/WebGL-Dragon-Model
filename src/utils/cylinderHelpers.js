@@ -57,7 +57,9 @@ function cylinder(){
     // side(6, 1, 9, 14);
 }
 
-function drawCylinder(drawTop = true, drawBottom = true){
+function drawCylinder(drawTop = true, drawBottom = true, topScale = 1.0){
+    gl.uniform1f(gl.getUniformLocation(program, "uTopScale"), topScale);
+
     if(drawTop){
         gl.drawArrays(gl.TRIANGLE_FAN, cylinderOffset, slices+2);
     }
