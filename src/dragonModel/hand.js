@@ -15,7 +15,7 @@ var handWidth = 1.0;
 // Function to initialize the left hand
 function initLeftHand() {
     var m = mat4();
-    m = translate(-0.5 * lowerWingWidth, 0.0, 0.0);
+    m = translate(-0.5 * lowerWingHeight, 0.0, 0.0);
     m = rotatePart(LEFT_HAND_ID, m);
     m = mult(m, translate(-0.5 * handWidth, 0.0, 0.0));
 
