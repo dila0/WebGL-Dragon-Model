@@ -173,3 +173,37 @@ function updateSelectedBodyPart() {
     selectedBodyPart.textContent = `Selected Part: ${bodyPartName}`;
     selectedLimb = parseFloat(limbSelect.value);
 }
+
+function initializeBuffers() {
+    pointsArray = [];
+    texCoordsArray = [];
+    cube();
+    cylinder();
+    sphere();
+    initBackground();
+
+    let vPos = gl.getAttribLocation(program, "vPos");
+    let cubeVBuffer = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, cubeVBuffer);
+    gl.bufferData(gl.ARRAY_BUFFER, flatten(pointsArray), gl.STATIC_DRAW);
+    gl.vertexAttribPointer(vPos, 4, gl.FLOAT, false, 0, 0);
+    gl.enableVertexAttribArray(vPos);
+
+    let vTexCoord = gl.getAttribLocation(program, "vTexCoord");
+    let texCoordsBuffer = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, texCoordsBuffer);
+    gl.bufferData(gl.ARRAY_BUFFER, flatten(texCoordsArray), gl.STATIC_DRAW);
+    gl.vertexAttribPointer(vTexCoord, 2, gl.FLOAT, false, 0, 0);
+    gl.enableVertexAttribArray(vTexCoord);
+}
+
+function setColor(color) {
+    gl.uniform4fv(gl.getUniformLocation(program, "uColor"), flatten(color));
+}
+
+function setTexture(texture, repeat = vec2(1, 1), translate = vec2(0, 0)) {
+    setColor(vec4(0, 0, 0, -1));
+    gl.uniform2fv(gl.getUniformLocation(program, "uTexRepeat"), flatten(repeat));
+    gl.uniform2fv(gl.getUniformLocation(program, "uTexTranslate"), flatten(translate));
+    gl.uniform1i(gl.getUniformLocation(program, "uTexture"), texture.id || texture);
+}

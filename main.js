@@ -104,9 +104,11 @@ for(var i = 0; i < numNodes; i++) {
 }
 
 var cubeVBuffer;
+var texCoordsBuffer;
 var modelViewLoc;
 
 var pointsArray = [];
+var texCoordsArray = [];
 
 // Keyframes for animations
 var keyframes = {
@@ -165,12 +167,8 @@ const resetKFButton = document.getElementById("reset-keyframes");
 const saveAnimationButton = document.getElementById("save-button");
 const loadAnimationButton = document.getElementById("load-button");
 
-// Background
-let background;
-let backgroundProgram;
-
 // Main function
-window.onload = function init() {
+window.onload = async function init() {
     canvas = document.getElementById('gl-canvas');
 
     gl = WebGLUtils.setupWebGL(canvas);
@@ -182,12 +180,12 @@ window.onload = function init() {
     gl.clearColor(0.0, 0.0, 1.0, 1.0); 
     gl.enable(gl.DEPTH_TEST);
 
-    backgroundProgram = initShaders(gl, "background-vertex-shader", "background-fragment-shader");
-    background = initBackground(gl);
-
     program = initShaders(gl, "vertex-shader", "fragment-shader");
     gl.useProgram(program);
-    
+
+    initializeBuffers();
+    await initTextures();
+
     instanceMatrix = mat4();
 
     projectionMatrix = ortho(-10.0, 10.0, -10.0, 10.0, -100.0, 100.0);
@@ -197,8 +195,6 @@ window.onload = function init() {
     gl.uniformMatrix4fv(gl.getUniformLocation(program, "projectionMatrix"), false, flatten(projectionMatrix));
 
     modelViewMatrixLoc = gl.getUniformLocation(program, "modelViewMatrix");
-
-    initCubeBuffers();
 
     // Update Sliders and Reset 
     updateRotations();
@@ -227,8 +223,7 @@ var render = function() {
 
 var renderOnce = function(){
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
-    renderBackground(gl, backgroundProgram, background.buffer, background.texture);
-    gl.useProgram(program);
+    renderBackground();
     modelViewMatrix = translate(xTransVal, yTransVal, zTransVal);
     traverse(BODY_ID);
 }

@@ -8,50 +8,35 @@
  * @id 22102278
  */
 
-function initBackground(gl) {
-    const vertices = new Float32Array([
-        -1, -1,
-        1, -1,
-        -1,  1,
-        1,  1 
-    ]);
+var backgroundOffset;
 
-    // Create buffer 
-    const buffer = gl.createBuffer();
-    gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
-    gl.bufferData(gl.ARRAY_BUFFER, vertices, gl.STATIC_DRAW);
-
-    // Background texture
-    const texture = gl.createTexture();
-    const image = new Image();
-    image.src = 'assets/background_image.png'; 
-    image.onload = () => {
-        gl.bindTexture(gl.TEXTURE_2D, texture);
-        gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
-        gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, image);
-        gl.generateMipmap(gl.TEXTURE_2D);
-    };
-
-    return { buffer, texture };
+function initBackground() {
+    backgroundOffset = pointsArray.length;
+    pointsArray.push(
+        vec4(-1, -1, 0, 1),
+        vec4(1, -1, 0, 1),
+        vec4(-1,  1, 0, 1),
+        vec4(1,  1, 0, 1),
+    );
+    texCoordsArray.push(
+        vec2(0, 0),
+        vec2(1, 0),
+        vec2(0, 1),
+        vec2(1, 1),
+    );
 }
 
-function renderBackground(gl, program, buffer, texture) {
-    gl.useProgram(program);
-
-    const positionLoc = gl.getAttribLocation(program, "vPos");
-    gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
-    gl.vertexAttribPointer(positionLoc, 2, gl.FLOAT, false, 0, 0);
-    gl.enableVertexAttribArray(positionLoc);
-
-    // Bind the background texture
-    gl.activeTexture(gl.TEXTURE0);
-    gl.bindTexture(gl.TEXTURE_2D, texture);
-    const textureLoc = gl.getUniformLocation(program, "uTexture");
-    gl.uniform1i(textureLoc, 0);
+function renderBackground() {
+    gl.uniform1f(gl.getUniformLocation(program, "uTopScale"), 1.0);
+    gl.uniform4fv(gl.getUniformLocation(program, "uColor"), flatten(vec4(0, 0, 0, -1.0)));
+    gl.uniform1i(gl.getUniformLocation(program, "uTexture"), TEXTURES.background.id);
+    
+    gl.uniformMatrix4fv(gl.getUniformLocation(program, "modelViewMatrix"), false, flatten(mat4()));
+    gl.uniformMatrix4fv(gl.getUniformLocation(program, "projectionMatrix"), false, flatten(mat4()));
 
     gl.disable(gl.DEPTH_TEST);
-    gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
-
+    gl.drawArrays(gl.TRIANGLE_STRIP, backgroundOffset, 4);
     gl.enable(gl.DEPTH_TEST);
+    gl.uniformMatrix4fv(gl.getUniformLocation(program, "projectionMatrix"), false, flatten(projectionMatrix));
 }
 

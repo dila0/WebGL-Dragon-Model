@@ -10,22 +10,22 @@
 
 // Global variables
 var leftLowerNeckHeight = 1.0;
-var leftLowerNeckWidth = 1.7;
+var leftLowerNeckWidth = 1.4;
 
 var rightLowerNeckHeight = 0.7;
 var rightLowerNeckWidth = 1.4;
 
-var lowerNeckHeight = 1.0;
-var lowerNeckWidth = 1.1;
+var lowerNeckHeight = 1.2;
+var lowerNeckWidth = 1.5;
 
-var neckSeparation = 3;
+var neckSeparation = 2.1;
 
 // Function to create the left lower neck
 function initLeftLowerNeck(){
     var m = mat4();
     m = translate(-neckSeparation, 0.5 * bodyHeight, 0.0);
     m = rotatePart(LEFT_LOWER_NECK_ID, m);
-    m = mult(m, translate(0.0, 0.5 * leftLowerNeckHeight, 0.0));
+    m = mult(m, translate(0.0, 0.3 * leftLowerNeckHeight, 0.0));
 
     figure[LEFT_LOWER_NECK_ID] = createNode(m, renderLeftLowerNeck, MID_LOWER_NECK_ID, LEFT_UPPER_NECK_ID);
 }
@@ -57,6 +57,7 @@ function renderLeftLowerNeck(){
     gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(instanceMatrix));
 
     gl.uniform4fv(gl.getUniformLocation(program, "uColor"), flatten(vec4(0.314, 0.396, 0.961, 1.0)));
+    setTexture(TEXTURES.pants, vec2(2.0, 1.0), vec2(0.5, 0.0));
     drawCylinder();
 }
 
@@ -66,8 +67,9 @@ function renderMidLowerNeck(){
     instanceMatrix = mult(instanceMatrix, scale4(lowerNeckWidth, lowerNeckHeight, lowerNeckWidth));
     gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(instanceMatrix));
 
-    gl.uniform4fv(gl.getUniformLocation(program, "uColor"), flatten(vec4(0.0, 0.333, 0.0, 1.0)));
-    drawCylinder();
+    gl.uniform4fv(gl.getUniformLocation(program, "uColor"), flatten(vec4(0.086, 0.125, 0.376, 1.0)));
+    setTexture(TEXTURES.dragon_head);
+    drawCube(0.8);
 
     const paletteCount = 6; 
     const paletteSpacing = 0.25; 
@@ -79,7 +81,7 @@ function renderMidLowerNeck(){
 
         gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(paletteMatrix));
 
-        gl.uniform4fv(gl.getUniformLocation(program, "uColor"), flatten(vec4(0.5, 0.2, 0.0, 1.0))); // Brown color
+        gl.uniform4fv(gl.getUniformLocation(program, "uColor"), flatten(vec4(0.5, 0.2, 0.0, 1.0)));
         drawCube(0.0);
     }
 }
@@ -91,5 +93,6 @@ function renderRightLowerNeck(){
     gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(instanceMatrix));
 
     gl.uniform4fv(gl.getUniformLocation(program, "uColor"), flatten(vec4(0.125, 0.643, 0.624, 1.0)));
+    setTexture(TEXTURES.perry_body, vec2(0.8, 0.7));
     drawCube();
 }

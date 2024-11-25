@@ -9,11 +9,11 @@
  */
 
 // Global variables
-var jawHeight = 1.0;
+var jawHeight = 0.8;
 var jawWidth = 1.6;
 
 var leftJawHeight = 0.5;
-var leftJawWidth = 1.7;
+var leftJawWidth = 1.4;
 
 var rightJawHeight = 0.8;
 var rightJawWidth = 1.4;
@@ -55,6 +55,7 @@ function renderLeftJaw(){
     gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(instanceMatrix));
 
     gl.uniform4fv(gl.getUniformLocation(program, "uColor"), flatten(vec4(0.961, 0.878, 0.314, 1.0)));
+    setTexture(TEXTURES.minion_body, vec2(0.8, 0.36));
     drawCylinder();
 
     // Mouth
@@ -84,10 +85,12 @@ function renderLeftJaw(){
 // Function to render the middle jaw
 function renderMidJaw(){
     instanceMatrix = modelViewMatrix;
-    instanceMatrix = mult(instanceMatrix, scale4(jawWidth, jawHeight, jawWidth));
+    instanceMatrix = mult(instanceMatrix, translate(0.0, 0.0, 0.0));
+    instanceMatrix = mult(instanceMatrix, scale4(jawWidth, jawHeight, headDepth));
     gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(instanceMatrix));
 
-    gl.uniform4fv(gl.getUniformLocation(program, "uColor"), flatten(vec4(1.0, 0.424, 0.0, 1.0)));
+    gl.uniform4fv(gl.getUniformLocation(program, "uColor"), flatten(vec4(0.086, 0.125, 0.376, 1.0)));
+    setTexture(TEXTURES.dragon_head);
     drawCube();
 
     // Teeth 
@@ -118,6 +121,7 @@ function renderRightJaw(){
     gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(instanceMatrix));
 
     gl.uniform4fv(gl.getUniformLocation(program, "uColor"), flatten(vec4(0.125, 0.643, 0.624, 1.0)));
+    setTexture(TEXTURES.perry_body, vec2(0.8, 0.8));
     drawCube();
 
     // Mouth
@@ -126,7 +130,7 @@ function renderRightJaw(){
     mouthBaseMatrix = mult(mouthBaseMatrix, rotate(90, 0, 1, 0));
     mouthBaseMatrix = mult(mouthBaseMatrix, scale4(0.5, 0.2, 0.7)); 
     gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(mouthBaseMatrix));
-    gl.uniform4fv(gl.getUniformLocation(program, "uColor"), flatten(vec4(0.98, 0.588, 0.29, 1.0)));
+    gl.uniform4fv(gl.getUniformLocation(program, "uColor"), flatten(vec4(0.961, 0.522, 0.184, 1.0)));
     drawCylinder(); 
 
     // Nose
@@ -136,6 +140,6 @@ function renderRightJaw(){
     mouthCylinderMatrix = mult(mouthCylinderMatrix, rotate(-45, 0, 1, 0));
     mouthCylinderMatrix = mult(mouthCylinderMatrix, scale4(0.25, 0.5, 0.4)); 
     gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(mouthCylinderMatrix));
-    gl.uniform4fv(gl.getUniformLocation(program, "uColor"), flatten(vec4(0.961, 0.545, 0.227, 1.0)));
+    gl.uniform4fv(gl.getUniformLocation(program, "uColor"), flatten(vec4(0.988, 0.506, 0.133, 1.0)));
     drawCylinder(true, true, 0.7);
 }
