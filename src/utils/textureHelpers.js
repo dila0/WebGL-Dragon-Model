@@ -43,6 +43,10 @@ const TEXTURES = {
         url: 'assets/horn.png',
         id: 10
     },
+    'dragon_body': {
+        url: 'assets/dragon_body.png',
+        id: 11
+    },
 }
 
 async function initTextures() {
