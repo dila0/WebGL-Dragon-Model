@@ -34,6 +34,7 @@ function initMidHead(){
     var m = mat4();
     m = translate(0.0, 0.5 * jawHeight, 0.0);
     m = rotatePart(MID_HEAD_ID, m);
+    m = mult(m, rotate(-15, 1, 0, 0));
     m = mult(m, translate(0.0, 0.5 * headHeight, 0.0));
 
     figure[MID_HEAD_ID] = createNode(m, renderMidHead, null, null);
@@ -149,7 +150,7 @@ function renderMidHead(){
 
     /// Left eye
     let sphere2Matrix = mult(modelViewMatrix, translate(-0.45, headHeight - 1.35, 1.3)); 
-    sphere2Matrix = mult(sphere2Matrix, scale4(0.48, 0.43, 0.3)); 
+    sphere2Matrix = mult(sphere2Matrix, scale4(0.4, 0.36, 0.3)); 
     gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(sphere2Matrix));
     gl.uniform4fv(gl.getUniformLocation(program, "uColor"), flatten(vec4(1.0, 1.0, 1.0, 1.0)));
     drawSphere();
@@ -162,7 +163,7 @@ function renderMidHead(){
 
     // Right eye
     let sphere4Matrix = mult(modelViewMatrix, translate(0.45, headHeight - 1.35, 1.3)); 
-    sphere4Matrix = mult(sphere4Matrix, scale4(0.48, 0.43, 0.3)); 
+    sphere4Matrix = mult(sphere4Matrix, scale4(0.4, 0.36, 0.3)); 
     gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(sphere4Matrix));
     gl.uniform4fv(gl.getUniformLocation(program, "uColor"), flatten(vec4(1.0, 1.0, 1.0, 1.0)));
     drawSphere();
@@ -185,6 +186,37 @@ function renderMidHead(){
     gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(nostril1Matrix));
     gl.uniform4fv(gl.getUniformLocation(program, "uColor"), flatten(vec4(0.0, 0.0, 0.0, 1.0)));
     drawSphere();
+
+    // Big horns
+    const hornPositions = [-0.4, 0.4]; 
+    const hornScale = vec3(0.2, 1.5, 0.4); 
+    const hornColor = vec4(0.02, 0.22, 0.157, 1.0); 
+
+    for (let i = 0; i < hornPositions.length; i++) {
+        let hornMatrix = mult(modelViewMatrix, translate(hornPositions[i], leftHeadHeight + 0.3, 0.0)); 
+        hornMatrix = mult(hornMatrix, scale4(hornScale[0], hornScale[1], hornScale[2])); 
+
+        gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(hornMatrix));
+        setColor(hornColor);  
+        setTexture(TEXTURES.horn);
+        drawCylinder(true, true, 0.2); 
+    }
+
+    // Small horns
+    const hornPositionsZ = [-1.2, -1.0, -0.8, -0.6, -0.4, 0.2, 0.0, 0.2, 0.4, 0.6, 0.8, 1.0, 1.2]; 
+    const hornX = 0.0; 
+    const hornScale2 = vec3(0.15, 0.45, 0.15); 
+    const hornColor2 = vec4(0.5, 0.2, 0.0, 1.0); 
+
+    // Loop to render each horn
+    for (let i = 0; i < hornPositionsZ.length; i++) {
+        let hornMatrix2 = mult(modelViewMatrix, translate(hornX, leftHeadHeight, hornPositionsZ[i]));
+        hornMatrix2 = mult(hornMatrix2, scale4(hornScale2[0], hornScale2[1], hornScale2[2])); 
+
+        gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(hornMatrix2));
+        setColor(hornColor2); 
+        drawCylinder(true, true, 0.0); 
+    }
 }
 
 // Function to render the right head
@@ -193,6 +225,7 @@ function renderRightHead(){
     instanceMatrix = mult(instanceMatrix, scale4(rightHeadWidth, rightHeadHeight, rightHeadWidth));
     gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(instanceMatrix));
     gl.uniform4fv(gl.getUniformLocation(program, "uColor"), flatten(vec4(0.125, 0.643, 0.624, 1.0)));
+    setTexture(TEXTURES.perry_body, vec2(0.8, 1.1));
     drawCube();
 
     // Left eye

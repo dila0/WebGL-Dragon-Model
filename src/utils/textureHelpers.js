@@ -35,6 +35,14 @@ const TEXTURES = {
         url: 'assets/pants.png',
         id: 8
     },
+    'perry_body': {
+        url: 'assets/perry_body.png',
+        id: 9
+    },
+    'horn': {
+        url: 'assets/horn.png',
+        id: 10
+    },
 }
 
 async function initTextures() {

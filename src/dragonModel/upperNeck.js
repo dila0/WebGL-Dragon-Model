@@ -84,6 +84,20 @@ function renderMiddleUpperNeck() {
     gl.uniform4fv(gl.getUniformLocation(program, "uColor"), flatten(vec4(0.086, 0.125, 0.376, 1.0)));
     setTexture(TEXTURES.dragon_head);
     drawCube();
+
+    const paletteCount = 5; 
+    const paletteSpacing = 0.25; 
+    const paletteScale = vec3(0.25, 0.15, 0.8); 
+
+    for (let i = 0; i < paletteCount; i++) {
+        let paletteMatrix = mult(modelViewMatrix, translate(0.0, 0.5 * upperNeckHeight - i * paletteSpacing, -0.7));
+        paletteMatrix = mult(paletteMatrix, scale4(paletteScale[0], paletteScale[1], paletteScale[2]));
+
+        gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(paletteMatrix));
+
+        gl.uniform4fv(gl.getUniformLocation(program, "uColor"), flatten(vec4(0.5, 0.2, 0.0, 1.0)));
+        drawCube(0.0);
+    }
 }
 
 // Function to render the right upper neck
@@ -93,5 +107,6 @@ function renderRightUpperNeck() {
     gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(instanceMatrix));
 
     gl.uniform4fv(gl.getUniformLocation(program, "uColor"), flatten(vec4(0.125, 0.643, 0.624, 1.0)));
+    setTexture(TEXTURES.perry_body, vec2(0.8, 0.7));
     drawCube();
 }
