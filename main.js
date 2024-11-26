@@ -321,7 +321,7 @@ function updateProjectionMatrix() {
 
 function resetZoomAndCamera() {
     // Reset zoom factor
-    zoomFactor = 1.0;
+    zoomFactor = 0.7;
 
     // Reset camera rotations
     cameraRotationX = 0.0;
