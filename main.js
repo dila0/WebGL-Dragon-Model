@@ -13,6 +13,11 @@ var gl;
 var program;
 
 var projectionMatrix;
+let left = -20.0, right = 20.0;
+    let bottom = -20.0, myTop = 20.0;
+    let near = -100.0, far = 100.0;
+    let zoomFactor = 1.0;
+
 var modelViewMatrix;
 
 var instanceMatrix;
@@ -153,6 +158,7 @@ const resetTransZ = document.getElementById("resetTransZ");
 const resetTransAll = document.getElementById("resetTransAll");
 
 const translationVal = document.getElementById("translationVals");
+const resetButton = document.getElementById("resetButton");
 
 var xTransVal = 0.0;
 var yTransVal = 0.0;
@@ -190,7 +196,7 @@ window.onload = async function init() {
 
     instanceMatrix = mat4();
 
-    projectionMatrix = ortho(-15.0, 15.0, -15.0, 15.0, -100.0, 100.0);
+    projectionMatrix = ortho(left, right, bottom, myTop, near, far);
     modelViewMatrix = mat4();
 
     gl.uniformMatrix4fv(gl.getUniformLocation(program, "modelViewMatrix"), false, flatten(modelViewMatrix));
@@ -212,6 +218,7 @@ window.onload = async function init() {
     resetKeyFrames();
     saveAnimationButton.addEventListener("click", saveAnimation);
     loadAnimationButton.addEventListener("change", loadAnimation);
+    resetButton.addEventListener("click", resetZoomAndCamera);
 
     window.addEventListener("keydown", function (event) {
         const rotationStep = 5.0; // Degrees to rotate per key press
@@ -240,6 +247,32 @@ window.onload = async function init() {
         renderOnce(); // Re-render the scene with updated rotation
     });
 
+    canvas.addEventListener("wheel", function (event) {
+        event.preventDefault();
+    
+        // Adjust zoom factor
+        if (event.deltaY < 0) {
+            // Zoom in (scroll up)
+            console.log("zoom in");
+            
+            zoomFactor *= 0.9; // Reduce the bounds
+            if (zoomFactor < 0.1) zoomFactor = 0.1; // Minimum zoom level
+        } else {
+            // Zoom out (scroll down)
+            console.log("zoom out");
+            zoomFactor *= 1.1; // Expand the bounds
+            if (zoomFactor > 5.0) zoomFactor = 5.0; // Maximum zoom level
+        }
+    
+        // Update the projection matrix with the new zoom factor
+        updateProjectionMatrix();
+    
+        // Re-render the scene
+        renderOnce();
+    });
+
+    
+
     for(var i = 0; i < numNodes; i++) initNodes(i);
     render();
 }
@@ -248,6 +281,32 @@ window.onload = async function init() {
 var render = function() {
     renderOnce()
     requestAnimationFrame(render);
+}
+
+function updateProjectionMatrix() {
+    const zoomedLeft = left * zoomFactor;
+    const zoomedRight = right * zoomFactor;
+    const zoomedBottom = bottom * zoomFactor;
+    const zoomedTop = myTop * zoomFactor;
+
+    projectionMatrix = ortho(zoomedLeft, zoomedRight, zoomedBottom, zoomedTop, near, far);
+    gl.uniformMatrix4fv(gl.getUniformLocation(program, "projectionMatrix"), false, flatten(projectionMatrix));
+}
+
+function resetZoomAndCamera() {
+    // Reset zoom factor
+    zoomFactor = 1.0;
+
+    // Reset camera rotations
+    cameraRotationX = 0.0;
+    cameraRotationY = 0.0;
+    cameraRotationZ = 0.0;
+
+    // Update the projection matrix
+    updateProjectionMatrix();
+
+    // Re-render the scene
+    renderOnce();
 }
 
 var renderOnce = function(){
@@ -259,6 +318,8 @@ var renderOnce = function(){
 
     // Apply object translation
     modelViewMatrix = mult(modelViewMatrix, translate(xTransVal, yTransVal, zTransVal));
+    updateProjectionMatrix();
     renderBackground();
     traverse(BODY_ID);
 }
+
