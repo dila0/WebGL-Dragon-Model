@@ -13,7 +13,7 @@ function saveCurrKeyframe(){
     saveKeyframeButton.onclick = function () {
         console.log("Type of array element original: " + typeof(theta[0][0]));
         keyframes.thetaVals.push(JSON.parse(JSON.stringify(theta)));
-        keyframes.translationVals.push([xTransVal, yTransVal, zTransVal]);
+        keyframes.translationVals.push([xTransVal, yTransVal, 0.0]);
         console.log(keyframes);
         console.log("keyframes saved");
     }

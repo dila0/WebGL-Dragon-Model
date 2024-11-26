@@ -20,7 +20,7 @@ function initLowerTail(){
     var m = mat4();
     m = translate(0.0, 0.0, -0.5 * upperTailHeight);
     m = rotatePart(LOWER_TAIL_ID, m);
-    m = mult(m, translate(0.0, -0.5 * lowerTailHeight, 0.0));
+    m = mult(m, translate(0.0, -0.6 * lowerTailHeight, 0.0));
     
     figure[LOWER_TAIL_ID] = createNode(m, renderLowerTail, null, null);
 }

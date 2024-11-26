@@ -241,7 +241,7 @@ window.onload = async function init() {
                 keyframes.thetaVals = animationData.thetaVals;
                 keyframes.translationVals = animationData.translationVals;
     
-                animate(400);
+                animate(300);
             })
             .catch((error) => {
                 console.error("Error loading war animation:", error);

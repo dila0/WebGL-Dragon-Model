@@ -9,9 +9,9 @@
  */
 
 // Global variables 
-var bodyHeight = 4;
-var bodyWidth = 6;
-var bodyDepth = 3;
+var bodyHeight = 3;
+var bodyWidth = 7;
+var bodyDepth = 6;
 
 // Function to initialize the body
 function initBody(){
@@ -24,10 +24,10 @@ function initBody(){
 // Function to render the body
 function renderBody(){
     instanceMatrix = modelViewMatrix;
-    instanceMatrix = mult(instanceMatrix, scale4(bodyWidth, bodyHeight, bodyDepth));
+    instanceMatrix = mult(instanceMatrix, scale4(bodyWidth, bodyHeight * 2, bodyDepth));
     gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(instanceMatrix));
 
     gl.uniform4fv(gl.getUniformLocation(program, "uColor"), flatten(vec4(0.753, 0.439, 0.0, 1.0)));
     setTexture(TEXTURES.dragon_neck, vec2(15.0, 1.0), vec2(0.25, 0.0));
-    drawCube();
+    drawSphere();
 }
