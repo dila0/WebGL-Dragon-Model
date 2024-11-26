@@ -31,7 +31,7 @@ var rightLegBaseWidthX = 2;
 function initBody(){
     var m = mat4();
     m = rotatePart(BODY_ID, m);
-    m = mult(m, translate(0.0, 0.5 * upperBodyHeight, 0.0));
+    m = mult(m, translate(0.0, 0.0, 0.0));
     figure[BODY_ID] = createNode(m, renderBody, null, LEFT_LOWER_NECK_ID);
 }
 

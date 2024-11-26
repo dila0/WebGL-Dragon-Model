@@ -158,6 +158,10 @@ var xTransVal = 0.0;
 var yTransVal = 0.0;
 var zTransVal = 0.0;
 
+let cameraRotationX = 0.0; 
+let cameraRotationY = 0.0; 
+let cameraRotationZ = 0.0; 
+
 // Animation
 const saveKeyframeButton = document.getElementById("save-keyframe");
 const playCurrKFButton = document.getElementById("play-curr-keyframe");
@@ -186,7 +190,7 @@ window.onload = async function init() {
 
     instanceMatrix = mat4();
 
-    projectionMatrix = ortho(-10.0, 10.0, -10.0, 10.0, -100.0, 100.0);
+    projectionMatrix = ortho(-15.0, 15.0, -15.0, 15.0, -100.0, 100.0);
     modelViewMatrix = mat4();
 
     gl.uniformMatrix4fv(gl.getUniformLocation(program, "modelViewMatrix"), false, flatten(modelViewMatrix));
@@ -209,6 +213,33 @@ window.onload = async function init() {
     saveAnimationButton.addEventListener("click", saveAnimation);
     loadAnimationButton.addEventListener("change", loadAnimation);
 
+    window.addEventListener("keydown", function (event) {
+        const rotationStep = 5.0; // Degrees to rotate per key press
+    
+        switch (event.key) {
+            case "ArrowLeft": 
+                cameraRotationY -= rotationStep;
+                break;
+            case "ArrowRight": 
+                cameraRotationY += rotationStep;
+                break;
+            case "ArrowUp": 
+                cameraRotationX -= rotationStep;
+                break;
+            case "ArrowDown": 
+                cameraRotationX += rotationStep;
+                break;
+            case "q": 
+                cameraRotationZ -= rotationStep;
+                break;
+            case "e": 
+                cameraRotationZ += rotationStep;
+                break;
+        }
+    
+        renderOnce(); // Re-render the scene with updated rotation
+    });
+
     for(var i = 0; i < numNodes; i++) initNodes(i);
     render();
 }
@@ -221,7 +252,13 @@ var render = function() {
 
 var renderOnce = function(){
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+    modelViewMatrix = mat4();
+    modelViewMatrix = mult(modelViewMatrix, rotate(cameraRotationX, [1, 0, 0])); // Rotate around X-axis
+    modelViewMatrix = mult(modelViewMatrix, rotate(cameraRotationY, [0, 1, 0])); // Rotate around Y-axis
+    modelViewMatrix = mult(modelViewMatrix, rotate(cameraRotationZ, [0, 0, 1])); // Rotate around Z-axis
+
+    // Apply object translation
+    modelViewMatrix = mult(modelViewMatrix, translate(xTransVal, yTransVal, zTransVal));
     renderBackground();
-    modelViewMatrix = translate(xTransVal, yTransVal, zTransVal);
     traverse(BODY_ID);
 }
