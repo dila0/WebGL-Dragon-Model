@@ -16,99 +16,175 @@
   <title>Dragon Head</title>
   <script src="Common/webgl-utils.js"></script>
   <script src="Common/MV.js"></script>
-  <script src="Common/initShaders.js"></script>
+  <script src="Common/initShaders.js"></script>\
+  <style>
+    body {
+      display: flex;
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    #gl-canvas {
+      flex: 3;
+      border: 1px solid #ccc;
+    }
+
+    #controls {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      padding: 10px;
+      box-sizing: border-box;
+      background-color: #f4f4f4;
+      border-left: 1px solid #ccc;
+      overflow-y: auto; 
+      height: 100vh;
+    }
+
+    #controls div, #controls button, #controls select, #controls p {
+      margin-bottom: 10px;
+    }
+
+    #controls label {
+      font-weight: bold;
+    }
+
+    #controls button {
+      cursor: pointer;
+      padding: 5px 10px;
+      background-color: #0078D7;
+      color: white;
+      border: none;
+      border-radius: 5px;
+    }
+
+    #controls button:hover {
+      background-color: #005A9E;
+    }
+
+    #controls input[type="range"] {
+      width: 100%;
+    }
+
+    #sliders {
+      display: flex; 
+      flex-direction: column;
+    }
+    #sliders div {
+      display: flex; 
+      align-items: center; 
+      justify-content: space-between; 
+      margin-bottom: 10px;
+    }
+
+  </style>
 </head>
 <body>
     <canvas id="gl-canvas" width="800" height="600"></canvas>
     <!-- SLIDERS -->
-    <div>
-      <label for="limbSelect">Select the limb you want to rotate:</label>
-      <select id="limbSelect">
-        <option value="0">Left Head</option>
-        <option value="1">Middle Head</option>
-        <option value="2">Right Head</option>
-        <option value="3">Left Jaw</option>
-        <option value="4">Middle Jaw</option>
-        <option value="5">Right Jaw</option>
-        <option value="6">Left Upper Neck</option>
-        <option value="7">Middle Upper Neck</option>
-        <option value="8">Right Upper Neck</option>
-        <option value="9">Left Lower Neck</option>
-        <option value="10">Middle Lower Neck</option>
-        <option value="11">Right Lower Neck</option>
-        <option value="12">Left Upper Wing</option>
-        <option value="13">Right Upper Wing</option>
-        <option value="14">Left Lower Wing</option>
-        <option value="15">Right Lower Wing</option>
-        <option value="16">Left Hand</option>
-        <option value="17">Right Hand</option>
-        <option value="18" selected>Body</option>
-        <option value="19">Left Upper Leg</option>
-        <option value="20">Right Upper Leg</option>
-        <option value="21">Left Lower Leg</option>
-        <option value="22">Right Lower Leg</option>
-        <option value="23">Left Foot</option>
-        <option value="24">Right Foot</option>
-        <option value="25">Upper Tail</option>
-        <option value="26">Lower Tail</option>
-      </select>
+    <div id="controls">
+      <div>
+        <label for="limbSelect">Select a Body Part:</label>
+        <select id="limbSelect">
+          <option value="0">Left Head</option>
+          <option value="1">Middle Head</option>
+          <option value="2">Right Head</option>
+          <option value="3">Left Jaw</option>
+          <option value="4">Middle Jaw</option>
+          <option value="5">Right Jaw</option>
+          <option value="6">Left Upper Neck</option>
+          <option value="7">Middle Upper Neck</option>
+          <option value="8">Right Upper Neck</option>
+          <option value="9">Left Lower Neck</option>
+          <option value="10">Middle Lower Neck</option>
+          <option value="11">Right Lower Neck</option>
+          <option value="12">Left Upper Wing</option>
+          <option value="13">Right Upper Wing</option>
+          <option value="14">Left Lower Wing</option>
+          <option value="15">Right Lower Wing</option>
+          <option value="16">Left Hand</option>
+          <option value="17">Right Hand</option>
+          <option value="18" selected>Body</option>
+          <option value="19">Left Upper Leg</option>
+          <option value="20">Right Upper Leg</option>
+          <option value="21">Left Lower Leg</option>
+          <option value="22">Right Lower Leg</option>
+          <option value="23">Left Foot</option>
+          <option value="24">Right Foot</option>
+          <option value="25">Upper Tail</option>
+          <option value="26">Lower Tail</option>
+        </select>
+      </div>
+
+        <!-- ROTATION SLIDERS -->
+      <div id="sliders">
+        <div>
+          <label for="xRotation">X Rotation Angle:</label>
+          <input type="range" id="xRotation" min="-180.0" max="180.0" value="0.0" step="1.0">
+          <span id="xValue">0.0</span>
+        </div>
+        <div>
+          <label for="yRotation">Y Rotation Angle:</label>
+          <input type="range" id="yRotation" min="-180.0" max="180.0" value="0.0" step="1.0">
+          <span id="yValue">0.0</span>
+        </div>
+        <div>
+          <label for="zRotation">Z Rotation Angle:</label>
+          <input type="range" id="zRotation" min="-180.0" max="180.0" value="0.0" step="1.0">
+          <span id="zValue">0.0</span>
+        </div>
+      </div>
+
+      <button id="resetX">Reset X</button>
+      <button id="resetY">Reset Y</button>
+      <button id="resetZ">Reset Z</button>
+      <button id="resetAll">Reset All</button>
+      <button id="resetButton">Reset Zoom and Camera</button>
+      
+      <div>
+        <p id="rotationVals"> Rotation (X, Y, Z): x:0, y:0, z:0 </p>
+      </div>
+
+      <!-- TRANSLATION SLIDERS -->
+      <div id="sliders">
+        <div>
+          <label for="xTranslation">X Translation:</label>
+          <input type="range" id="xTranslation" min="-20.0" max="20.0" value="0.0" step="0.1">
+          <span id="xTransValue">0.0</span>
+        </div>
+        <div>
+          <label for="yTranslation">Y Translation:</label>
+          <input type="range" id="yTranslation" min="-20.0" max="20.0" value="0.0" step="0.1">
+          <span id="yTransValue">0.0</span>
+        </div>
+        <div>
+          <label for="zTranslation">Z Translation:</label>
+          <input type="range" id="zTranslation" min="-10.0" max="10.0" value="0.0" step="0.5">
+          <span id="zTransValue">0.0</span>
+        </div>
+      </div>
+
+      <button id="resetTransX">Reset Trans X</button>
+      <button id="resetTransY">Reset Trans Y</button>
+      <button id="resetTransZ">Reset Trans Z</button>
+      <button id="resetTransAll">Reset Trans All</button>
+
+      <p id="translationVals"> Translation (X, Y, Z): x:0, y:0, z:0 </p>
+
+      <!-- ANIMATION BUTTONS -->
+      <div>
+        <button id="save-keyframe">Save Keyframe</button>
+        <button id="play-curr-keyframe">Play Current Keyframe</button>
+        <button id="reset-keyframes">Reset Keyframes</button>
+        <button id="save-button">Save Animation</button>
+        <input type="file" id="load-button" accept=".json">
+      </div>
+      <div>
+        <button id="fly-button">Fly</button>
+      </div>
     </div>
 
-    <!-- ROTATION SLIDERS -->
-    <div>
-      <label for="xRotation">X Rotation Angle:</label>
-      <input type="range" id="xRotation" min="-180.0" max="180.0" value="0.0" step="1.0">
-      <span id="xValue">0.0</span>
-      <label for="yRotation">Y Rotation Angle:</label>
-      <input type="range" id="yRotation" min="-180.0" max="180.0" value="0.0" step="1.0">
-      <span id="yValue">0.0</span>
-      <label for="zRotation">Z Rotation Angle:</label>
-      <input type="range" id="zRotation" min="-180.0" max="180.0" value="0.0" step="1.0">
-      <span id="zValue">0.0</span>
-    </div>
-
-    <button id="resetX">Reset X</button>
-    <button id="resetY">Reset Y</button>
-    <button id="resetZ">Reset Z</button>
-    <button id="resetAll">Reset All</button>
-    <button id="resetButton">Reset Zoom and Camera</button>
     
-    <div>
-      <p id="selectedBodyPart"> Select a Body Part </p>
-      <p id="rotationVals"> Rotation (X, Y, Z): x:0, y:0, z:0 </p>
-    </div>
-
-    <!-- TRANSLATION SLIDERS -->
-    <div>
-      <label for="xTranslation">X Translation:</label>
-      <input type="range" id="xTranslation" min="-20.0" max="20.0" value="0.0" step="0.1">
-      <span id="xTransValue">0.0</span>
-      <label for="yTranslation">Y Translation:</label>
-      <input type="range" id="yTranslation" min="-20.0" max="20.0" value="0.0" step="0.1">
-      <span id="yTransValue">0.0</span>
-      <label for="zTranslation">Z Translation:</label>
-      <input type="range" id="zTranslation" min="-10.0" max="10.0" value="0.0" step="0.5">
-      <span id="zTransValue">0.0</span>
-    </div>
-
-    <button id="resetTransX">Reset Trans X</button>
-    <button id="resetTransY">Reset Trans Y</button>
-    <button id="resetTransZ">Reset Trans Z</button>
-    <button id="resetTransAll">Reset Trans All</button>
-
-    <p id="translationVals"> Translation (X, Y, Z): x:0, y:0, z:0 </p>
-
-    <!-- ANIMATION BUTTONS -->
-    <div>
-      <button id="save-keyframe">Save Keyframe</button>
-      <button id="play-curr-keyframe">Play Current Keyframe</button>
-      <button id="reset-keyframes">Reset Keyframes</button>
-      <button id="save-button">Save Animation</button>
-      <input type="file" id="load-button" accept=".json">
-    </div>
-    <div>
-      <button id="fly-button">Fly</button>
-    </div>
 
     <!-- SHADERS -->
     <script id="vertex-shader" type="x-shader/x-vertex">
