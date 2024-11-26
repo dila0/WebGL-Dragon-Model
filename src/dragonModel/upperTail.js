@@ -15,7 +15,7 @@ var upperTailWidth = 1.5;
 // Function to initialize the upper tail
 function initUpperTail() {
     var m = mat4();
-    m = translate(0.0, - 0.8 * bodyHeight, -0.5 * bodyWidth);
+    m = translate(0.0, - 0.4 * bodyHeight, -0.5 * bodyWidth);
     m = rotatePart(UPPER_TAIL_ID, m);
     m = mult(m, translate(0.0, 0.0, 0.5 * upperTailWidth + 0.2));
     
