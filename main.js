@@ -16,7 +16,7 @@ var projectionMatrix;
 let left = -20.0, right = 20.0;
     let bottom = -20.0, myTop = 20.0;
     let near = -100.0, far = 100.0;
-    let zoomFactor = 1.0;
+    let zoomFactor = 0.7;
 
 var modelViewMatrix;
 
