@@ -9,8 +9,8 @@
  */
 
 // Global variables 
-var lowerWingHeight = 3.0;
-var lowerWingWidth = 2.0;  
+var lowerWingHeight = 4.0;
+var lowerWingWidth = 2.6;  
 
 // Function to create the left lower wing
 function initLeftLowerWing(){

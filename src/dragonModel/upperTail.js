@@ -15,7 +15,7 @@ var upperTailWidth = 7;
 // Function to initialize the upper tail
 function initUpperTail() {
     var m = mat4();
-    m = translate(0.0, -0.5 * upperTailHeight, -0.05 * bodyWidth);
+    m = translate(0.0, -0.7 * upperTailHeight, -0.05 * bodyWidth);
     m = rotatePart(UPPER_TAIL_ID, m);
     m = mult(m, translate(0.0, 0.0, -0.5 * upperTailHeight));
     
@@ -29,6 +29,6 @@ function renderUpperTail() {
     gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(instanceMatrix));
 
     gl.uniform4fv(gl.getUniformLocation(program, "uColor"), flatten(vec4(0.059, 0.569, 0.82, 1.0)));
-    setTexture(TEXTURES.dragon_neck);
+    setTexture(TEXTURES.dragon_neck, vec2(2.2,1.2));
     drawSphere();
 }

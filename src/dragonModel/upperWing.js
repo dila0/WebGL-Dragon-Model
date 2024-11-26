@@ -9,8 +9,8 @@
  */
 
 // Global variables 
-var upperWingHeight = 3.0;
-var upperWingWidth = 2.0;
+var upperWingHeight = 5.0;
+var upperWingWidth = 4.0;
 
 // Function to initialize the left upper wing node
 function initLeftUpperWing() {

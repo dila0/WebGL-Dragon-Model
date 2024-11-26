@@ -9,8 +9,9 @@
  */
 
 // Global variables
-var footHeight = 0.5;
-var footWidth = 2;
+var footHeight = 2;
+var footWidth = 3;
+var footWidthX = 2;
 
 // Function to initialize the left foot
 function initLeftFoot() {
@@ -35,19 +36,22 @@ function initRightFoot() {
 // Function to render the left foot
 function renderLeftFoot() {
     instanceMatrix = modelViewMatrix;
-    instanceMatrix = mult(instanceMatrix, scale4(footWidth, footHeight, footWidth));
+    instanceMatrix = mult(instanceMatrix, scale4(footWidthX, footHeight, footWidth));
     gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(instanceMatrix));
 
     gl.uniform4fv(gl.getUniformLocation(program, "uColor"), flatten(vec4(0.0, 1.0, 0.0, 1.0)));
-    drawCube();
+    setTexture(TEXTURES.horn)
+    drawCylinder();
 }
 
 // Function to render the right foot
 function renderRightFoot() {
     instanceMatrix = modelViewMatrix;
-    instanceMatrix = mult(instanceMatrix, scale4(footWidth, footHeight, footWidth));
+    instanceMatrix = mult(instanceMatrix, scale4(footWidthX, footHeight, footWidth));
     gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(instanceMatrix));
 
     gl.uniform4fv(gl.getUniformLocation(program, "uColor"), flatten(vec4(0.0, 1.0, 0.0, 1.0)));
-    drawCube();
+    setTexture(TEXTURES.horn)
+    
+    drawCylinder();
 }
