@@ -146,15 +146,12 @@ var zRotVal = 0.0;
 //  Translation
 const xTranslation = document.getElementById("xTranslation");
 const yTranslation = document.getElementById("yTranslation");
-const zTranslation = document.getElementById("zTranslation");
 
 const xTransValue = document.getElementById("xTransValue");
 const yTransValue = document.getElementById("yTransValue");
-const zTransValue = document.getElementById("zTransValue");
 
 const resetTransX = document.getElementById("resetTransX");
 const resetTransY = document.getElementById("resetTransY");
-const resetTransZ = document.getElementById("resetTransZ");
 const resetTransAll = document.getElementById("resetTransAll");
 
 const translationVal = document.getElementById("translationVals");
@@ -162,7 +159,6 @@ const resetButton = document.getElementById("resetButton");
 
 var xTransVal = 0.0;
 var yTransVal = 0.0;
-var zTransVal = 0.0;
 
 let cameraRotationX = 0.0; 
 let cameraRotationY = 0.0; 
@@ -175,6 +171,7 @@ const resetKFButton = document.getElementById("reset-keyframes");
 const saveAnimationButton = document.getElementById("save-button");
 const loadAnimationButton = document.getElementById("load-button");
 const flyButton = document.getElementById("fly-button");
+const warButton = document.getElementById("war-button");
 
 // Main function
 window.onload = async function init() {
@@ -229,11 +226,25 @@ window.onload = async function init() {
                 keyframes.thetaVals = animationData.thetaVals;
                 keyframes.translationVals = animationData.translationVals;
     
-                console.log("Flying animation loaded:", keyframes);
                 animate(400);
             })
             .catch((error) => {
                 console.error("Error loading flying animation:", error);
+            });
+    });
+
+    // War animation
+    warButton.addEventListener("click", function () {
+        fetch("animations/war_prep.json")
+            .then((response) => response.json())
+            .then((animationData) => {
+                keyframes.thetaVals = animationData.thetaVals;
+                keyframes.translationVals = animationData.translationVals;
+    
+                animate(400);
+            })
+            .catch((error) => {
+                console.error("Error loading war animation:", error);
             });
     });
 
@@ -319,8 +330,6 @@ function resetZoomAndCamera() {
 
     // Update the projection matrix
     updateProjectionMatrix();
-
-    // Re-render the scene
     renderOnce();
 }
 
@@ -332,7 +341,7 @@ var renderOnce = function(){
     modelViewMatrix = mult(modelViewMatrix, rotate(cameraRotationZ, [0, 0, 1])); // Rotate around Z-axis
 
     // Apply object translation
-    modelViewMatrix = mult(modelViewMatrix, translate(xTransVal, yTransVal, zTransVal));
+    modelViewMatrix = mult(modelViewMatrix, translate(xTransVal, yTransVal, 0.0));
     updateProjectionMatrix();
     renderBackground();
     traverse(BODY_ID);
