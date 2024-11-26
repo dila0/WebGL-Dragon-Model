@@ -174,6 +174,7 @@ const playCurrKFButton = document.getElementById("play-curr-keyframe");
 const resetKFButton = document.getElementById("reset-keyframes");
 const saveAnimationButton = document.getElementById("save-button");
 const loadAnimationButton = document.getElementById("load-button");
+const flyButton = document.getElementById("fly-button");
 
 // Main function
 window.onload = async function init() {
@@ -219,6 +220,22 @@ window.onload = async function init() {
     saveAnimationButton.addEventListener("click", saveAnimation);
     loadAnimationButton.addEventListener("change", loadAnimation);
     resetButton.addEventListener("click", resetZoomAndCamera);
+
+    // Flying animation
+    flyButton.addEventListener("click", function () {
+        fetch("animations/flying_animation.json")
+            .then((response) => response.json())
+            .then((animationData) => {
+                keyframes.thetaVals = animationData.thetaVals;
+                keyframes.translationVals = animationData.translationVals;
+    
+                console.log("Flying animation loaded:", keyframes);
+                animate(400);
+            })
+            .catch((error) => {
+                console.error("Error loading flying animation:", error);
+            });
+    });
 
     window.addEventListener("keydown", function (event) {
         const rotationStep = 5.0; // Degrees to rotate per key press
@@ -270,8 +287,6 @@ window.onload = async function init() {
         // Re-render the scene
         renderOnce();
     });
-
-    
 
     for(var i = 0; i < numNodes; i++) initNodes(i);
     render();
